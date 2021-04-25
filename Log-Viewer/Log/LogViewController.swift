@@ -1,0 +1,169 @@
+//
+//  LogViewController.swift
+//  Log-Viewer
+//
+//  Created by Michael Rönnau on 07.12.20.
+//
+
+import Cocoa
+
+class LogViewController: NSViewController {
+    
+    let scrollView = NSScrollView()
+    let textView = NSTextView()
+    
+    var logDocument : LogDocument!
+    
+    var follow = true
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        view.frame = CGRect(x: 0, y: 0, width: Statics.startSize.width, height: Statics.startSize.height)
+        view.wantsLayer = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = false
+        view = scrollView
+        textView.autoresizingMask = [.width]
+        textView.isVerticallyResizable = true
+        textView.isEditable = false
+        textView.isSelectable = true
+        scrollView.documentView = textView
+    }
+    
+    func reset(){
+        textView.textStorage?.setAttributedString(NSAttributedString(string: ""))
+    }
+    
+    func updateFromDocument(){
+        if !follow{
+            return
+        }
+        if let log = logDocument{
+            for chunk in log.chunks{
+                if !chunk.displayed{
+                    chunk.displayed = true
+                    appendText(string: chunk.string)
+                }
+            }
+        }
+    }
+    
+    func appearanceChanged(){
+        let oldFollow = follow
+        follow = false;
+        reset()
+        if let log = logDocument{
+            for chunk in log.chunks{
+                if chunk.displayed{
+                    appendText(string: chunk.string)
+                }
+            }
+        }
+        follow = oldFollow
+        textView.scrollToEndOfDocument(nil)
+    }
+    
+    func appendText(string: String) {
+        let prefs = logDocument?.preferences ?? DocumentPreferences()
+        let font : NSFont = NSFont.systemFont(ofSize: CGFloat(prefs.fontSize))
+        if let document = logDocument{
+            if document.preferences.hasColorCoding{
+                appendColorMarkedText(string, font : font, preferences: prefs)
+            }
+            else{
+                appendDefaultText(string, font : font)
+            }
+            textView.scrollToEndOfDocument(nil)
+        }
+    }
+    
+    private func appendColorMarkedText(_ string : String, font: NSFont, preferences: DocumentPreferences){
+        let darkMode = Statics.isDarkMode
+        let caseMode : NSString.CompareOptions = preferences.caseInsensitive ? .caseInsensitive : .literal
+        let lines = string.components(separatedBy: "\n")
+        for line in lines{
+            if !line.isEmpty{
+                appendColorMarkedLine(line, font: font, darkMode : darkMode, caseMode: caseMode, preferences: preferences)
+            }
+        }
+    }
+    
+    private func appendColorMarkedLine(_ string : String, font: NSFont, darkMode: Bool, caseMode: NSString.CompareOptions, preferences : DocumentPreferences){
+        var parts = [TextPart]()
+        for i in 0..<DocumentPreferences.numPatterns{
+            if !preferences.patterns[i].isEmpty{
+                var start = string.startIndex
+                while let range = string.range(of: preferences.patterns[i], options: caseMode, range: start..<string.endIndex){
+                    let textPart = TextPart(start: range.lowerBound, end: range.upperBound, color: Preferences.colors[i])
+                    parts.append(textPart)
+                    start = range.upperBound
+                }
+            }
+        }
+        if parts.isEmpty{
+            appendUnmarkedText(string + "\n", font: font, showGray: preferences.showUnmarkedGray)
+        }
+        else{
+            parts.sort{
+                $0.start < $1.start
+            }
+            var start = string.startIndex
+            for part in parts{
+                if start >= part.end{
+                    continue
+                }
+                if start < part.start{
+                    appendDefaultText(String(string[start..<part.start]), font: font)
+                    start = part.start
+                }
+                appendColoredText(String(string[start..<part.end]), color: part.color, font: font, darkMode: darkMode)
+                start = part.end
+            }
+            if string.endIndex > start{
+                appendDefaultText(String(string[start..<string.endIndex])+"\n", font: font)
+            }
+            else{
+                appendDefaultText("\n", font: font)
+            }
+        }
+    }
+    
+    private func appendColoredText(_ string : String, color: NSColor, font: NSFont, darkMode: Bool){
+        if darkMode{
+            textView.textStorage?.append(NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : color, NSAttributedString.Key.font : font]))
+        }
+        else{
+            textView.textStorage?.append(NSAttributedString(string: string, attributes: [NSAttributedString.Key.backgroundColor : color, NSAttributedString.Key.font : font]))
+        }
+    }
+    
+    private func appendUnmarkedText(_ string : String, font: NSFont, showGray : Bool){
+        let color = showGray ? NSColor.gray : NSColor.textColor
+        textView.textStorage?.append(NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : color, NSAttributedString.Key.font : font]))
+    }
+    
+    private func appendDefaultText(_ string : String, font: NSFont){
+        textView.textStorage?.append(NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : NSColor.textColor, NSAttributedString.Key.font : font]))
+    }
+    
+}
+
+class TextPart{
+    
+    var start : String.Index
+    var end : String.Index
+    var color : NSColor
+    
+    init(start: String.Index, end: String.Index, color: NSColor){
+        self.start = start
+        self.end = end
+        self.color = color
+    }
+}

@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4E20A79D257E47B40068AC8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A79C257E47B40068AC8D /* AppDelegate.swift */; };
+		4E20A79F257E47B50068AC8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A79E257E47B50068AC8D /* Assets.xcassets */; };
+		4E20A7A2257E47B50068AC8D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A7A0257E47B50068AC8D /* MainMenu.xib */; };
+		4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7AB257E48140068AC8D /* LogWindowController.swift */; };
+		4E20A7AF257E482B0068AC8D /* LogWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7AE257E482B0068AC8D /* LogWindow.swift */; };
+		4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7B1257E484F0068AC8D /* LogViewController.swift */; };
+		4E20A7BF257E4A6D0068AC8D /* Statics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7BE257E4A6D0068AC8D /* Statics.swift */; };
+		4E33FA98257FCE8C007AB6C0 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33FA97257FCE8C007AB6C0 /* PreferencesViewController.swift */; };
+		4E33FA9B257FD0CE007AB6C0 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33FA9A257FD0CE007AB6C0 /* PreferencesWindowController.swift */; };
+		4E50575A25811C7E00A4CC90 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50575925811C7E00A4CC90 /* Preferences.swift */; };
+		4E50576525812AC500A4CC90 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50576425812AC500A4CC90 /* Logger.swift */; };
+		4E539550258222D400CC56A8 /* HelpWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E53954F258222D400CC56A8 /* HelpWindowController.swift */; };
+		4E5395562582230C00CC56A8 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5395552582230C00CC56A8 /* HelpViewController.swift */; };
+		4E539559258229E800CC56A8 /* PopupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E539558258229E800CC56A8 /* PopupWindow.swift */; };
+		4E53955C25822CEC00CC56A8 /* PopupWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E53955B25822CEC00CC56A8 /* PopupWindowController.swift */; };
+		4E53956A2582541C00CC56A8 /* NSBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5395692582541C00CC56A8 /* NSBox.swift */; };
+		4E5C9AB7257F809100E0D8BB /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C9AB0257F809100E0D8BB /* NSView.swift */; };
+		4E5C9AB8257F809100E0D8BB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C9AB1257F809100E0D8BB /* String.swift */; };
+		4E5C9ABB257F809100E0D8BB /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C9AB4257F809100E0D8BB /* Codable.swift */; };
+		4E5C9ABC257F809100E0D8BB /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C9AB5257F809100E0D8BB /* Date.swift */; };
+		4E5C9ABD257F809100E0D8BB /* NSMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C9AB6257F809100E0D8BB /* NSMenuItem.swift */; };
+		4E5C9AC1257F823700E0D8BB /* Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C9AC0257F823700E0D8BB /* Insets.swift */; };
+		4E903C17258CD52000E542AD /* DocumentPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E903C16258CD52000E542AD /* DocumentPreferences.swift */; };
+		4EAC4CEB258A3D6800554A69 /* LogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CEA258A3D6800554A69 /* LogDocument.swift */; };
+		4EAC4CEE258A448C00554A69 /* LogDocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CED258A448C00554A69 /* LogDocumentController.swift */; };
+		4EAC4CF5258A738200554A69 /* LogChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CF4258A738200554A69 /* LogChunk.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4E20A799257E47B40068AC8D /* Log-Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Log-Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E20A79C257E47B40068AC8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4E20A79E257E47B50068AC8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4E20A7A1257E47B50068AC8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4E20A7A3257E47B50068AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E20A7A4257E47B50068AC8D /* LogViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LogViewer.entitlements; sourceTree = "<group>"; };
+		4E20A7AB257E48140068AC8D /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
+		4E20A7AE257E482B0068AC8D /* LogWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindow.swift; sourceTree = "<group>"; };
+		4E20A7B1257E484F0068AC8D /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		4E20A7BE257E4A6D0068AC8D /* Statics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statics.swift; sourceTree = "<group>"; };
+		4E33FA97257FCE8C007AB6C0 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		4E33FA9A257FD0CE007AB6C0 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		4E50575925811C7E00A4CC90 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		4E50576425812AC500A4CC90 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		4E53954F258222D400CC56A8 /* HelpWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpWindowController.swift; sourceTree = "<group>"; };
+		4E5395552582230C00CC56A8 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		4E539558258229E800CC56A8 /* PopupWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindow.swift; sourceTree = "<group>"; };
+		4E53955B25822CEC00CC56A8 /* PopupWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindowController.swift; sourceTree = "<group>"; };
+		4E5395692582541C00CC56A8 /* NSBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSBox.swift; sourceTree = "<group>"; };
+		4E5C9AB0257F809100E0D8BB /* NSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
+		4E5C9AB1257F809100E0D8BB /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		4E5C9AB4257F809100E0D8BB /* Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		4E5C9AB5257F809100E0D8BB /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		4E5C9AB6257F809100E0D8BB /* NSMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMenuItem.swift; sourceTree = "<group>"; };
+		4E5C9AC0257F823700E0D8BB /* Insets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Insets.swift; sourceTree = "<group>"; };
+		4E903C16258CD52000E542AD /* DocumentPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferences.swift; sourceTree = "<group>"; };
+		4EAC4CEA258A3D6800554A69 /* LogDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocument.swift; sourceTree = "<group>"; };
+		4EAC4CED258A448C00554A69 /* LogDocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocumentController.swift; sourceTree = "<group>"; };
+		4EAC4CF4258A738200554A69 /* LogChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogChunk.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4E20A796257E47B40068AC8D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4E20A790257E47B40068AC8D = {
+			isa = PBXGroup;
+			children = (
+				4E20A79B257E47B40068AC8D /* Log-Viewer */,
+				4E20A79A257E47B40068AC8D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4E20A79A257E47B40068AC8D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E20A799257E47B40068AC8D /* Log-Viewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4E20A79B257E47B40068AC8D /* Log-Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				4E5C9AAE257F802F00E0D8BB /* E5Base */,
+				4E5C9AA2257F799200E0D8BB /* App */,
+				4E20A79E257E47B50068AC8D /* Assets.xcassets */,
+				4E20A7A0257E47B50068AC8D /* MainMenu.xib */,
+				4E20A7A3257E47B50068AC8D /* Info.plist */,
+				4E20A7A4257E47B50068AC8D /* LogViewer.entitlements */,
+				4E5C9AA4257F79A300E0D8BB /* Log */,
+				4E53955E2582417200CC56A8 /* Preferences */,
+				4E5395622582418F00CC56A8 /* Help */,
+			);
+			path = "Log-Viewer";
+			sourceTree = "<group>";
+		};
+		4E53955E2582417200CC56A8 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				4E903C16258CD52000E542AD /* DocumentPreferences.swift */,
+				4E50575925811C7E00A4CC90 /* Preferences.swift */,
+				4E33FA97257FCE8C007AB6C0 /* PreferencesViewController.swift */,
+				4E33FA9A257FD0CE007AB6C0 /* PreferencesWindowController.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		4E5395622582418F00CC56A8 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				4E53954F258222D400CC56A8 /* HelpWindowController.swift */,
+				4E5395552582230C00CC56A8 /* HelpViewController.swift */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		4E5C9AA2257F799200E0D8BB /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4E20A79C257E47B40068AC8D /* AppDelegate.swift */,
+				4E20A7BE257E4A6D0068AC8D /* Statics.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		4E5C9AA4257F79A300E0D8BB /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				4E20A7AB257E48140068AC8D /* LogWindowController.swift */,
+				4E20A7AE257E482B0068AC8D /* LogWindow.swift */,
+				4E20A7B1257E484F0068AC8D /* LogViewController.swift */,
+				4EAC4CEA258A3D6800554A69 /* LogDocument.swift */,
+				4EAC4CED258A448C00554A69 /* LogDocumentController.swift */,
+				4EAC4CF4258A738200554A69 /* LogChunk.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		4E5C9AAE257F802F00E0D8BB /* E5Base */ = {
+			isa = PBXGroup;
+			children = (
+				4E5C9AC0257F823700E0D8BB /* Insets.swift */,
+				4E5C9AB4257F809100E0D8BB /* Codable.swift */,
+				4E5C9AB5257F809100E0D8BB /* Date.swift */,
+				4E5C9AB6257F809100E0D8BB /* NSMenuItem.swift */,
+				4E5C9AB0257F809100E0D8BB /* NSView.swift */,
+				4E5C9AB1257F809100E0D8BB /* String.swift */,
+				4E50576425812AC500A4CC90 /* Logger.swift */,
+				4E539558258229E800CC56A8 /* PopupWindow.swift */,
+				4E53955B25822CEC00CC56A8 /* PopupWindowController.swift */,
+				4E5395692582541C00CC56A8 /* NSBox.swift */,
+			);
+			path = E5Base;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4E20A798257E47B40068AC8D /* Log-Viewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E20A7A7257E47B50068AC8D /* Build configuration list for PBXNativeTarget "Log-Viewer" */;
+			buildPhases = (
+				4E20A795257E47B40068AC8D /* Sources */,
+				4E20A796257E47B40068AC8D /* Frameworks */,
+				4E20A797257E47B40068AC8D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Log-Viewer";
+			productName = LogViewer;
+			productReference = 4E20A799257E47B40068AC8D /* Log-Viewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4E20A791257E47B40068AC8D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					4E20A798257E47B40068AC8D = {
+						CreatedOnToolsVersion = 12.2;
+					};
+				};
+			};
+			buildConfigurationList = 4E20A794257E47B40068AC8D /* Build configuration list for PBXProject "Log-Viewer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4E20A790257E47B40068AC8D;
+			productRefGroup = 4E20A79A257E47B40068AC8D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4E20A798257E47B40068AC8D /* Log-Viewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4E20A797257E47B40068AC8D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E20A79F257E47B50068AC8D /* Assets.xcassets in Resources */,
+				4E20A7A2257E47B50068AC8D /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E20A795257E47B40068AC8D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E53956A2582541C00CC56A8 /* NSBox.swift in Sources */,
+				4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */,
+				4E50576525812AC500A4CC90 /* Logger.swift in Sources */,
+				4E20A7BF257E4A6D0068AC8D /* Statics.swift in Sources */,
+				4E5C9AB8257F809100E0D8BB /* String.swift in Sources */,
+				4E539559258229E800CC56A8 /* PopupWindow.swift in Sources */,
+				4E20A7AF257E482B0068AC8D /* LogWindow.swift in Sources */,
+				4E903C17258CD52000E542AD /* DocumentPreferences.swift in Sources */,
+				4E20A79D257E47B40068AC8D /* AppDelegate.swift in Sources */,
+				4E5C9ABC257F809100E0D8BB /* Date.swift in Sources */,
+				4E5395562582230C00CC56A8 /* HelpViewController.swift in Sources */,
+				4EAC4CEB258A3D6800554A69 /* LogDocument.swift in Sources */,
+				4E33FA9B257FD0CE007AB6C0 /* PreferencesWindowController.swift in Sources */,
+				4E5C9ABD257F809100E0D8BB /* NSMenuItem.swift in Sources */,
+				4E5C9ABB257F809100E0D8BB /* Codable.swift in Sources */,
+				4EAC4CEE258A448C00554A69 /* LogDocumentController.swift in Sources */,
+				4E33FA98257FCE8C007AB6C0 /* PreferencesViewController.swift in Sources */,
+				4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */,
+				4E5C9AC1257F823700E0D8BB /* Insets.swift in Sources */,
+				4E50575A25811C7E00A4CC90 /* Preferences.swift in Sources */,
+				4EAC4CF5258A738200554A69 /* LogChunk.swift in Sources */,
+				4E539550258222D400CC56A8 /* HelpWindowController.swift in Sources */,
+				4E53955C25822CEC00CC56A8 /* PopupWindowController.swift in Sources */,
+				4E5C9AB7257F809100E0D8BB /* NSView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4E20A7A0257E47B50068AC8D /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4E20A7A1257E47B50068AC8D /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4E20A7A5257E47B50068AC8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4E20A7A6257E47B50068AC8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		4E20A7A8257E47B50068AC8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Log-Viewer/LogViewer.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = 5UG99476V8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Log-Viewer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = de.elbe5.logviewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4E20A7A9257E47B50068AC8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Log-Viewer/LogViewer.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = 5UG99476V8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Log-Viewer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = de.elbe5.logviewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4E20A794257E47B40068AC8D /* Build configuration list for PBXProject "Log-Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E20A7A5257E47B50068AC8D /* Debug */,
+				4E20A7A6257E47B50068AC8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E20A7A7257E47B50068AC8D /* Build configuration list for PBXNativeTarget "Log-Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E20A7A8257E47B50068AC8D /* Debug */,
+				4E20A7A9257E47B50068AC8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4E20A791257E47B40068AC8D /* Project object */;
+}
