@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyDataExtensions
 import Cocoa
 
 protocol PreferencesDelegate {

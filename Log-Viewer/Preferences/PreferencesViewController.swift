@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import SwiftyMacViewExtensions
 
 class PreferencesViewController:NSViewController {
     

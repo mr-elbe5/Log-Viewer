@@ -69,7 +69,7 @@ class LogDocument: NSDocument, PreferencesDelegate{
                 setEventSource()
             }
             catch{
-                Logger.log(error.localizedDescription)
+                Swift.print(error.localizedDescription)
             }
         }
     }
