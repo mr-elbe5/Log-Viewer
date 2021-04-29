@@ -8,13 +8,14 @@
 import Cocoa
 import SwiftyMacViewExtensions
 
-class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelegate {
+class LogWindowController: WindowController, NSToolbarDelegate {
     
     let mainWindowToolbarIdentifier = NSToolbar.Identifier("MainWindowToolbar")
     
     let toolbarItemStart = NSToolbarItem.Identifier("ToolbarStartItem")
     let toolbarItemPause = NSToolbarItem.Identifier("ToolbarPauseItem")
-    let toolbarItemPreferences = NSToolbarItem.Identifier("ToolbarPreferencesItem")
+    let toolbarItemGlobalPreferences = NSToolbarItem.Identifier("ToolbarGlobalPreferencesItem")
+    let toolbarItemDocumentPreferences = NSToolbarItem.Identifier("ToolbarDocumentPreferencesItem")
     let toolbarItemHelp = NSToolbarItem.Identifier("ToolbarHelpItem")
     
     var logDocument : LogDocument!
@@ -22,11 +23,6 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         get{
             return contentViewController as! LogViewController
         }
-    }
-    var observer : NSKeyValueObservation? = nil
-    
-    convenience init() {
-        self.init(windowNibName: "")
     }
     
     func setup(doc: LogDocument){
@@ -44,16 +40,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         toolbar.delegate = self
         toolbar.allowsUserCustomization = false
         toolbar.autosavesConfiguration = false
-        toolbar.displayMode = .iconOnly
+        toolbar.displayMode = .iconAndLabel
         
         window.toolbar = toolbar
         window.toolbar?.validateVisibleItems()
         self.window = window
         logViewController.updateFromDocument()
-        observer = NSApp.observe(\.effectiveAppearance){
-            (app, _) in
-            self.logViewController.appearanceChanged()
-        }
     }
     
     func windowWillClose(_ notification: Notification) {
@@ -76,8 +68,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(start)
-            toolbarItem.label = "Start"
-            toolbarItem.paletteLabel = "Start"
+            toolbarItem.label = "Start Logging"
+            toolbarItem.paletteLabel = "Start Logging"
             toolbarItem.toolTip = "Start following the log file"
             toolbarItem.image = NSImage(systemSymbolName: "play.circle", accessibilityDescription: "")
             return toolbarItem
@@ -87,21 +79,32 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(pause)
-            toolbarItem.label = "Pause"
-            toolbarItem.paletteLabel = "Pause"
+            toolbarItem.label = "Pause Logging"
+            toolbarItem.paletteLabel = "Pause Logging"
             toolbarItem.toolTip = "Pause following the log file"
             toolbarItem.image = NSImage(systemSymbolName: "pause.circle", accessibilityDescription: "")
             return toolbarItem
         }
         
-        if  itemIdentifier == self.toolbarItemPreferences {
+        if  itemIdentifier == self.toolbarItemGlobalPreferences {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
-            toolbarItem.action = #selector(openPreferences)
-            toolbarItem.label = "Preferences"
-            toolbarItem.paletteLabel = "Preferences"
-            toolbarItem.toolTip = "Set log preferences and colors"
-            toolbarItem.image = NSImage(systemSymbolName: "gear", accessibilityDescription: "")
+            toolbarItem.action = #selector(openGlobalPreferences)
+            toolbarItem.label = "Global Preferences"
+            toolbarItem.paletteLabel = "Global Preferences"
+            toolbarItem.toolTip = "Set global preferences and colors"
+            toolbarItem.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: "")
+            return toolbarItem
+        }
+        
+        if  itemIdentifier == self.toolbarItemDocumentPreferences {
+            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+            toolbarItem.target = self
+            toolbarItem.action = #selector(openDocumentPreferences)
+            toolbarItem.label = "Document Preferences"
+            toolbarItem.paletteLabel = "Document Preferences"
+            toolbarItem.toolTip = "Set document log preferences"
+            toolbarItem.image = NSImage(systemSymbolName: "doc.badge.gearshape", accessibilityDescription: "")
             return toolbarItem
         }
         
@@ -123,7 +126,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     {
         return [
             self.toolbarItemPause,
-            self.toolbarItemPreferences,
+            self.toolbarItemGlobalPreferences,
+            self.toolbarItemDocumentPreferences,
             self.toolbarItemHelp
         ]
     }
@@ -132,14 +136,21 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     {
         return [self.toolbarItemStart,
                 self.toolbarItemPause,
-                self.toolbarItemPreferences,
+                self.toolbarItemGlobalPreferences,
+                self.toolbarItemDocumentPreferences,
                 self.toolbarItemHelp,
                 NSToolbarItem.Identifier.space,
                 NSToolbarItem.Identifier.flexibleSpace]
     }
     
-    @objc func openPreferences() {
-        let controller = PreferencesWindowController()
+    @objc func openGlobalPreferences() {
+        let controller = GlobalPreferencesWindowController()
+        controller.presentingWindow = self.window
+        NSApp.runModal(for: controller.window!)
+    }
+    
+    @objc func openDocumentPreferences() {
+        let controller = DocumentPreferencesWindowController()
         controller.presentingWindow = self.window
         controller.logDocument = logDocument
         NSApp.runModal(for: controller.window!)

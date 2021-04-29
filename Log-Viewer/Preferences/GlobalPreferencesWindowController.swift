@@ -8,28 +8,15 @@
 import Cocoa
 import SwiftyMacViewExtensions
 
-class PreferencesWindowController: PopupWindowController, NSWindowDelegate {
-    
-    var logDocument : LogDocument? = nil
-    
-    var observer : NSKeyValueObservation? = nil
-    
-    convenience init() {
-        self.init(windowNibName: "")
-    }
+class GlobalPreferencesWindowController: PopupWindowController {
     
     override func loadWindow() {
         let window = popupWindow()
-        window.title = "Preferences"
+        window.title = "Global Preferences"
         window.delegate = self
-        let controller = PreferencesViewController()
-        controller.logDocument = self.logDocument
+        let controller = GlobalPreferencesViewController()
         contentViewController = controller
         self.window = window
-        observer = NSApp.observe(\.effectiveAppearance){
-            (app, _) in
-            controller.appearanceChanged()
-        }
     }
 
     func windowDidBecomeKey(_ notification: Notification) {
