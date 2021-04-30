@@ -12,7 +12,6 @@ import SwiftyMacViewExtensions
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        print("will launch")
         let _ = LogDocumentController()
         NSColorPanel.setPickerMode(.wheel)
         NSColorPanel.setPickerMask(.wheelModeMask)
@@ -21,7 +20,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         Preferences.load()
-        print("did launch")
         if Preferences.shared.showSplash{
             let splashController = SplashWindowController()
             splashController.window!.center()

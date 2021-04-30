@@ -12,7 +12,7 @@ class SplashWindowController: PopupWindowController {
 
     override func loadWindow() {
         let window = popupWindow()
-        window.title = "Open file"
+        window.title = "Log-Viewer - Open file"
         window.delegate = self
         contentViewController = SplashViewController()
         self.window = window

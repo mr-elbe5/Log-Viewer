@@ -12,54 +12,64 @@ class SplashViewController: ViewController {
     
     override func loadView() {
         view = NSView()
-        view.frame = CGRect(x: 0, y: 0, width: 400, height: 270)
+        view.frame = CGRect(x: 0, y: 0, width: 400, height: 100)
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
         
-        let leftPanel = NSView()
-        view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
-        view.addSubview(leftPanel)
-        leftPanel.placeAfter(anchor: view.leadingAnchor)
-        leftPanel.trailing(view.centerXAnchor)
+        let headerField = NSTextField(labelWithString: "Open recent:")
+        headerField.alignment = .center
+        view.addSubview(headerField)
+        headerField.placeBelow(anchor: view.topAnchor)
         
-        var vw = NSTextField(labelWithString: "Test")
-        leftPanel.addSubview(vw)
-        vw.placeBelow(anchor: leftPanel.topAnchor)
-        
-        let rightScrollView = NSScrollView()
-        rightScrollView.hasVerticalScroller = true
-        rightScrollView.hasHorizontalScroller = false
-        rightScrollView.autohidesScrollers = false
-        view.addSubview(rightScrollView)
-        rightScrollView.placeBefore(anchor: view.trailingAnchor)
-        rightScrollView.leading(view.centerXAnchor)
-        
-        let clipView = NSClipView()
-        rightScrollView.contentView = clipView
-        clipView.fillView(view: rightScrollView)
-        
-        let rightPanel = NSView()
-        rightScrollView.documentView = rightPanel
-        rightPanel.setAnchors()
-        rightPanel.leading(clipView.leadingAnchor)
-        rightPanel.top(clipView.topAnchor)
-        rightPanel.trailing(clipView.trailingAnchor)
-    
-        
-        var lastAnchor =  rightPanel.topAnchor
-        for i in 0..<50{
-            vw = NSTextField(labelWithString: "Test \(i)")
-            rightPanel.addSubview(vw)
-            vw.placeBelow(anchor: lastAnchor)
-            lastAnchor = vw.bottomAnchor
+        let urls = NSDocumentController.shared.recentDocumentURLs
+        var lastView : NSView = headerField
+        for url in urls{
+            let button = NSButton(title: url.path, target: self, action: #selector(openRecent(sender:)))
+            view.addSubview(button)
+            button.placeBelow(anchor: lastView.bottomAnchor)
+            button.refusesFirstResponder = true
+            lastView = button
         }
-        rightPanel.bottom(lastAnchor)
+        
+        let openButton = NSButton(title: "Open...", target: self, action: #selector(open))
+        view.addSubview(openButton)
+        openButton.placeBelow(view: lastView)
+        openButton.refusesFirstResponder = true
+        
+        let showSplashCheck = NSButton(checkboxWithTitle: "Show this window on application start", target: self, action: #selector(showSplashChanged(sender:)))
+        showSplashCheck.state = Preferences.shared.showSplash ? .on : .off
+        view.addSubview(showSplashCheck)
+        showSplashCheck.placeBelow(view: openButton)
+        showSplashCheck.refusesFirstResponder = true
+        showSplashCheck.bottom(view.bottomAnchor,inset: Insets.defaultInset)
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    @objc func openRecent(sender: Any){
+        if let button = sender as? NSButton{
+            if let url = URL(string: "file://" + button.title){
+                NSDocumentController.shared.openDocument(withContentsOf: url, display: true){ document, documentWasAlreadyOpen, error in
+                    self.view.window?.close()
+                }
+            }
+        }
+    }
+    
+    @objc func open(){
+        self.view.window?.close()
+        NSDocumentController.shared.openDocument(nil)
+    }
+    
+    @objc func showSplashChanged(sender: Any){
+        if let button = sender as? NSButton{
+            Preferences.shared.showSplash = button.state == .on
+            Preferences.shared.save()
+        }
     }
     
 }

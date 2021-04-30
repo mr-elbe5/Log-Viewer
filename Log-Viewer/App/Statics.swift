@@ -11,7 +11,7 @@ class Statics{
     
     static var title = "Log-Viewer"
     
-    static var startSize = NSMakeSize(1440, 900)
+    static var startSize = NSMakeSize(900, 600)
     
     static var isDarkMode : Bool{
         get{
