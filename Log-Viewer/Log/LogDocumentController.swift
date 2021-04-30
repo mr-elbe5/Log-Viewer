@@ -10,7 +10,10 @@ import Cocoa
 class LogDocumentController: NSDocumentController {
     
     override func openUntitledDocumentAndDisplay(_ displayDocument: Bool) throws -> NSDocument {
-        print("open untitled")
+        print("open untitled \(displayDocument)")
+        /*let splashController = SplashWindowController()
+        splashController.window!.center()
+        NSApp.runModal(for: splashController.window!)*/
         return LogDocument.dummyDocument
     }
     

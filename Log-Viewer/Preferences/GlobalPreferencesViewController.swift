@@ -8,7 +8,7 @@
 import Cocoa
 import SwiftyMacViewExtensions
 
-class GlobalPreferencesViewController:NSViewController {
+class GlobalPreferencesViewController:ViewController {
     
     var showSplashField = NSButton(checkboxWithTitle: "Show at startup", target: nil, action: nil)
     var rememberFrameField = NSButton(checkboxWithTitle: "Remember", target: nil, action: nil)
@@ -18,8 +18,8 @@ class GlobalPreferencesViewController:NSViewController {
     var textColorFields = [NSColorWell]()
     var backgroundColorFields = [NSColorWell]()
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    override init() {
+        super.init()
         for _ in 0..<Preferences.numPatterns{
             textColorFields.append(NSColorWell())
             backgroundColorFields.append(NSColorWell())

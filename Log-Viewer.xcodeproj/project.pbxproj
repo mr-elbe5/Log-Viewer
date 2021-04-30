@@ -473,7 +473,7 @@
 			repositoryURL = "https://github.com/mr-elbe5/SwiftyMacViewExtensions.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.3;
+				minimumVersion = 1.0.4;
 			};
 		};
 		4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions" */ = {

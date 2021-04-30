@@ -8,15 +8,15 @@
 import Cocoa
 import SwiftyMacViewExtensions
 
-class DocumentPreferencesViewController:NSViewController {
+class DocumentPreferencesViewController:ViewController {
     
     var logDocument : LogDocument? = nil
     
     var fullLineColoringField = NSButton(checkboxWithTitle: "On", target: nil, action: nil)
     var patternFields = [NSTextField]()
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    override init() {
+        super.init()
         for _ in 0..<Preferences.numPatterns{
             patternFields.append(NSTextField())
         }

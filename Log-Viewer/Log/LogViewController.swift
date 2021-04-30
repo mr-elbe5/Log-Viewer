@@ -6,8 +6,9 @@
 //
 
 import Cocoa
+import SwiftyMacViewExtensions
 
-class LogViewController: NSViewController {
+class LogViewController: ViewController {
     
     let scrollView = NSScrollView()
     let textView = NSTextView()
@@ -16,8 +17,8 @@ class LogViewController: NSViewController {
     
     var follow = true
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    override init() {
+        super.init()
         view.frame = CGRect(x: 0, y: 0, width: Statics.startSize.width, height: Statics.startSize.height)
         view.wantsLayer = true
     }

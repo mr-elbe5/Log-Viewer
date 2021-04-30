@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         Preferences.load()
         print("did launch")
-        if !Preferences.shared.showSplash{
+        if Preferences.shared.showSplash{
             let splashController = SplashWindowController()
             splashController.window!.center()
             NSApp.runModal(for: splashController.window!)
