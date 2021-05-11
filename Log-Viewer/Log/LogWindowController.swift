@@ -49,7 +49,9 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         viewController.logDocument = logDocument
         contentViewController = viewController
         logViewController.updateFromDocument()
-        self.window?.setFrameUsingName(logDocument.preferences.id)
+        if Preferences.shared.rememberWindowFrame{
+            self.window?.setFrameUsingName(logDocument.preferences.id)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -58,7 +60,9 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     
     func windowWillClose(_ notification: Notification) {
         logDocument.releaseEventSource()
-        self.window?.saveFrame(usingName: logDocument.preferences.id)
+        if Preferences.shared.rememberWindowFrame{
+            self.window?.saveFrame(usingName: logDocument.preferences.id)
+        }
     }
     
     // Window delegate

@@ -55,6 +55,7 @@ class Preferences: Identifiable, Codable{
     enum CodingKeys: String, CodingKey {
         case showSplash
         case rememberWindowFrame
+        case useTabs
         case fontSize
         case showUnmarkedGray
         case caseInsensitive
@@ -65,6 +66,7 @@ class Preferences: Identifiable, Codable{
     
     var showSplash = true
     var rememberWindowFrame = true
+    var useTabs = true
     var fontSize = 14
     var showUnmarkedGray = true
     var caseInsensitive = true
@@ -79,6 +81,7 @@ class Preferences: Identifiable, Codable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
         showSplash = try values.decodeIfPresent(Bool.self, forKey: .showSplash) ?? true
         rememberWindowFrame = try values.decodeIfPresent(Bool.self, forKey: .rememberWindowFrame) ?? true
+        useTabs = try values.decodeIfPresent(Bool.self, forKey: .useTabs) ?? true
         fontSize = try values.decodeIfPresent(Int.self, forKey: .fontSize) ?? 14
         showUnmarkedGray = try values.decodeIfPresent(Bool.self, forKey: .showUnmarkedGray) ?? true
         caseInsensitive = try values.decodeIfPresent(Bool.self, forKey: .caseInsensitive) ?? true
@@ -92,6 +95,7 @@ class Preferences: Identifiable, Codable{
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(showSplash, forKey: .showSplash)
         try container.encode(rememberWindowFrame, forKey: .rememberWindowFrame)
+        try container.encode(useTabs, forKey: .useTabs)
         try container.encode(fontSize, forKey: .fontSize)
         try container.encode(showUnmarkedGray, forKey: .showUnmarkedGray)
         try container.encode(caseInsensitive, forKey: .caseInsensitive)
@@ -103,6 +107,7 @@ class Preferences: Identifiable, Codable{
     func resetGlobalSettings(){
         showSplash = true
         rememberWindowFrame = true
+        useTabs = true
         fontSize = 14
         showUnmarkedGray = false
         caseInsensitive = true
