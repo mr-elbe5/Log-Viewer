@@ -8,22 +8,27 @@
 import Cocoa
 import SwiftyMacViewExtensions
 
-class DocumentPreferencesWindowController: PopupWindowController {
+class DocumentPreferencesWindowController: NSWindowController, NSWindowDelegate {
     
-    var logDocument : LogDocument? = nil
+    var logDocument : LogDocument
     
     var observer : NSKeyValueObservation? = nil
     
-    override func loadWindow() {
-        let window = popupWindow()
+    init(log: LogDocument){
+        self.logDocument = log
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 290), styleMask: [.closable, .miniaturizable, .titled, .resizable], backing: .buffered, defer: false)
         window.title = "Document Preferences"
-        window.delegate = self
+        super.init(window: window)
+        self.window?.delegate = self
         let controller = DocumentPreferencesViewController()
         controller.logDocument = self.logDocument
         contentViewController = controller
-        self.window = window
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func windowDidBecomeKey(_ notification: Notification) {
         window?.level = .statusBar
     }

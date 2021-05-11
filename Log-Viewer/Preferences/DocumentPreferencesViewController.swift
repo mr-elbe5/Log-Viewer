@@ -87,7 +87,7 @@ class DocumentPreferencesViewController:ViewController {
             log.savePreferences()
             log.preferencesChanged()
         }
-        if let window = self.view.window as? PopupWindow{
+        if let window = self.view.window{
             window.close()
         }
     }

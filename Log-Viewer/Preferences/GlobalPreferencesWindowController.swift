@@ -8,17 +8,21 @@
 import Cocoa
 import SwiftyMacViewExtensions
 
-class GlobalPreferencesWindowController: PopupWindowController {
+class GlobalPreferencesWindowController: NSWindowController, NSWindowDelegate {
     
-    override func loadWindow() {
-        let window = popupWindow()
+    init(){
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 390), styleMask: [.closable, .miniaturizable, .titled, .resizable], backing: .buffered, defer: false)
         window.title = "Global Preferences"
-        window.delegate = self
+        super.init(window: window)
+        self.window?.delegate = self
         let controller = GlobalPreferencesViewController()
         contentViewController = controller
-        self.window = window
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func windowDidBecomeKey(_ notification: Notification) {
         window?.level = .statusBar
     }

@@ -15,11 +15,11 @@ class LogDocument: NSDocument, PreferencesDelegate{
     var url : URL? = nil
     var preferences =  DocumentPreferences()
     
-    var windowController = LogWindowController()
+    var windowController : LogWindowController? = nil
     
     var viewController : LogViewController?{
         get{
-            return windowController.logViewController
+            return windowController?.logViewController
         }
     }
     
@@ -46,8 +46,8 @@ class LogDocument: NSDocument, PreferencesDelegate{
             NSApp.runModal(for: splashController.window!)
             return
         }
-        windowController.setup(doc: self)
-        addWindowController(windowController)
+        windowController = LogWindowController(document: self)
+        addWindowController(windowController!)
     }
     
     override func write(to url: URL, ofType typeName: String) throws {

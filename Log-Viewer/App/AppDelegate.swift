@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         Preferences.load()
+        Preferences.shared.save() // if defaults have been used
         if Preferences.shared.showSplash{
             let splashController = SplashWindowController()
             splashController.window!.center()
@@ -37,13 +38,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func openHelp(_ sender: Any) {
         if let doc = NSDocumentController.shared.currentDocument as? LogDocument{
-            doc.windowController.openHelp()
+            doc.windowController?.openHelp()
         }
     }
     
     @objc func openGlobalPreferences() {
         let controller = GlobalPreferencesWindowController()
-        controller.presentingWindow = nil
+        controller.window?.center()
         NSApp.runModal(for: controller.window!)
     }
     

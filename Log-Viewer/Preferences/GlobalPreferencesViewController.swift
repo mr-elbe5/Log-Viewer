@@ -108,7 +108,7 @@ class GlobalPreferencesViewController:ViewController {
             Preferences.shared.backgroundColors[i] = CodableColor(color: backgroundColorFields[i].color)
         }
         Preferences.shared.save()
-        if let window = self.view.window as? PopupWindow{
+        if let window = self.view.window{
             window.close()
         }
     }

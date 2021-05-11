@@ -11,7 +11,6 @@
 		4E20A79F257E47B50068AC8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A79E257E47B50068AC8D /* Assets.xcassets */; };
 		4E20A7A2257E47B50068AC8D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A7A0257E47B50068AC8D /* MainMenu.xib */; };
 		4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7AB257E48140068AC8D /* LogWindowController.swift */; };
-		4E20A7AF257E482B0068AC8D /* LogWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7AE257E482B0068AC8D /* LogWindow.swift */; };
 		4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7B1257E484F0068AC8D /* LogViewController.swift */; };
 		4E20A7BF257E4A6D0068AC8D /* Statics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7BE257E4A6D0068AC8D /* Statics.swift */; };
 		4E33FA98257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33FA97257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift */; };
@@ -40,7 +39,6 @@
 		4E20A7A3257E47B50068AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E20A7A4257E47B50068AC8D /* LogViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LogViewer.entitlements; sourceTree = "<group>"; };
 		4E20A7AB257E48140068AC8D /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
-		4E20A7AE257E482B0068AC8D /* LogWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindow.swift; sourceTree = "<group>"; };
 		4E20A7B1257E484F0068AC8D /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		4E20A7BE257E4A6D0068AC8D /* Statics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statics.swift; sourceTree = "<group>"; };
 		4E33FA97257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPreferencesViewController.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				4E20A7AB257E48140068AC8D /* LogWindowController.swift */,
-				4E20A7AE257E482B0068AC8D /* LogWindow.swift */,
 				4E20A7B1257E484F0068AC8D /* LogViewController.swift */,
 				4EAC4CEA258A3D6800554A69 /* LogDocument.swift */,
 				4EAC4CED258A448C00554A69 /* LogDocumentController.swift */,
@@ -238,7 +235,6 @@
 			files = (
 				4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */,
 				4E20A7BF257E4A6D0068AC8D /* Statics.swift in Sources */,
-				4E20A7AF257E482B0068AC8D /* LogWindow.swift in Sources */,
 				4EF26DD42638607600C4C473 /* SplashWindowController.swift in Sources */,
 				4E903C17258CD52000E542AD /* DocumentPreferences.swift in Sources */,
 				4E20A79D257E47B40068AC8D /* AppDelegate.swift in Sources */,
@@ -473,7 +469,7 @@
 			repositoryURL = "https://github.com/mr-elbe5/SwiftyMacViewExtensions.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
+				minimumVersion = 1.1.3;
 			};
 		};
 		4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions" */ = {

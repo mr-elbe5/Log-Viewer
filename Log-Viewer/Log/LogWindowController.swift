@@ -8,7 +8,7 @@
 import Cocoa
 import SwiftyMacViewExtensions
 
-class LogWindowController: WindowController, NSToolbarDelegate {
+class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelegate {
     
     let mainWindowToolbarIdentifier = NSToolbar.Identifier("MainWindowToolbar")
     
@@ -18,38 +18,47 @@ class LogWindowController: WindowController, NSToolbarDelegate {
     let toolbarItemDocumentPreferences = NSToolbarItem.Identifier("ToolbarDocumentPreferencesItem")
     let toolbarItemHelp = NSToolbarItem.Identifier("ToolbarHelpItem")
     
-    var logDocument : LogDocument!
+    var logDocument : LogDocument
     var logViewController : LogViewController {
         get{
             return contentViewController as! LogViewController
         }
     }
     
-    func setup(doc: LogDocument){
-        self.logDocument = doc
-        let viewController = LogViewController()
-        viewController.logDocument = logDocument
-        contentViewController = viewController
-    }
-    
-    override func loadWindow() {
-        let window = LogWindow()
+    init(document: LogDocument){
+        self.logDocument = document
+        var x : CGFloat = 0
+        var y : CGFloat = 0
+        if let screen = NSScreen.main{
+            x = screen.frame.width/2 - Statics.startSize.width/2
+            y = screen.frame.height/2 - Statics.startSize.height/2
+        }
+        let window = NSWindow(contentRect: NSMakeRect(x, y, Statics.startSize.width, Statics.startSize.height), styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
+        window.tabbingMode = .disallowed
         window.title = Statics.title
-        window.delegate = self
+        super.init(window: window)
+        self.window?.delegate = self
         let toolbar = NSToolbar(identifier: self.mainWindowToolbarIdentifier)
         toolbar.delegate = self
         toolbar.allowsUserCustomization = false
         toolbar.autosavesConfiguration = false
         toolbar.displayMode = .iconAndLabel
-        
-        window.toolbar = toolbar
-        window.toolbar?.validateVisibleItems()
-        self.window = window
+        self.window?.toolbar = toolbar
+        self.window?.toolbar?.validateVisibleItems()
+        let viewController = LogViewController()
+        viewController.logDocument = logDocument
+        contentViewController = viewController
         logViewController.updateFromDocument()
+        self.window?.setFrameUsingName(logDocument.preferences.id)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func windowWillClose(_ notification: Notification) {
         logDocument.releaseEventSource()
+        self.window?.saveFrame(usingName: logDocument.preferences.id)
     }
     
     // Window delegate
@@ -145,20 +154,19 @@ class LogWindowController: WindowController, NSToolbarDelegate {
     
     @objc func openGlobalPreferences() {
         let controller = GlobalPreferencesWindowController()
-        controller.presentingWindow = self.window
+        controller.centerInWindow(outerWindow: self.window)
         NSApp.runModal(for: controller.window!)
     }
     
     @objc func openDocumentPreferences() {
-        let controller = DocumentPreferencesWindowController()
-        controller.presentingWindow = self.window
-        controller.logDocument = logDocument
+        let controller = DocumentPreferencesWindowController(log: logDocument)
+        controller.centerInWindow(outerWindow: self.window)
         NSApp.runModal(for: controller.window!)
     }
     
     @objc func openHelp() {
         let controller = HelpWindowController()
-        controller.presentingWindow = self.window
+        controller.centerInWindow(outerWindow: self.window)
         NSApp.runModal(for: controller.window!)
     }
     
