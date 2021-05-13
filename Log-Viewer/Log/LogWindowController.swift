@@ -17,6 +17,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     let toolbarItemGlobalPreferences = NSToolbarItem.Identifier("ToolbarGlobalPreferencesItem")
     let toolbarItemDocumentPreferences = NSToolbarItem.Identifier("ToolbarDocumentPreferencesItem")
     let toolbarItemHelp = NSToolbarItem.Identifier("ToolbarHelpItem")
+
+    var defaultSize = NSMakeSize(900, 600)
     
     var logDocument : LogDocument
     var logViewController : LogViewController {
@@ -30,12 +32,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         var x : CGFloat = 0
         var y : CGFloat = 0
         if let screen = NSScreen.main{
-            x = screen.frame.width/2 - Statics.startSize.width/2
-            y = screen.frame.height/2 - Statics.startSize.height/2
+            x = screen.frame.width/2 - defaultSize.width/2
+            y = screen.frame.height/2 - defaultSize.height/2
         }
-        let window = NSWindow(contentRect: NSMakeRect(x, y, Statics.startSize.width, Statics.startSize.height), styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
-        window.title = Statics.title
-        window.tabbingMode = Preferences.shared.useTabs ? .preferred : .automatic
+        let window = NSWindow(contentRect: NSMakeRect(x, y, defaultSize.width, defaultSize.height), styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
+        window.title = "Log-Viewer"
+        window.tabbingMode = GlobalPreferences.shared.useTabs ? .preferred : .automatic
         super.init(window: window)
         self.window?.delegate = self
         let toolbar = NSToolbar(identifier: self.mainWindowToolbarIdentifier)
@@ -49,7 +51,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         viewController.logDocument = logDocument
         contentViewController = viewController
         logViewController.updateFromDocument()
-        if Preferences.shared.rememberWindowFrame{
+        if GlobalPreferences.shared.rememberWindowFrame{
             self.window?.setFrameUsingName(logDocument.preferences.id)
         }
     }
@@ -60,7 +62,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     
     func windowWillClose(_ notification: Notification) {
         logDocument.releaseEventSource()
-        if Preferences.shared.rememberWindowFrame{
+        if GlobalPreferences.shared.rememberWindowFrame{
             self.window?.saveFrame(usingName: logDocument.preferences.id)
         }
     }

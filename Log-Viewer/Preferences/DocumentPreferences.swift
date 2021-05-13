@@ -17,11 +17,11 @@ class DocumentPreferences: Identifiable, Codable{
     
     var id : String
     var fullLineColoring = false
-    var patterns = [String](repeating: "",count: Preferences.numPatterns)
+    var patterns = [String](repeating: "",count: GlobalPreferences.numPatterns)
     
     var hasColorCoding : Bool{
         get{
-            for i in 0..<Preferences.numPatterns{
+            for i in 0..<GlobalPreferences.numPatterns{
                 if !patterns[i].isEmpty{
                     return true
                 }
@@ -38,7 +38,7 @@ class DocumentPreferences: Identifiable, Codable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decodeIfPresent(String.self, forKey: .id) ?? String.generateRandomString(length: 16)
         fullLineColoring = try values.decodeIfPresent(Bool.self, forKey: .fullLineColoring) ?? false
-        patterns = try values.decodeIfPresent([String].self, forKey: .patterns) ?? [String](repeating: "",count: Preferences.numPatterns)
+        patterns = try values.decodeIfPresent([String].self, forKey: .patterns) ?? [String](repeating: "",count: GlobalPreferences.numPatterns)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -49,7 +49,7 @@ class DocumentPreferences: Identifiable, Codable{
     }
     
     func reset(){
-        for i in 0..<Preferences.numPatterns{
+        for i in 0..<GlobalPreferences.numPatterns{
             patterns[i] = ""
         }
     }

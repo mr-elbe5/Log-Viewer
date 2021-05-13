@@ -12,6 +12,8 @@ class LogViewController: ViewController {
     
     let scrollView = NSScrollView()
     let textView = NSTextView()
+
+    var defaultSize = NSMakeSize(900, 600)
     
     var logDocument : LogDocument!
     
@@ -19,7 +21,7 @@ class LogViewController: ViewController {
     
     override init() {
         super.init()
-        view.frame = CGRect(x: 0, y: 0, width: Statics.startSize.width, height: Statics.startSize.height)
+        view.frame = CGRect(x: 0, y: 0, width: defaultSize.width, height: defaultSize.height)
         view.wantsLayer = true
     }
     
@@ -73,7 +75,7 @@ class LogViewController: ViewController {
     
     func appendText(string: String) {
         let prefs = logDocument?.preferences ?? DocumentPreferences()
-        let font : NSFont = NSFont.systemFont(ofSize: CGFloat(Preferences.shared.fontSize))
+        let font : NSFont = NSFont.systemFont(ofSize: CGFloat(GlobalPreferences.shared.fontSize))
         if let document = logDocument{
             if document.preferences.hasColorCoding{
                 appendColorMarkedText(string, font : font, preferences: prefs)
@@ -86,7 +88,7 @@ class LogViewController: ViewController {
     }
     
     private func appendColorMarkedText(_ string : String, font: NSFont, preferences: DocumentPreferences){
-        let caseMode : NSString.CompareOptions = Preferences.shared.caseInsensitive ? .caseInsensitive : .literal
+        let caseMode : NSString.CompareOptions = GlobalPreferences.shared.caseInsensitive ? .caseInsensitive : .literal
         let lines = string.components(separatedBy: "\n")
         for line in lines{
             if !line.isEmpty{
@@ -97,18 +99,18 @@ class LogViewController: ViewController {
     
     private func appendColorMarkedLine(_ string : String, font: NSFont, caseMode: NSString.CompareOptions, preferences : DocumentPreferences){
         var parts = [TextPart]()
-        for i in 0..<Preferences.numPatterns{
+        for i in 0..<GlobalPreferences.numPatterns{
             if !preferences.patterns[i].isEmpty{
                 var start = string.startIndex
                 while let range = string.range(of: preferences.patterns[i], options: caseMode, range: start..<string.endIndex){
-                    let textPart = TextPart(start: range.lowerBound, end: range.upperBound, color: Preferences.shared.textColors[i].color, background: Preferences.shared.backgroundColors[i].color)
+                    let textPart = TextPart(start: range.lowerBound, end: range.upperBound, color: GlobalPreferences.shared.textColors[i].color, background: GlobalPreferences.shared.backgroundColors[i].color)
                     parts.append(textPart)
                     start = range.upperBound
                 }
             }
         }
         if parts.isEmpty{
-            appendUnmarkedText(string + "\n", font: font, showGray: Preferences.shared.showUnmarkedGray)
+            appendUnmarkedText(string + "\n", font: font, showGray: GlobalPreferences.shared.showUnmarkedGray)
         }
         else{
             parts.sort{

@@ -19,9 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        Preferences.load()
-        Preferences.shared.save() // if defaults have been used
-        if Preferences.shared.showSplash{
+        GlobalPreferences.load()
+        GlobalPreferences.shared.save() // if defaults have been used
+        if GlobalPreferences.shared.showSplash{
             if let url = LogDocumentController.sharedController.showStartDialog(){
                 LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
                 }
@@ -45,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        Preferences.shared.save()
+        GlobalPreferences.shared.save()
     }
 
     @IBAction func openPreferences(_ sender: Any) {

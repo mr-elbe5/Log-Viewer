@@ -48,7 +48,7 @@ class LogDocument: NSDocument, PreferencesDelegate{
     override func read(from url: URL, ofType typeName: String) throws {
         if FileManager.default.fileExists(atPath: url.path){
             do{
-                preferences = Preferences.shared.getDocumentPreferences(url: url)
+                preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)
                 fileHandle = try FileHandle(forReadingFrom: url)
                 if let data = self.fileHandle?.readDataToEndOfFile(){
                     let chunk = LogChunk(String(data: data, encoding: .utf8) ?? "")
@@ -104,7 +104,7 @@ class LogDocument: NSDocument, PreferencesDelegate{
     }
     
     func savePreferences(){
-        Preferences.shared.save()
+        GlobalPreferences.shared.save()
     }
 
     func preferencesChanged(){

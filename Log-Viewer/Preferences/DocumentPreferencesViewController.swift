@@ -17,7 +17,7 @@ class DocumentPreferencesViewController:ViewController {
     
     override init() {
         super.init()
-        for _ in 0..<Preferences.numPatterns{
+        for _ in 0..<GlobalPreferences.numPatterns{
             patternFields.append(NSTextField())
         }
     }
@@ -32,7 +32,7 @@ class DocumentPreferencesViewController:ViewController {
         
         if let prefs = logDocument?.preferences{
             fullLineColoringField.state = prefs.fullLineColoring ? .on : .off
-            for i in 0..<Preferences.numPatterns{
+            for i in 0..<GlobalPreferences.numPatterns{
                 patternFields[i].stringValue = prefs.patterns[i]
             }
         }
@@ -65,15 +65,15 @@ class DocumentPreferencesViewController:ViewController {
     }
     
     private func setColors(){
-        for i in 0..<Preferences.numPatterns{
-            patternFields[i].textColor = Preferences.shared.textColors[i].color
-            patternFields[i].backgroundColor = Preferences.shared.backgroundColors[i].color
+        for i in 0..<GlobalPreferences.numPatterns{
+            patternFields[i].textColor = GlobalPreferences.shared.textColors[i].color
+            patternFields[i].backgroundColor = GlobalPreferences.shared.backgroundColors[i].color
         }
     }
     
     @objc func resetDocumentPreferences(){
         fullLineColoringField.state = .off
-        for i in 0..<Preferences.numPatterns{
+        for i in 0..<GlobalPreferences.numPatterns{
             patternFields[i].stringValue = ""
         }
     }
@@ -81,7 +81,7 @@ class DocumentPreferencesViewController:ViewController {
     @objc func save(){
         if let log = logDocument{
             log.preferences.fullLineColoring = fullLineColoringField.state == .on
-            for i in 0..<Preferences.numPatterns{
+            for i in 0..<GlobalPreferences.numPatterns{
                 log.preferences.patterns[i] = patternFields[i].stringValue
             }
             log.savePreferences()

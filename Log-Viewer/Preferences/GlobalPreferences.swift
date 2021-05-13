@@ -13,9 +13,9 @@ protocol PreferencesDelegate {
     func preferencesChanged()
 }
 
-class Preferences: Identifiable, Codable{
+class GlobalPreferences: Identifiable, Codable{
     
-    static var shared = Preferences()
+    static var shared = GlobalPreferences()
     
     static var fontSizes = [10, 12, 14, 16, 18, 20, 24]
     static var numPatterns : Int = 5
@@ -70,10 +70,16 @@ class Preferences: Identifiable, Codable{
     var fontSize = 14
     var showUnmarkedGray = true
     var caseInsensitive = true
-    var textColors : [CodableColor] = Statics.isDarkMode ? darkmodeTextColorSet : defaultTextColorSet
-    var backgroundColors : [CodableColor] = Statics.isDarkMode ? darkmodeBackgroundColorSet : defaultBackgroundColorSet
+    var textColors : [CodableColor] = isDarkMode ? darkmodeTextColorSet : defaultTextColorSet
+    var backgroundColors : [CodableColor] = isDarkMode ? darkmodeBackgroundColorSet : defaultBackgroundColorSet
     var documentPreferences = [URL: DocumentPreferences]()
-    
+
+    static var isDarkMode : Bool{
+        get{
+            return UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+        }
+    }
+
     init(){
     }
     
@@ -85,8 +91,8 @@ class Preferences: Identifiable, Codable{
         fontSize = try values.decodeIfPresent(Int.self, forKey: .fontSize) ?? 14
         showUnmarkedGray = try values.decodeIfPresent(Bool.self, forKey: .showUnmarkedGray) ?? true
         caseInsensitive = try values.decodeIfPresent(Bool.self, forKey: .caseInsensitive) ?? true
-        textColors = try values.decodeIfPresent([CodableColor].self, forKey: .textColors) ?? (Statics.isDarkMode ? Preferences.darkmodeTextColorSet : Preferences.defaultTextColorSet)
-        backgroundColors = try values.decodeIfPresent([CodableColor].self, forKey: .backgroundColors) ?? (Statics.isDarkMode ? Preferences.darkmodeBackgroundColorSet : Preferences.defaultBackgroundColorSet)
+        textColors = try values.decodeIfPresent([CodableColor].self, forKey: .textColors) ?? (GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeTextColorSet : GlobalPreferences.defaultTextColorSet)
+        backgroundColors = try values.decodeIfPresent([CodableColor].self, forKey: .backgroundColors) ?? (GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeBackgroundColorSet : GlobalPreferences.defaultBackgroundColorSet)
         documentPreferences = try values.decodeIfPresent([URL: DocumentPreferences].self, forKey: .documentPreferences) ?? [URL: DocumentPreferences]()
         save()
     }
@@ -111,8 +117,8 @@ class Preferences: Identifiable, Codable{
         fontSize = 14
         showUnmarkedGray = false
         caseInsensitive = true
-        textColors = Statics.isDarkMode ? Preferences.darkmodeTextColorSet : Preferences.defaultTextColorSet
-        backgroundColors = Statics.isDarkMode ? Preferences.darkmodeBackgroundColorSet : Preferences.defaultBackgroundColorSet
+        textColors = GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeTextColorSet : GlobalPreferences.defaultTextColorSet
+        backgroundColors = GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeBackgroundColorSet : GlobalPreferences.defaultBackgroundColorSet
     }
     
     func resetDocumentPreferences(){
@@ -131,13 +137,13 @@ class Preferences: Identifiable, Codable{
     
     static func load(){
         if let storedString = UserDefaults.standard.value(forKey: "logPreferences") as? String {
-            if let history : Preferences = Preferences.fromJSON(encoded: storedString){
-                Preferences.shared = history
+            if let history : GlobalPreferences = GlobalPreferences.fromJSON(encoded: storedString){
+                GlobalPreferences.shared = history
             }
         }
         else{
             print("no saved data available for preferences")
-            Preferences.shared = Preferences()
+            GlobalPreferences.shared = GlobalPreferences()
         }
     }
     

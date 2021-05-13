@@ -12,10 +12,9 @@
 		4E20A7A2257E47B50068AC8D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A7A0257E47B50068AC8D /* MainMenu.xib */; };
 		4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7AB257E48140068AC8D /* LogWindowController.swift */; };
 		4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7B1257E484F0068AC8D /* LogViewController.swift */; };
-		4E20A7BF257E4A6D0068AC8D /* Statics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7BE257E4A6D0068AC8D /* Statics.swift */; };
 		4E33FA98257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33FA97257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift */; };
 		4E33FA9B257FD0CE007AB6C0 /* GlobalPreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33FA9A257FD0CE007AB6C0 /* GlobalPreferencesWindowController.swift */; };
-		4E50575A25811C7E00A4CC90 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50575925811C7E00A4CC90 /* Preferences.swift */; };
+		4E50575A25811C7E00A4CC90 /* GlobalPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50575925811C7E00A4CC90 /* GlobalPreferences.swift */; };
 		4E539550258222D400CC56A8 /* HelpWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E53954F258222D400CC56A8 /* HelpWindowController.swift */; };
 		4E5395562582230C00CC56A8 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5395552582230C00CC56A8 /* HelpViewController.swift */; };
 		4E72F91D264D3A1500EF6AF0 /* LogStartWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E72F91C264D3A1500EF6AF0 /* LogStartWindowController.swift */; };
@@ -40,10 +39,9 @@
 		4E20A7A4257E47B50068AC8D /* LogViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LogViewer.entitlements; sourceTree = "<group>"; };
 		4E20A7AB257E48140068AC8D /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		4E20A7B1257E484F0068AC8D /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
-		4E20A7BE257E4A6D0068AC8D /* Statics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statics.swift; sourceTree = "<group>"; };
 		4E33FA97257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPreferencesViewController.swift; sourceTree = "<group>"; };
 		4E33FA9A257FD0CE007AB6C0 /* GlobalPreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPreferencesWindowController.swift; sourceTree = "<group>"; };
-		4E50575925811C7E00A4CC90 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		4E50575925811C7E00A4CC90 /* GlobalPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPreferences.swift; sourceTree = "<group>"; };
 		4E53954F258222D400CC56A8 /* HelpWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpWindowController.swift; sourceTree = "<group>"; };
 		4E5395552582230C00CC56A8 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		4E72F91C264D3A1500EF6AF0 /* LogStartWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStartWindowController.swift; sourceTree = "<group>"; };
@@ -105,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				4E903C16258CD52000E542AD /* DocumentPreferences.swift */,
-				4E50575925811C7E00A4CC90 /* Preferences.swift */,
+				4E50575925811C7E00A4CC90 /* GlobalPreferences.swift */,
 				4E33FA97257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift */,
 				4E33FA9A257FD0CE007AB6C0 /* GlobalPreferencesWindowController.swift */,
 				4ED97A60263A9F7C00F79137 /* DocumentPreferencesWindowController.swift */,
@@ -127,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				4E20A79C257E47B40068AC8D /* AppDelegate.swift */,
-				4E20A7BE257E4A6D0068AC8D /* Statics.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -195,9 +192,9 @@
 			);
 			mainGroup = 4E20A790257E47B40068AC8D;
 			packageReferences = (
-				4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions" */,
-				4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions" */,
-				4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions" */,
+				4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions.git" */,
+				4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions.git" */,
+				4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions.git" */,
 			);
 			productRefGroup = 4E20A79A257E47B40068AC8D /* Products */;
 			projectDirPath = "";
@@ -227,7 +224,6 @@
 			files = (
 				4E72F91F264D3DF500EF6AF0 /* LogStartViewController.swift in Sources */,
 				4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */,
-				4E20A7BF257E4A6D0068AC8D /* Statics.swift in Sources */,
 				4E903C17258CD52000E542AD /* DocumentPreferences.swift in Sources */,
 				4E20A79D257E47B40068AC8D /* AppDelegate.swift in Sources */,
 				4E5395562582230C00CC56A8 /* HelpViewController.swift in Sources */,
@@ -239,7 +235,7 @@
 				4E33FA98257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift in Sources */,
 				4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */,
 				4ED97A63263A9F9900F79137 /* DocumentPreferencesViewController.swift in Sources */,
-				4E50575A25811C7E00A4CC90 /* Preferences.swift in Sources */,
+				4E50575A25811C7E00A4CC90 /* GlobalPreferences.swift in Sources */,
 				4EAC4CF5258A738200554A69 /* LogChunk.swift in Sources */,
 				4E539550258222D400CC56A8 /* HelpWindowController.swift in Sources */,
 			);
@@ -448,7 +444,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions" */ = {
+		4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mr-elbe5/SwiftyDataExtensions.git";
 			requirement = {
@@ -456,7 +452,7 @@
 				minimumVersion = 1.1.0;
 			};
 		};
-		4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions" */ = {
+		4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mr-elbe5/SwiftyMacViewExtensions.git";
 			requirement = {
@@ -464,7 +460,7 @@
 				minimumVersion = 1.1.3;
 			};
 		};
-		4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions" */ = {
+		4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mr-elbe5/SwiftyStringExtensions.git";
 			requirement = {
@@ -477,17 +473,17 @@
 /* Begin XCSwiftPackageProductDependency section */
 		4EC1DF942636CC670070FBA3 /* SwiftyDataExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions" */;
+			package = 4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions.git" */;
 			productName = SwiftyDataExtensions;
 		};
 		4EC1DF982636CCBE0070FBA3 /* SwiftyMacViewExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions" */;
+			package = 4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions.git" */;
 			productName = SwiftyMacViewExtensions;
 		};
 		4EC1DFA22636D4660070FBA3 /* SwiftyStringExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions" */;
+			package = 4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions.git" */;
 			productName = SwiftyStringExtensions;
 		};
 /* End XCSwiftPackageProductDependency section */

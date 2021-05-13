@@ -18,8 +18,8 @@ class LogDocumentController: NSDocumentController {
     
     override func clearRecentDocuments(_ sender: Any?) {
         super.clearRecentDocuments(sender)
-        Preferences.shared.resetDocumentPreferences()
-        Preferences.shared.save()
+        GlobalPreferences.shared.resetDocumentPreferences()
+        GlobalPreferences.shared.save()
     }
     
     public func showStartDialog() -> URL?{

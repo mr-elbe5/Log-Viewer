@@ -21,7 +21,7 @@ class GlobalPreferencesViewController:ViewController {
     
     override init() {
         super.init()
-        for _ in 0..<Preferences.numPatterns{
+        for _ in 0..<GlobalPreferences.numPatterns{
             textColorFields.append(NSColorWell())
             backgroundColorFields.append(NSColorWell())
         }
@@ -35,7 +35,7 @@ class GlobalPreferencesViewController:ViewController {
         view = NSView()
         view.frame = CGRect(x: 0, y: 0, width: 500, height: 410)
         
-        fontSizeField.addItems(selectedSize: Preferences.shared.fontSize)
+        fontSizeField.addItems(selectedSize: GlobalPreferences.shared.fontSize)
         reset()
         let resetButton = NSButton(title: "Reset to previous", target: self, action: #selector(reset))
         let setDefaultsButton = NSButton(title: "Reset to defaults", target: self, action: #selector(toDefaults))
@@ -51,7 +51,7 @@ class GlobalPreferencesViewController:ViewController {
         grid.addLabeledRow(label: "Search:", views: [caseInsensitiveField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addSeparator()
         grid.addRow(with: [NSTextField(labelWithString: ""), NSTextField(labelWithString: "Text color"), NSTextField(labelWithString: "Background")])
-        for i in 0..<Preferences.numPatterns{
+        for i in 0..<GlobalPreferences.numPatterns{
             grid.addLabeledRow(label: "Colors of pattern \(i)", views: [textColorFields[i], backgroundColorFields[i]])
         }
         grid.addSeparator()
@@ -71,47 +71,47 @@ class GlobalPreferencesViewController:ViewController {
     }
     
     @objc func reset(){
-        fontSizeField.setSelectedSize(Preferences.shared.fontSize)
-        showSplashField.state = Preferences.shared.showSplash ? .on : .off
-        rememberFrameField.state = Preferences.shared.rememberWindowFrame ? .on : .off
-        useTabsField.state = Preferences.shared.useTabs ? .on : .off
-        showUnmarkedGrayField.state = Preferences.shared.showUnmarkedGray ? .on : .off
-        caseInsensitiveField.state = Preferences.shared.caseInsensitive ? .on : .off
-        for i in 0..<Preferences.numPatterns{
+        fontSizeField.setSelectedSize(GlobalPreferences.shared.fontSize)
+        showSplashField.state = GlobalPreferences.shared.showSplash ? .on : .off
+        rememberFrameField.state = GlobalPreferences.shared.rememberWindowFrame ? .on : .off
+        useTabsField.state = GlobalPreferences.shared.useTabs ? .on : .off
+        showUnmarkedGrayField.state = GlobalPreferences.shared.showUnmarkedGray ? .on : .off
+        caseInsensitiveField.state = GlobalPreferences.shared.caseInsensitive ? .on : .off
+        for i in 0..<GlobalPreferences.numPatterns{
             let colorField = textColorFields[i]
-            colorField.height(CGFloat(Preferences.shared.fontSize + 10))
+            colorField.height(CGFloat(GlobalPreferences.shared.fontSize + 10))
             colorField.width(50)
-            colorField.color = Preferences.shared.textColors[i].color
+            colorField.color = GlobalPreferences.shared.textColors[i].color
         }
-        for i in 0..<Preferences.numPatterns{
+        for i in 0..<GlobalPreferences.numPatterns{
             let colorField = backgroundColorFields[i]
-            colorField.height(CGFloat(Preferences.shared.fontSize + 10))
+            colorField.height(CGFloat(GlobalPreferences.shared.fontSize + 10))
             colorField.width(50)
-            colorField.color = Preferences.shared.backgroundColors[i].color
+            colorField.color = GlobalPreferences.shared.backgroundColors[i].color
         }
     }
     
     @objc func toDefaults(){
-        Preferences.shared.resetGlobalSettings()
+        GlobalPreferences.shared.resetGlobalSettings()
         reset()
     }
     
     @objc func save(){
-        Preferences.shared.showSplash = showSplashField.state == .on
-        Preferences.shared.rememberWindowFrame = rememberFrameField.state == .on
-        Preferences.shared.useTabs = useTabsField.state == .on
+        GlobalPreferences.shared.showSplash = showSplashField.state == .on
+        GlobalPreferences.shared.rememberWindowFrame = rememberFrameField.state == .on
+        GlobalPreferences.shared.useTabs = useTabsField.state == .on
         if let fontSizeString = fontSizeField.titleOfSelectedItem{
             if let fontSize = Int(fontSizeString){
-                Preferences.shared.fontSize = fontSize
+                GlobalPreferences.shared.fontSize = fontSize
             }
         }
-        Preferences.shared.showUnmarkedGray = showUnmarkedGrayField.state == .on
-        Preferences.shared.caseInsensitive = caseInsensitiveField.state == .on
-        for i in 0..<Preferences.numPatterns{
-            Preferences.shared.textColors[i] = CodableColor(color: textColorFields[i].color)
-            Preferences.shared.backgroundColors[i] = CodableColor(color: backgroundColorFields[i].color)
+        GlobalPreferences.shared.showUnmarkedGray = showUnmarkedGrayField.state == .on
+        GlobalPreferences.shared.caseInsensitive = caseInsensitiveField.state == .on
+        for i in 0..<GlobalPreferences.numPatterns{
+            GlobalPreferences.shared.textColors[i] = CodableColor(color: textColorFields[i].color)
+            GlobalPreferences.shared.backgroundColors[i] = CodableColor(color: backgroundColorFields[i].color)
         }
-        Preferences.shared.save()
+        GlobalPreferences.shared.save()
         if let window = self.view.window{
             window.close()
         }
@@ -122,8 +122,8 @@ class GlobalPreferencesViewController:ViewController {
 class FontSizeSelect : NSPopUpButton{
     
     func addItems(selectedSize : Int){
-        for i in 0..<Preferences.fontSizes.count{
-            let fontSize = Preferences.fontSizes[i]
+        for i in 0..<GlobalPreferences.fontSizes.count{
+            let fontSize = GlobalPreferences.fontSizes[i]
             addItem(withTitle: String(fontSize))
             if fontSize == selectedSize{
                 selectItem(at: i)
