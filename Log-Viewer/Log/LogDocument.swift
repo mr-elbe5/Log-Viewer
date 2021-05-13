@@ -74,7 +74,12 @@ class LogDocument: NSDocument, PreferencesDelegate{
                 self.processEvent(event: event)
             }
             eventSource.setCancelHandler {
-                try? fileHandle.close()
+                if #available(macOS 10.15, *){
+                    try? fileHandle.close()
+                }
+                else{
+                    fileHandle.closeFile()
+                }
             }
             fileHandle.seekToEndOfFile()
             eventSource.resume()

@@ -91,7 +91,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             toolbarItem.label = "Start Logging"
             toolbarItem.paletteLabel = "Start Logging"
             toolbarItem.toolTip = "Start following the log file"
-            toolbarItem.image = NSImage(systemSymbolName: "play.circle", accessibilityDescription: "")
+            if #available(macOS 11.0, *){
+                toolbarItem.image = NSImage(systemSymbolName: "play.circle", accessibilityDescription: "")
+            }
+            else{
+                toolbarItem.image = NSImage(named: "play.circle")
+            }
             return toolbarItem
         }
         
@@ -102,7 +107,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             toolbarItem.label = "Pause Logging"
             toolbarItem.paletteLabel = "Pause Logging"
             toolbarItem.toolTip = "Pause following the log file"
-            toolbarItem.image = NSImage(systemSymbolName: "pause.circle", accessibilityDescription: "")
+            if #available(macOS 11.0, *){
+                toolbarItem.image = NSImage(systemSymbolName: "pause.circle", accessibilityDescription: "")
+            }
+            else{
+                toolbarItem.image = NSImage(named: "pause.circle")
+            }
             return toolbarItem
         }
         
@@ -113,7 +123,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             toolbarItem.label = "Global Preferences"
             toolbarItem.paletteLabel = "Global Preferences"
             toolbarItem.toolTip = "Set global preferences and colors"
-            toolbarItem.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: "")
+            if #available(macOS 11.0, *){
+                toolbarItem.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: "")
+            }
+            else{
+                toolbarItem.image = NSImage(named: "gearshape")
+            }
             return toolbarItem
         }
         
@@ -124,7 +139,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             toolbarItem.label = "Document Preferences"
             toolbarItem.paletteLabel = "Document Preferences"
             toolbarItem.toolTip = "Set document log preferences"
-            toolbarItem.image = NSImage(systemSymbolName: "doc.badge.gearshape", accessibilityDescription: "")
+            if #available(macOS 11.0, *){
+                toolbarItem.image = NSImage(systemSymbolName: "doc.badge.gearshape", accessibilityDescription: "")
+            }
+            else{
+                toolbarItem.image = NSImage(named: "doc.badge.gearshape")
+            }
             return toolbarItem
         }
         
@@ -135,7 +155,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             toolbarItem.label = "Help"
             toolbarItem.paletteLabel = "Help"
             toolbarItem.toolTip = "Help"
-            toolbarItem.image = NSImage(systemSymbolName: "questionmark.circle", accessibilityDescription: "")
+            if #available(macOS 11.0, *){
+                toolbarItem.image = NSImage(systemSymbolName: "questionmark.circle", accessibilityDescription: "")
+            }
+            else{
+                toolbarItem.image = NSImage(named: "questionmark.circle")
+            }
             return toolbarItem
         }
     
