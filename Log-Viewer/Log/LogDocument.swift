@@ -10,8 +10,6 @@ import Cocoa
 
 class LogDocument: NSDocument, PreferencesDelegate{
     
-    static var dummyDocument = LogDocument()
-    
     var url : URL? = nil
     var preferences =  DocumentPreferences()
     
@@ -39,13 +37,6 @@ class LogDocument: NSDocument, PreferencesDelegate{
     }
     
     override func makeWindowControllers() {
-        if self == LogDocument.dummyDocument{
-            Swift.print("is dummy make")
-            let splashController = SplashWindowController()
-            splashController.window!.center()
-            NSApp.runModal(for: splashController.window!)
-            return
-        }
         windowController = LogWindowController(document: self)
         addWindowController(windowController!)
     }
@@ -55,10 +46,6 @@ class LogDocument: NSDocument, PreferencesDelegate{
     }
     
     override func read(from url: URL, ofType typeName: String) throws {
-        if self == LogDocument.dummyDocument{
-            Swift.print("is dummy read")
-            return
-        }
         if FileManager.default.fileExists(atPath: url.path){
             do{
                 preferences = Preferences.shared.getDocumentPreferences(url: url)

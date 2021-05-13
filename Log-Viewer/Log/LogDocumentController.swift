@@ -6,21 +6,28 @@
 //
 
 import Cocoa
+import SwiftyMacViewExtensions
 
 class LogDocumentController: NSDocumentController {
     
-    override func openUntitledDocumentAndDisplay(_ displayDocument: Bool) throws -> NSDocument {
-        print("open untitled \(displayDocument)")
-        let splashController = SplashWindowController()
-        splashController.window!.center()
-        NSApp.runModal(for: splashController.window!)
-        return LogDocument.dummyDocument
+    public static var sharedController : LogDocumentController{
+        get{
+            NSDocumentController.shared as! LogDocumentController
+        }
     }
     
     override func clearRecentDocuments(_ sender: Any?) {
         super.clearRecentDocuments(sender)
         Preferences.shared.resetDocumentPreferences()
         Preferences.shared.save()
+    }
+    
+    public func showStartDialog() -> URL?{
+        let controller = LogStartWindowController()
+        if NSApp.runModal(for: controller.window!) == .OK{
+            return controller.url
+        }
+        return nil
     }
     
 }

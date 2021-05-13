@@ -12,6 +12,7 @@ class GlobalPreferencesViewController:ViewController {
     
     var showSplashField = NSButton(checkboxWithTitle: "Show at startup", target: nil, action: nil)
     var rememberFrameField = NSButton(checkboxWithTitle: "Remember", target: nil, action: nil)
+    var useTabsField = NSButton(checkboxWithTitle: "Use Tabs", target: nil, action: nil)
     var fontSizeField = FontSizeSelect()
     var showUnmarkedGrayField = NSButton(checkboxWithTitle: "Show gray", target: nil, action: nil)
     var caseInsensitiveField = NSButton(checkboxWithTitle: "Case insensitive", target: nil, action: nil)
@@ -32,7 +33,7 @@ class GlobalPreferencesViewController:ViewController {
     
     override func loadView() {
         view = NSView()
-        view.frame = CGRect(x: 0, y: 0, width: 500, height: 390)
+        view.frame = CGRect(x: 0, y: 0, width: 500, height: 410)
         
         fontSizeField.addItems(selectedSize: Preferences.shared.fontSize)
         reset()
@@ -44,6 +45,7 @@ class GlobalPreferencesViewController:ViewController {
         let grid = NSGridView()
         grid.addLabeledRow(label: "Previous documents:", views: [showSplashField, NSGridCell.emptyContentView]).mergeCells(from: 1, to: 2)
         grid.addLabeledRow(label: "Window size:", views: [rememberFrameField, NSGridCell.emptyContentView]).mergeCells(from: 1)
+        grid.addLabeledRow(label: "Window settings:", views: [useTabsField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Font size:", views: [fontSizeField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Unmarked lines:", views: [showUnmarkedGrayField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Search:", views: [caseInsensitiveField, NSGridCell.emptyContentView]).mergeCells(from: 1)
@@ -72,6 +74,7 @@ class GlobalPreferencesViewController:ViewController {
         fontSizeField.setSelectedSize(Preferences.shared.fontSize)
         showSplashField.state = Preferences.shared.showSplash ? .on : .off
         rememberFrameField.state = Preferences.shared.rememberWindowFrame ? .on : .off
+        useTabsField.state = Preferences.shared.useTabs ? .on : .off
         showUnmarkedGrayField.state = Preferences.shared.showUnmarkedGray ? .on : .off
         caseInsensitiveField.state = Preferences.shared.caseInsensitive ? .on : .off
         for i in 0..<Preferences.numPatterns{
@@ -96,6 +99,7 @@ class GlobalPreferencesViewController:ViewController {
     @objc func save(){
         Preferences.shared.showSplash = showSplashField.state == .on
         Preferences.shared.rememberWindowFrame = rememberFrameField.state == .on
+        Preferences.shared.useTabs = useTabsField.state == .on
         if let fontSizeString = fontSizeField.titleOfSelectedItem{
             if let fontSize = Int(fontSizeString){
                 Preferences.shared.fontSize = fontSize

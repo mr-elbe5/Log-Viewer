@@ -22,10 +22,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Preferences.load()
         Preferences.shared.save() // if defaults have been used
         if Preferences.shared.showSplash{
-            let splashController = SplashWindowController()
-            splashController.window!.center()
-            NSApp.runModal(for: splashController.window!)
+            if let url = LogDocumentController.sharedController.showStartDialog(){
+                LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
+                }
+            }
         }
+    }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if flag{
+            return true
+        }
+        if let url = LogDocumentController.sharedController.showStartDialog(){
+            LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
+            }
+        }
+        return false
+    }
+    
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool{
+        false
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

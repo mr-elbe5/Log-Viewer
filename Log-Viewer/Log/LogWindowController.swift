@@ -71,6 +71,13 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         window?.makeFirstResponder(nil)
     }
     
+    override public func newWindowForTab(_ sender: Any?) {
+        guard let window = self.window else { preconditionFailure("no window for controller")}
+        if let url = LogDocumentController.sharedController.showStartDialog(){
+            LogDocumentController.sharedController.openDocument(url)
+        }
+    }
+    
     // Toolbar Delegate
     
     func toolbar(_ toolbar: NSToolbar,
