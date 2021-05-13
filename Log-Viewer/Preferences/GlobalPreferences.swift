@@ -76,7 +76,7 @@ class GlobalPreferences: Identifiable, Codable{
 
     static var isDarkMode : Bool{
         get{
-            return UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+            UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
         }
     }
 
