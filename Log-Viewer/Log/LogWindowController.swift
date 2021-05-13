@@ -34,8 +34,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             y = screen.frame.height/2 - Statics.startSize.height/2
         }
         let window = NSWindow(contentRect: NSMakeRect(x, y, Statics.startSize.width, Statics.startSize.height), styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
-        window.tabbingMode = .disallowed
         window.title = Statics.title
+        window.tabbingMode = Preferences.shared.useTabs ? .preferred : .automatic
         super.init(window: window)
         self.window?.delegate = self
         let toolbar = NSToolbar(identifier: self.mainWindowToolbarIdentifier)
@@ -68,13 +68,13 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     // Window delegate
     
     func windowDidBecomeKey(_ notification: Notification) {
-        window?.makeFirstResponder(nil)
+        updateStartPause()
     }
     
     override public func newWindowForTab(_ sender: Any?) {
-        guard let window = self.window else { preconditionFailure("no window for controller")}
         if let url = LogDocumentController.sharedController.showStartDialog(){
-            LogDocumentController.sharedController.openDocument(url)
+            LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
+            }
         }
     }
     
@@ -195,6 +195,18 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         if let toolbar = window?.toolbar{
             toolbar.removeItem(at: 0)
             toolbar.insertItem(withItemIdentifier: toolbarItemStart, at: 0)
+        }
+    }
+    
+    func updateStartPause(){
+        if let toolbar = window?.toolbar{
+            toolbar.removeItem(at: 0)
+            if logViewController.follow{
+                toolbar.insertItem(withItemIdentifier: toolbarItemPause, at: 0)
+            }
+            else{
+                toolbar.insertItem(withItemIdentifier: toolbarItemStart, at: 0)
+            }
         }
     }
     

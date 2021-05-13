@@ -17,7 +17,7 @@ public class LogStartWindowController: NSWindowController, NSWindowDelegate {
     }
     
     init(){
-        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 400, height: 200), styleMask: [.closable, .miniaturizable, .titled, .resizable], backing: .buffered, defer: false)
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 400, height: 200), styleMask: [.closable, .titled, .resizable], backing: .buffered, defer: false)
         window.title = "Open file"
         super.init(window: window)
         self.window?.delegate = self
