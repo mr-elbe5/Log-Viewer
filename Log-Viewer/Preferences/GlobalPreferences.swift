@@ -53,7 +53,6 @@ class GlobalPreferences: Identifiable, Codable{
     ]
     
     enum CodingKeys: String, CodingKey {
-        case showSplash
         case rememberWindowFrame
         case useTabs
         case fontSize
@@ -64,7 +63,6 @@ class GlobalPreferences: Identifiable, Codable{
         case documentPreferences
     }
     
-    var showSplash = true
     var rememberWindowFrame = true
     var useTabs = true
     var fontSize = 14
@@ -85,7 +83,6 @@ class GlobalPreferences: Identifiable, Codable{
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        showSplash = try values.decodeIfPresent(Bool.self, forKey: .showSplash) ?? true
         rememberWindowFrame = try values.decodeIfPresent(Bool.self, forKey: .rememberWindowFrame) ?? true
         useTabs = try values.decodeIfPresent(Bool.self, forKey: .useTabs) ?? true
         fontSize = try values.decodeIfPresent(Int.self, forKey: .fontSize) ?? 14
@@ -99,7 +96,6 @@ class GlobalPreferences: Identifiable, Codable{
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(showSplash, forKey: .showSplash)
         try container.encode(rememberWindowFrame, forKey: .rememberWindowFrame)
         try container.encode(useTabs, forKey: .useTabs)
         try container.encode(fontSize, forKey: .fontSize)
@@ -111,7 +107,6 @@ class GlobalPreferences: Identifiable, Codable{
     }
     
     func resetGlobalSettings(){
-        showSplash = true
         rememberWindowFrame = true
         useTabs = true
         fontSize = 14
@@ -148,7 +143,7 @@ class GlobalPreferences: Identifiable, Codable{
     }
     
     func save(){
-        let storeString = self.toJSON()
+        let storeString = toJSON()
         UserDefaults.standard.set(storeString, forKey: "logPreferences")
     }
 }

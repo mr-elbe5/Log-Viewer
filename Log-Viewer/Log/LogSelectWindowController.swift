@@ -8,11 +8,11 @@
 import Cocoa
 import SwiftyMacViewExtensions
 
-public class LogStartWindowController: NSWindowController, NSWindowDelegate {
+public class LogSelectWindowController: NSWindowController, NSWindowDelegate {
     
     var url : URL?{
         get{
-            (contentViewController as! LogStartViewController).url
+            (contentViewController as! LogSelectViewController).url
         }
     }
     
@@ -21,7 +21,7 @@ public class LogStartWindowController: NSWindowController, NSWindowDelegate {
         window.title = "Open file"
         super.init(window: window)
         self.window?.delegate = self
-        let controller = LogStartViewController()
+        let controller = LogSelectViewController()
         contentViewController = controller
     }
     

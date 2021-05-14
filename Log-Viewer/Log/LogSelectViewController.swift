@@ -9,7 +9,7 @@ import Foundation
 import Cocoa
 import SwiftyMacViewExtensions
 
-public class LogStartViewController: ViewController {
+public class LogSelectViewController: ViewController {
     
     var url : URL? = nil
     
@@ -49,14 +49,14 @@ public class LogStartViewController: ViewController {
     
     @objc open func openRecent(sender: Any){
         if let button = sender as? NSButton{
-            self.url = URL(fileURLWithPath: button.title)
-            self.view.window?.close()
+            url = URL(fileURLWithPath: button.title)
+            view.window?.close()
         }
     }
     
     @objc open func open(){
         LogDocumentController.sharedController.openDocument(self)
-        self.view.window?.close()
+        view.window?.close()
     }
     
 }

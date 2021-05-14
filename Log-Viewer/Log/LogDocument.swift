@@ -17,7 +17,7 @@ class LogDocument: NSDocument, PreferencesDelegate{
     
     var viewController : LogViewController?{
         get{
-            return windowController?.logViewController
+            windowController?.logViewController
         }
     }
     
@@ -31,9 +31,13 @@ class LogDocument: NSDocument, PreferencesDelegate{
         fileHandle = nil
         url = nil
     }
+
+    override class var autosavesDrafts: Bool {
+        false
+    }
     
     override class var autosavesInPlace: Bool {
-        return false
+        false
     }
     
     override func makeWindowControllers() {
@@ -42,7 +46,6 @@ class LogDocument: NSDocument, PreferencesDelegate{
     }
     
     override func write(to url: URL, ofType typeName: String) throws {
-        Swift.print("is write")
     }
     
     override func read(from url: URL, ofType typeName: String) throws {
@@ -50,7 +53,7 @@ class LogDocument: NSDocument, PreferencesDelegate{
             do{
                 preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)
                 fileHandle = try FileHandle(forReadingFrom: url)
-                if let data = self.fileHandle?.readDataToEndOfFile(){
+                if let data = fileHandle?.readDataToEndOfFile(){
                     let chunk = LogChunk(String(data: data, encoding: .utf8) ?? "")
                     chunks.append(chunk)
                 }
@@ -63,7 +66,7 @@ class LogDocument: NSDocument, PreferencesDelegate{
     }
     
     func setEventSource(){
-        if let fileHandle = self.fileHandle{
+        if let fileHandle = fileHandle{
             let eventSource = DispatchSource.makeFileSystemObjectSource(
                 fileDescriptor: fileHandle.fileDescriptor,
                 eventMask: .extend,
@@ -96,7 +99,7 @@ class LogDocument: NSDocument, PreferencesDelegate{
         guard event.contains(.extend) else {
             return
         }
-        if let data = self.fileHandle?.readDataToEndOfFile(){
+        if let data = fileHandle?.readDataToEndOfFile(){
             let chunk = LogChunk(String(data: data, encoding: .utf8) ?? "")
             chunks.append(chunk)
             viewController?.updateFromDocument()

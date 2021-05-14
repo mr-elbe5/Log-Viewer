@@ -22,8 +22,8 @@ class LogDocumentController: NSDocumentController {
         GlobalPreferences.shared.save()
     }
     
-    public func showStartDialog() -> URL?{
-        let controller = LogStartWindowController()
+    public func showSelectDialog() -> URL?{
+        let controller = LogSelectWindowController()
         if NSApp.runModal(for: controller.window!) == .OK{
             return controller.url
         }

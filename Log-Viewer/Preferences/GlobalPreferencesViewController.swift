@@ -10,7 +10,6 @@ import SwiftyMacViewExtensions
 
 class GlobalPreferencesViewController:ViewController {
     
-    var showSplashField = NSButton(checkboxWithTitle: "Show at startup", target: nil, action: nil)
     var rememberFrameField = NSButton(checkboxWithTitle: "Remember", target: nil, action: nil)
     var useTabsField = NSButton(checkboxWithTitle: "Use Tabs", target: nil, action: nil)
     var fontSizeField = FontSizeSelect()
@@ -33,7 +32,7 @@ class GlobalPreferencesViewController:ViewController {
     
     override func loadView() {
         view = NSView()
-        view.frame = CGRect(x: 0, y: 0, width: 500, height: 410)
+        view.frame = CGRect(x: 0, y: 0, width: 500, height: 390)
         
         fontSizeField.addItems(selectedSize: GlobalPreferences.shared.fontSize)
         reset()
@@ -43,7 +42,6 @@ class GlobalPreferencesViewController:ViewController {
         okButton.keyEquivalent = "\r"
         
         let grid = NSGridView()
-        grid.addLabeledRow(label: "Previous documents:", views: [showSplashField, NSGridCell.emptyContentView]).mergeCells(from: 1, to: 2)
         grid.addLabeledRow(label: "Window size:", views: [rememberFrameField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Window settings:", views: [useTabsField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Font size:", views: [fontSizeField, NSGridCell.emptyContentView]).mergeCells(from: 1)
@@ -72,7 +70,6 @@ class GlobalPreferencesViewController:ViewController {
     
     @objc func reset(){
         fontSizeField.setSelectedSize(GlobalPreferences.shared.fontSize)
-        showSplashField.state = GlobalPreferences.shared.showSplash ? .on : .off
         rememberFrameField.state = GlobalPreferences.shared.rememberWindowFrame ? .on : .off
         useTabsField.state = GlobalPreferences.shared.useTabs ? .on : .off
         showUnmarkedGrayField.state = GlobalPreferences.shared.showUnmarkedGray ? .on : .off
@@ -97,7 +94,6 @@ class GlobalPreferencesViewController:ViewController {
     }
     
     @objc func save(){
-        GlobalPreferences.shared.showSplash = showSplashField.state == .on
         GlobalPreferences.shared.rememberWindowFrame = rememberFrameField.state == .on
         GlobalPreferences.shared.useTabs = useTabsField.state == .on
         if let fontSizeString = fontSizeField.titleOfSelectedItem{
@@ -112,7 +108,7 @@ class GlobalPreferencesViewController:ViewController {
             GlobalPreferences.shared.backgroundColors[i] = CodableColor(color: backgroundColorFields[i].color)
         }
         GlobalPreferences.shared.save()
-        if let window = self.view.window{
+        if let window = view.window{
             window.close()
         }
     }
@@ -133,7 +129,7 @@ class FontSizeSelect : NSPopUpButton{
     
     func setSelectedSize(_ size: Int){
         let s = String(size)
-        for item in self.itemArray{
+        for item in itemArray{
             if item.title == s{
                 select(item)
                 break

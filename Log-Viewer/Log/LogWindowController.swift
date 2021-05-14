@@ -23,12 +23,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     var logDocument : LogDocument
     var logViewController : LogViewController {
         get{
-            return contentViewController as! LogViewController
+            contentViewController as! LogViewController
         }
     }
     
     init(document: LogDocument){
-        self.logDocument = document
+        logDocument = document
         var x : CGFloat = 0
         var y : CGFloat = 0
         if let screen = NSScreen.main{
@@ -40,7 +40,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         window.tabbingMode = GlobalPreferences.shared.useTabs ? .preferred : .automatic
         super.init(window: window)
         self.window?.delegate = self
-        let toolbar = NSToolbar(identifier: self.mainWindowToolbarIdentifier)
+        let toolbar = NSToolbar(identifier: mainWindowToolbarIdentifier)
         toolbar.delegate = self
         toolbar.allowsUserCustomization = false
         toolbar.autosavesConfiguration = false
@@ -63,7 +63,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     func windowWillClose(_ notification: Notification) {
         logDocument.releaseEventSource()
         if GlobalPreferences.shared.rememberWindowFrame{
-            self.window?.saveFrame(usingName: logDocument.preferences.id)
+            window?.saveFrame(usingName: logDocument.preferences.id)
         }
     }
     
@@ -74,7 +74,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     }
     
     override public func newWindowForTab(_ sender: Any?) {
-        if let url = LogDocumentController.sharedController.showStartDialog(){
+        if let url = LogDocumentController.sharedController.showSelectDialog(){
             LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
             }
         }
@@ -86,13 +86,13 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
                  itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
                  willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem?
     {
-        if  itemIdentifier == self.toolbarItemStart {
+        if  itemIdentifier == toolbarItemStart {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(start)
-            toolbarItem.label = "Start Logging"
-            toolbarItem.paletteLabel = "Start Logging"
-            toolbarItem.toolTip = "Start following the log file"
+            toolbarItem.label = "Start Following"
+            toolbarItem.paletteLabel = "Start Following"
+            toolbarItem.toolTip = "Follow changes of the log file"
             if #available(macOS 11.0, *){
                 toolbarItem.image = NSImage(systemSymbolName: "play.circle", accessibilityDescription: "")
             }
@@ -102,12 +102,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             return toolbarItem
         }
         
-        if  itemIdentifier == self.toolbarItemPause {
+        if  itemIdentifier == toolbarItemPause {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(pause)
-            toolbarItem.label = "Pause Logging"
-            toolbarItem.paletteLabel = "Pause Logging"
+            toolbarItem.label = "Pause Following"
+            toolbarItem.paletteLabel = "Pause Following"
             toolbarItem.toolTip = "Pause following the log file"
             if #available(macOS 11.0, *){
                 toolbarItem.image = NSImage(systemSymbolName: "pause.circle", accessibilityDescription: "")
@@ -118,7 +118,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             return toolbarItem
         }
         
-        if  itemIdentifier == self.toolbarItemGlobalPreferences {
+        if  itemIdentifier == toolbarItemGlobalPreferences {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(openGlobalPreferences)
@@ -134,7 +134,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             return toolbarItem
         }
         
-        if  itemIdentifier == self.toolbarItemDocumentPreferences {
+        if  itemIdentifier == toolbarItemDocumentPreferences {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(openDocumentPreferences)
@@ -150,7 +150,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             return toolbarItem
         }
         
-        if  itemIdentifier == self.toolbarItemHelp {
+        if  itemIdentifier == toolbarItemHelp {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(openHelp)
@@ -169,42 +169,40 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         return nil
     }
     
-    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier]
-    {
-        return [
-            self.toolbarItemPause,
-            self.toolbarItemGlobalPreferences,
-            self.toolbarItemDocumentPreferences,
-            self.toolbarItemHelp
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        [
+            toolbarItemPause,
+            toolbarItemGlobalPreferences,
+            toolbarItemDocumentPreferences,
+            toolbarItemHelp
         ]
     }
     
-    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier]
-    {
-        return [self.toolbarItemStart,
-                self.toolbarItemPause,
-                self.toolbarItemGlobalPreferences,
-                self.toolbarItemDocumentPreferences,
-                self.toolbarItemHelp,
-                NSToolbarItem.Identifier.space,
-                NSToolbarItem.Identifier.flexibleSpace]
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        [toolbarItemStart,
+         toolbarItemPause,
+         toolbarItemGlobalPreferences,
+         toolbarItemDocumentPreferences,
+         toolbarItemHelp,
+         NSToolbarItem.Identifier.space,
+         NSToolbarItem.Identifier.flexibleSpace]
     }
     
     @objc func openGlobalPreferences() {
         let controller = GlobalPreferencesWindowController()
-        controller.centerInWindow(outerWindow: self.window)
+        controller.centerInWindow(outerWindow: window)
         NSApp.runModal(for: controller.window!)
     }
     
     @objc func openDocumentPreferences() {
         let controller = DocumentPreferencesWindowController(log: logDocument)
-        controller.centerInWindow(outerWindow: self.window)
+        controller.centerInWindow(outerWindow: window)
         NSApp.runModal(for: controller.window!)
     }
     
     @objc func openHelp() {
         let controller = HelpWindowController()
-        controller.centerInWindow(outerWindow: self.window)
+        controller.centerInWindow(outerWindow: window)
         NSApp.runModal(for: controller.window!)
     }
     

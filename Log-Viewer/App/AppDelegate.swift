@@ -16,24 +16,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSColorPanel.setPickerMode(.wheel)
         NSColorPanel.setPickerMask(.wheelModeMask)
         NSColorPanel.shared.showsAlpha = false
+        GlobalPreferences.load()
+        GlobalPreferences.shared.save() // if defaults have been used
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        GlobalPreferences.load()
-        GlobalPreferences.shared.save() // if defaults have been used
-        if GlobalPreferences.shared.showSplash{
-            if let url = LogDocumentController.sharedController.showStartDialog(){
-                LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
-                }
-            }
-        }
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         if flag{
             return true
         }
-        if let url = LogDocumentController.sharedController.showStartDialog(){
+        if let url = LogDocumentController.sharedController.showSelectDialog(){
             LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
             }
         }

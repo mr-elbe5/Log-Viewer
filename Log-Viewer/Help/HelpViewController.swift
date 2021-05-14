@@ -10,11 +10,11 @@ import SwiftyMacViewExtensions
 
 class HelpViewController: NSViewController {
     
-    let texts = ["Log-Viewer helps you following log files and thereby mark text parts of interest.",
-                 "Open the Preferences window to select font size, text color and search mode as well as the text patterns to be color marked.",
-                 "Preferences for a file will be available until the 'open recent' list is cleared.",
+    let texts = ["Log-Viewer helps you to follow log files and thereby mark text parts of interest.",
+                 "Open 'Global Preferences' to select general behaviour, font size, colors and search mode. Colors can be changed by selecting a color block.",
+                 "Open 'Document Preferences' to set the text patterns to be color marked. Full line coloring is a little faster and colors the complete line with the color of the first detected pattern.",
                  "Open a log file (.txt, .log or .out). The view will follow the file like the tail -f command.",
-                 "You can pause and resume the display of new incoming lines with the toolbar icon.",
+                 "You can pause and resume following new incoming lines with the toolbar icon.",
                  "If color marks overlap, the first (leftmost) 'wins'."]
     
     init() {

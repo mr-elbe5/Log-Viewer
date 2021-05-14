@@ -87,7 +87,7 @@ class DocumentPreferencesViewController:ViewController {
             log.savePreferences()
             log.preferencesChanged()
         }
-        if let window = self.view.window{
+        if let window = view.window{
             window.close()
         }
     }
