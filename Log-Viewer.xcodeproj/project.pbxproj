@@ -192,9 +192,9 @@
 			);
 			mainGroup = 4E20A790257E47B40068AC8D;
 			packageReferences = (
-				4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions.git" */,
-				4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions.git" */,
-				4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions.git" */,
+				4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions" */,
+				4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions" */,
+				4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions" */,
 			);
 			productRefGroup = 4E20A79A257E47B40068AC8D /* Products */;
 			projectDirPath = "";
@@ -379,7 +379,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 5UG99476V8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Log-Viewer/Info.plist";
@@ -404,7 +404,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 5UG99476V8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Log-Viewer/Info.plist";
@@ -444,7 +444,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions.git" */ = {
+		4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mr-elbe5/SwiftyDataExtensions.git";
 			requirement = {
@@ -452,7 +452,7 @@
 				minimumVersion = 1.1.0;
 			};
 		};
-		4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions.git" */ = {
+		4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mr-elbe5/SwiftyMacViewExtensions.git";
 			requirement = {
@@ -460,7 +460,7 @@
 				minimumVersion = 1.1.3;
 			};
 		};
-		4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions.git" */ = {
+		4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mr-elbe5/SwiftyStringExtensions.git";
 			requirement = {
@@ -473,17 +473,17 @@
 /* Begin XCSwiftPackageProductDependency section */
 		4EC1DF942636CC670070FBA3 /* SwiftyDataExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions.git" */;
+			package = 4EC1DF932636CC670070FBA3 /* XCRemoteSwiftPackageReference "SwiftyDataExtensions" */;
 			productName = SwiftyDataExtensions;
 		};
 		4EC1DF982636CCBE0070FBA3 /* SwiftyMacViewExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions.git" */;
+			package = 4EC1DF972636CCBE0070FBA3 /* XCRemoteSwiftPackageReference "SwiftyMacViewExtensions" */;
 			productName = SwiftyMacViewExtensions;
 		};
 		4EC1DFA22636D4660070FBA3 /* SwiftyStringExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions.git" */;
+			package = 4EC1DFA12636D4660070FBA3 /* XCRemoteSwiftPackageReference "SwiftyStringExtensions" */;
 			productName = SwiftyStringExtensions;
 		};
 /* End XCSwiftPackageProductDependency section */
