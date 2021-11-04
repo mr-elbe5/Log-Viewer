@@ -7,9 +7,8 @@
 
 import Foundation
 import Cocoa
-import SwiftyMacViewExtensions
 
-public class LogSelectViewController: ViewController {
+class LogSelectViewController: ViewController {
     
     var url : URL? = nil
     

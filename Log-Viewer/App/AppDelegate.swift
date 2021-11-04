@@ -6,7 +6,7 @@
 //
 
 import Cocoa
-import SwiftyMacViewExtensions
+
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {

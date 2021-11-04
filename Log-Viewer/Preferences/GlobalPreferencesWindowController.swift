@@ -6,7 +6,7 @@
 //
 
 import Cocoa
-import SwiftyMacViewExtensions
+
 
 class GlobalPreferencesWindowController: NSWindowController, NSWindowDelegate {
     
