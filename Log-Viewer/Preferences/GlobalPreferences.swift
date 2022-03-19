@@ -55,6 +55,7 @@ class GlobalPreferences: Identifiable, Codable{
     enum CodingKeys: String, CodingKey {
         case rememberWindowFrame
         case useTabs
+        case showFullFile
         case fontSize
         case showUnmarkedGray
         case caseInsensitive
@@ -65,6 +66,7 @@ class GlobalPreferences: Identifiable, Codable{
     
     var rememberWindowFrame = true
     var useTabs = true
+    var showFullFile = true
     var fontSize = 14
     var showUnmarkedGray = true
     var caseInsensitive = true
@@ -85,6 +87,7 @@ class GlobalPreferences: Identifiable, Codable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
         rememberWindowFrame = try values.decodeIfPresent(Bool.self, forKey: .rememberWindowFrame) ?? true
         useTabs = try values.decodeIfPresent(Bool.self, forKey: .useTabs) ?? true
+        showFullFile = try values.decodeIfPresent(Bool.self, forKey: .showFullFile) ?? true
         fontSize = try values.decodeIfPresent(Int.self, forKey: .fontSize) ?? 14
         showUnmarkedGray = try values.decodeIfPresent(Bool.self, forKey: .showUnmarkedGray) ?? true
         caseInsensitive = try values.decodeIfPresent(Bool.self, forKey: .caseInsensitive) ?? true
@@ -98,6 +101,7 @@ class GlobalPreferences: Identifiable, Codable{
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(rememberWindowFrame, forKey: .rememberWindowFrame)
         try container.encode(useTabs, forKey: .useTabs)
+        try container.encode(showFullFile, forKey: .showFullFile)
         try container.encode(fontSize, forKey: .fontSize)
         try container.encode(showUnmarkedGray, forKey: .showUnmarkedGray)
         try container.encode(caseInsensitive, forKey: .caseInsensitive)
@@ -109,6 +113,7 @@ class GlobalPreferences: Identifiable, Codable{
     func resetGlobalSettings(){
         rememberWindowFrame = true
         useTabs = true
+        showFullFile = true
         fontSize = 14
         showUnmarkedGray = false
         caseInsensitive = true

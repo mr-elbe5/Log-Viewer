@@ -53,7 +53,7 @@ class LogDocument: NSDocument, PreferencesDelegate{
             do{
                 preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)
                 fileHandle = try FileHandle(forReadingFrom: url)
-                if let data = fileHandle?.readDataToEndOfFile(){
+                if GlobalPreferences.shared.showFullFile, let data = fileHandle?.readDataToEndOfFile(){
                     let chunk = LogChunk(String(data: data, encoding: .utf8) ?? "")
                     chunks.append(chunk)
                 }

@@ -12,6 +12,7 @@ class GlobalPreferencesViewController:ViewController {
     
     var rememberFrameField = NSButton(checkboxWithTitle: "Remember", target: nil, action: nil)
     var useTabsField = NSButton(checkboxWithTitle: "Use Tabs", target: nil, action: nil)
+    var showFullFileField = NSButton(checkboxWithTitle: "Show Full File", target: nil, action: nil)
     var fontSizeField = FontSizeSelect()
     var showUnmarkedGrayField = NSButton(checkboxWithTitle: "Show gray", target: nil, action: nil)
     var caseInsensitiveField = NSButton(checkboxWithTitle: "Case insensitive", target: nil, action: nil)
@@ -32,7 +33,7 @@ class GlobalPreferencesViewController:ViewController {
     
     override func loadView() {
         view = NSView()
-        view.frame = CGRect(x: 0, y: 0, width: 500, height: 390)
+        view.frame = CGRect(x: 0, y: 0, width: 500, height: 410)
         
         fontSizeField.addItems(selectedSize: GlobalPreferences.shared.fontSize)
         reset()
@@ -44,6 +45,7 @@ class GlobalPreferencesViewController:ViewController {
         let grid = NSGridView()
         grid.addLabeledRow(label: "Window size:", views: [rememberFrameField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Window settings:", views: [useTabsField, NSGridCell.emptyContentView]).mergeCells(from: 1)
+        grid.addLabeledRow(label: "File settings:", views: [showFullFileField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Font size:", views: [fontSizeField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Unmarked lines:", views: [showUnmarkedGrayField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Search:", views: [caseInsensitiveField, NSGridCell.emptyContentView]).mergeCells(from: 1)
@@ -72,6 +74,7 @@ class GlobalPreferencesViewController:ViewController {
         fontSizeField.setSelectedSize(GlobalPreferences.shared.fontSize)
         rememberFrameField.state = GlobalPreferences.shared.rememberWindowFrame ? .on : .off
         useTabsField.state = GlobalPreferences.shared.useTabs ? .on : .off
+        showFullFileField.state = GlobalPreferences.shared.showFullFile ? .on : .off
         showUnmarkedGrayField.state = GlobalPreferences.shared.showUnmarkedGray ? .on : .off
         caseInsensitiveField.state = GlobalPreferences.shared.caseInsensitive ? .on : .off
         for i in 0..<GlobalPreferences.numPatterns{
