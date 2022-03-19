@@ -21,17 +21,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-    }
-    
-    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        if flag{
-            return true
-        }
         if let url = LogDocumentController.sharedController.showSelectDialog(){
             LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
             }
         }
-        return false
+    }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        true
     }
     
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool{
