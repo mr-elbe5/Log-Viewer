@@ -20,19 +20,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         GlobalPreferences.shared.save() // if defaults have been used
     }
     
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        if let url = LogDocumentController.sharedController.showSelectDialog(){
-            LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
-            }
-        }
-    }
-    
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        true
+        return true
     }
     
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool{
-        false
+        if let url = LogDocumentController.sharedController.showSelectDialog(){
+            LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
+                NSApp.activate(ignoringOtherApps: true)
+            }
+        }
+        return false
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

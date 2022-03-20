@@ -87,6 +87,20 @@ class LogViewController: ViewController {
         }
     }
     
+    func clear(){
+        reset()
+    }
+    
+    func reloadFullFile(){
+        reset()
+        if let log = logDocument{
+            for chunk in log.chunks{
+                chunk.displayed = true
+                appendText(string: chunk.string)
+            }
+        }
+    }
+    
     private func appendColorMarkedText(_ string : String, font: NSFont, preferences: DocumentPreferences){
         let caseMode : NSString.CompareOptions = GlobalPreferences.shared.caseInsensitive ? .caseInsensitive : .literal
         let lines = string.components(separatedBy: "\n")

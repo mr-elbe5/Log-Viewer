@@ -12,6 +12,9 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     
     let mainWindowToolbarIdentifier = NSToolbar.Identifier("MainWindowToolbar")
     
+    let toolbarItemOpen = NSToolbarItem.Identifier("ToolbarOpenItem")
+    let toolbarItemClear = NSToolbarItem.Identifier("ToolbarClearItem")
+    let toolbarItemReload = NSToolbarItem.Identifier("ToolbarReloadItem")
     let toolbarItemStart = NSToolbarItem.Identifier("ToolbarStartItem")
     let toolbarItemPause = NSToolbarItem.Identifier("ToolbarPauseItem")
     let toolbarItemGlobalPreferences = NSToolbarItem.Identifier("ToolbarGlobalPreferencesItem")
@@ -86,6 +89,54 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
                  itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
                  willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem?
     {
+        if  itemIdentifier == toolbarItemOpen {
+            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+            toolbarItem.target = self
+            toolbarItem.action = #selector(openFile)
+            toolbarItem.label = "Open File"
+            toolbarItem.paletteLabel = "Open File"
+            toolbarItem.toolTip = "Open new file"
+            if #available(macOS 11.0, *){
+                toolbarItem.image = NSImage(systemSymbolName: "plus.circle", accessibilityDescription: "")
+            }
+            else{
+                toolbarItem.image = NSImage(named: "plus.circle")
+            }
+            return toolbarItem
+        }
+        
+        if  itemIdentifier == toolbarItemClear {
+            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+            toolbarItem.target = self
+            toolbarItem.action = #selector(clearView)
+            toolbarItem.label = "Clear View"
+            toolbarItem.paletteLabel = "Clear View"
+            toolbarItem.toolTip = "Clear view and proceed with incoming messages"
+            if #available(macOS 11.0, *){
+                toolbarItem.image = NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: "")
+            }
+            else{
+                toolbarItem.image = NSImage(named: "xmark.circle")
+            }
+            return toolbarItem
+        }
+        
+        if  itemIdentifier == toolbarItemReload {
+            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+            toolbarItem.target = self
+            toolbarItem.action = #selector(reloadView)
+            toolbarItem.label = "Reload File"
+            toolbarItem.paletteLabel = "Reload File"
+            toolbarItem.toolTip = "Reload File"
+            if #available(macOS 11.0, *){
+                toolbarItem.image = NSImage(systemSymbolName: "arrow.clockwise.circle", accessibilityDescription: "")
+            }
+            else{
+                toolbarItem.image = NSImage(named: "arrow.clockwise.circle")
+            }
+            return toolbarItem
+        }
+        
         if  itemIdentifier == toolbarItemStart {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
@@ -171,6 +222,9 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         [
+            toolbarItemOpen,
+            toolbarItemClear,
+            toolbarItemReload,
             toolbarItemPause,
             toolbarItemGlobalPreferences,
             toolbarItemDocumentPreferences,
@@ -179,13 +233,32 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        [toolbarItemStart,
+        [toolbarItemOpen,
+         toolbarItemClear,
+         toolbarItemReload,
+         toolbarItemStart,
          toolbarItemPause,
          toolbarItemGlobalPreferences,
          toolbarItemDocumentPreferences,
          toolbarItemHelp,
          NSToolbarItem.Identifier.space,
          NSToolbarItem.Identifier.flexibleSpace]
+    }
+    
+    @objc func openFile() {
+        if let url = LogDocumentController.sharedController.showSelectDialog(){
+            LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
+                NSApp.activate(ignoringOtherApps: true)
+            }
+        }
+    }
+    
+    @objc func clearView() {
+        logViewController.clear()
+    }
+    
+    @objc func reloadView() {
+        logViewController.reloadFullFile()
     }
     
     @objc func openGlobalPreferences() {
@@ -210,27 +283,27 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         logViewController.follow = true
         logViewController.updateFromDocument()
         if let toolbar = window?.toolbar{
-            toolbar.removeItem(at: 0)
-            toolbar.insertItem(withItemIdentifier: toolbarItemPause, at: 0)
+            toolbar.removeItem(at: 3)
+            toolbar.insertItem(withItemIdentifier: toolbarItemPause, at: 3)
         }
     }
     
     @objc func pause() {
         logViewController.follow = false
         if let toolbar = window?.toolbar{
-            toolbar.removeItem(at: 0)
-            toolbar.insertItem(withItemIdentifier: toolbarItemStart, at: 0)
+            toolbar.removeItem(at: 3)
+            toolbar.insertItem(withItemIdentifier: toolbarItemStart, at: 3)
         }
     }
     
     func updateStartPause(){
         if let toolbar = window?.toolbar{
-            toolbar.removeItem(at: 0)
+            toolbar.removeItem(at: 3)
             if logViewController.follow{
-                toolbar.insertItem(withItemIdentifier: toolbarItemPause, at: 0)
+                toolbar.insertItem(withItemIdentifier: toolbarItemPause, at: 3)
             }
             else{
-                toolbar.insertItem(withItemIdentifier: toolbarItemStart, at: 0)
+                toolbar.insertItem(withItemIdentifier: toolbarItemStart, at: 3)
             }
         }
     }

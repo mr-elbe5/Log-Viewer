@@ -99,6 +99,7 @@ class GlobalPreferencesViewController:ViewController {
     @objc func save(){
         GlobalPreferences.shared.rememberWindowFrame = rememberFrameField.state == .on
         GlobalPreferences.shared.useTabs = useTabsField.state == .on
+        GlobalPreferences.shared.showFullFile = showFullFileField.state == .on
         if let fontSizeString = fontSizeField.titleOfSelectedItem{
             if let fontSize = Int(fontSizeString){
                 GlobalPreferences.shared.fontSize = fontSize
