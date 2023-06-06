@@ -55,9 +55,15 @@ class LogDocument: NSDocument, PreferencesDelegate{
             do{
                 preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)
                 fileHandle = try FileHandle(forReadingFrom: url)
+                Log.debug("start read")
                 if GlobalPreferences.shared.showFullFile, let data = fileHandle?.readDataToEndOfFile(){
-                    let chunk = LogChunk(String(data: data, encoding: .utf8) ?? "")
-                    chunks.append(chunk)
+                    let str = String(data: data, encoding: .utf8) ?? ""
+                    if GlobalPreferences.shared.maxLines != 0{
+                        chunks.append(LogChunk(str.substr(lines: GlobalPreferences.shared.maxLines)))
+                    }
+                    else{
+                        chunks.append(LogChunk(str))
+                    }
                 }
                 setEventSource()
             }

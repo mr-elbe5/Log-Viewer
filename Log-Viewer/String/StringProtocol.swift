@@ -36,6 +36,29 @@ extension StringProtocol{
         let end = self.index(start, offsetBy: to - from)
         return includeLast ? String(self[start...end]) : String(self[start..<end])
     }
+    
+    func substr(_ from: Int) -> String{
+        let start = self.index(startIndex, offsetBy: from)
+        return String(self[start...])
+    }
+    
+    func endOfLines() -> Array<Int>{
+        var eols = Array<Int>()
+        for (index, char) in self.enumerated() {
+            if char == "\n"{
+                eols.append(index)
+            }
+        }
+        return eols
+    }
+    
+    func substr(lines: Int) -> String{
+        let eols = endOfLines()
+        if eols.count > lines{
+            return substr(eols[eols.count - lines])
+        }
+        return String(self)
+    }
 
     func trim() -> String {
         trimmingCharacters(in: .whitespacesAndNewlines)

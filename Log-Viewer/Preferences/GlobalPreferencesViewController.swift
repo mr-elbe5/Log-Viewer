@@ -17,6 +17,7 @@ class GlobalPreferencesViewController:ViewController {
     var fontSizeField = FontSizeSelect()
     var showUnmarkedGrayField = NSButton(checkboxWithTitle: "Show gray", target: nil, action: nil)
     var caseInsensitiveField = NSButton(checkboxWithTitle: "Case insensitive", target: nil, action: nil)
+    var maxLinesField = NSTextField(string: String(GlobalPreferences.shared.maxLines))
     var textColorFields = [NSColorWell]()
     var backgroundColorFields = [NSColorWell]()
     
@@ -34,7 +35,7 @@ class GlobalPreferencesViewController:ViewController {
     
     override func loadView() {
         view = NSView()
-        view.frame = CGRect(x: 0, y: 0, width: 500, height: 410)
+        view.frame = CGRect(x: 0, y: 0, width: 500, height: 430)
         
         fontSizeField.addItems(selectedSize: GlobalPreferences.shared.fontSize)
         reset()
@@ -47,6 +48,7 @@ class GlobalPreferencesViewController:ViewController {
         grid.addLabeledRow(label: "Window size:", views: [rememberFrameField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Window settings:", views: [useTabsField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "File settings:", views: [showFullFileField, NSGridCell.emptyContentView]).mergeCells(from: 1)
+        grid.addLabeledRow(label: "Max lines:", views: [maxLinesField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Font size:", views: [fontSizeField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Unmarked lines:", views: [showUnmarkedGrayField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         grid.addLabeledRow(label: "Search:", views: [caseInsensitiveField, NSGridCell.emptyContentView]).mergeCells(from: 1)
@@ -73,6 +75,7 @@ class GlobalPreferencesViewController:ViewController {
     
     @objc func reset(){
         fontSizeField.setSelectedSize(GlobalPreferences.shared.fontSize)
+        maxLinesField.stringValue = String(GlobalPreferences.shared.maxLines)
         rememberFrameField.state = GlobalPreferences.shared.rememberWindowFrame ? .on : .off
         useTabsField.state = GlobalPreferences.shared.useTabs ? .on : .off
         showFullFileField.state = GlobalPreferences.shared.showFullFile ? .on : .off
@@ -105,6 +108,9 @@ class GlobalPreferencesViewController:ViewController {
             if let fontSize = Int(fontSizeString){
                 GlobalPreferences.shared.fontSize = fontSize
             }
+        }
+        if let maxLines = Int(maxLinesField.stringValue){
+            GlobalPreferences.shared.maxLines = maxLines
         }
         GlobalPreferences.shared.showUnmarkedGray = showUnmarkedGrayField.state == .on
         GlobalPreferences.shared.caseInsensitive = caseInsensitiveField.state == .on

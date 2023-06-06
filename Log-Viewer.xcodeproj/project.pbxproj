@@ -46,6 +46,7 @@
 		4EA1E5122A2F453400FF0B32 /* StoreWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5112A2F453400FF0B32 /* StoreWindowController.swift */; };
 		4EA1E5142A2F454900FF0B32 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5132A2F454900FF0B32 /* StoreViewController.swift */; };
 		4EA1E5162A2F594E00FF0B32 /* RadioGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5152A2F594E00FF0B32 /* RadioGroup.swift */; };
+		4EA1E5182A2F939A00FF0B32 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5172A2F939A00FF0B32 /* Log.swift */; };
 		4EAC4CEB258A3D6800554A69 /* LogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CEA258A3D6800554A69 /* LogDocument.swift */; };
 		4EAC4CEE258A448C00554A69 /* LogDocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CED258A448C00554A69 /* LogDocumentController.swift */; };
 		4EAC4CF5258A738200554A69 /* LogChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CF4258A738200554A69 /* LogChunk.swift */; };
@@ -96,6 +97,7 @@
 		4EA1E5112A2F453400FF0B32 /* StoreWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreWindowController.swift; sourceTree = "<group>"; };
 		4EA1E5132A2F454900FF0B32 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		4EA1E5152A2F594E00FF0B32 /* RadioGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioGroup.swift; sourceTree = "<group>"; };
+		4EA1E5172A2F939A00FF0B32 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		4EAC4CEA258A3D6800554A69 /* LogDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocument.swift; sourceTree = "<group>"; };
 		4EAC4CED258A448C00554A69 /* LogDocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocumentController.swift; sourceTree = "<group>"; };
 		4EAC4CF4258A738200554A69 /* LogChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogChunk.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				4E20A79C257E47B40068AC8D /* AppDelegate.swift */,
+				4EA1E5172A2F939A00FF0B32 /* Log.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E72F91F264D3DF500EF6AF0 /* LogSelectViewController.swift in Sources */,
+				4EA1E5182A2F939A00FF0B32 /* Log.swift in Sources */,
 				4E672AB22734771100CBB3CE /* Dictionary.swift in Sources */,
 				4E672ACF2734772A00CBB3CE /* CodableColor.swift in Sources */,
 				4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */,

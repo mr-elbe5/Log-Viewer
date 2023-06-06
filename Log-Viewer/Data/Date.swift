@@ -40,6 +40,10 @@ extension Date{
         DateFormats.timeOnlyFormatter.string(from: self)
     }
     
+    func longTimeString() -> String{
+        DateFormats.longTimeFormatter.string(from: self)
+    }
+    
 }
 
 extension Date {
@@ -69,6 +73,15 @@ class DateFormats{
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
+            return dateFormatter
+        }
+    }
+    
+    static var longTimeFormatter : DateFormatter{
+        get{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .none
+            dateFormatter.timeStyle = .medium
             return dateFormatter
         }
     }

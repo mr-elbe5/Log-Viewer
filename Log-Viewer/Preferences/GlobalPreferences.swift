@@ -64,6 +64,7 @@ class GlobalPreferences: Identifiable, Codable{
         case textColors
         case backgroundColors
         case documentPreferences
+        case maxLines
     }
     
     var rememberWindowFrame = true
@@ -75,6 +76,7 @@ class GlobalPreferences: Identifiable, Codable{
     var textColors : [CodableColor] = isDarkMode ? darkmodeTextColorSet : defaultTextColorSet
     var backgroundColors : [CodableColor] = isDarkMode ? darkmodeBackgroundColorSet : defaultBackgroundColorSet
     var documentPreferences = [URL: DocumentPreferences]()
+    var maxLines = 0
 
     static var isDarkMode : Bool{
         get{
@@ -96,6 +98,7 @@ class GlobalPreferences: Identifiable, Codable{
         textColors = try values.decodeIfPresent([CodableColor].self, forKey: .textColors) ?? (GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeTextColorSet : GlobalPreferences.defaultTextColorSet)
         backgroundColors = try values.decodeIfPresent([CodableColor].self, forKey: .backgroundColors) ?? (GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeBackgroundColorSet : GlobalPreferences.defaultBackgroundColorSet)
         documentPreferences = try values.decodeIfPresent([URL: DocumentPreferences].self, forKey: .documentPreferences) ?? [URL: DocumentPreferences]()
+        maxLines = try values.decodeIfPresent(Int.self, forKey: .maxLines) ?? 0
         save()
     }
     
@@ -110,6 +113,8 @@ class GlobalPreferences: Identifiable, Codable{
         try container.encode(textColors, forKey: .textColors)
         try container.encode(backgroundColors, forKey: .backgroundColors)
         try container.encode(documentPreferences, forKey: .documentPreferences)
+        try container.encode(maxLines, forKey: .maxLines)
+        
     }
     
     func resetGlobalSettings(){
@@ -119,6 +124,7 @@ class GlobalPreferences: Identifiable, Codable{
         fontSize = 14
         showUnmarkedGray = false
         caseInsensitive = true
+        maxLines = 0
         textColors = GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeTextColorSet : GlobalPreferences.defaultTextColorSet
         backgroundColors = GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeBackgroundColorSet : GlobalPreferences.defaultBackgroundColorSet
     }

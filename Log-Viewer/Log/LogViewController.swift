@@ -75,6 +75,7 @@ class LogViewController: ViewController {
     }
     
     func appendText(string: String) {
+        Log.debug("start append text")
         let prefs = logDocument?.preferences ?? DocumentPreferences()
         let font : NSFont = NSFont.systemFont(ofSize: CGFloat(GlobalPreferences.shared.fontSize))
         if let document = logDocument{
@@ -86,6 +87,7 @@ class LogViewController: ViewController {
             }
             textView.scrollToEndOfDocument(nil)
         }
+        Log.debug("end append text")
     }
     
     func clear(){
