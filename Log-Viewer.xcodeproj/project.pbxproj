@@ -42,6 +42,10 @@
 		4E72F91D264D3A1500EF6AF0 /* LogSelectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E72F91C264D3A1500EF6AF0 /* LogSelectWindowController.swift */; };
 		4E72F91F264D3DF500EF6AF0 /* LogSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E72F91E264D3DF500EF6AF0 /* LogSelectViewController.swift */; };
 		4E903C17258CD52000E542AD /* DocumentPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E903C16258CD52000E542AD /* DocumentPreferences.swift */; };
+		4EA1E50F2A2F444100FF0B32 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E50E2A2F444100FF0B32 /* Store.swift */; };
+		4EA1E5122A2F453400FF0B32 /* StoreWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5112A2F453400FF0B32 /* StoreWindowController.swift */; };
+		4EA1E5142A2F454900FF0B32 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5132A2F454900FF0B32 /* StoreViewController.swift */; };
+		4EA1E5162A2F594E00FF0B32 /* RadioGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5152A2F594E00FF0B32 /* RadioGroup.swift */; };
 		4EAC4CEB258A3D6800554A69 /* LogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CEA258A3D6800554A69 /* LogDocument.swift */; };
 		4EAC4CEE258A448C00554A69 /* LogDocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CED258A448C00554A69 /* LogDocumentController.swift */; };
 		4EAC4CF5258A738200554A69 /* LogChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CF4258A738200554A69 /* LogChunk.swift */; };
@@ -88,6 +92,10 @@
 		4E72F91C264D3A1500EF6AF0 /* LogSelectWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSelectWindowController.swift; sourceTree = "<group>"; };
 		4E72F91E264D3DF500EF6AF0 /* LogSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSelectViewController.swift; sourceTree = "<group>"; };
 		4E903C16258CD52000E542AD /* DocumentPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferences.swift; sourceTree = "<group>"; };
+		4EA1E50E2A2F444100FF0B32 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		4EA1E5112A2F453400FF0B32 /* StoreWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreWindowController.swift; sourceTree = "<group>"; };
+		4EA1E5132A2F454900FF0B32 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		4EA1E5152A2F594E00FF0B32 /* RadioGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioGroup.swift; sourceTree = "<group>"; };
 		4EAC4CEA258A3D6800554A69 /* LogDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocument.swift; sourceTree = "<group>"; };
 		4EAC4CED258A448C00554A69 /* LogDocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocumentController.swift; sourceTree = "<group>"; };
 		4EAC4CF4258A738200554A69 /* LogChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogChunk.swift; sourceTree = "<group>"; };
@@ -125,6 +133,7 @@
 		4E20A79B257E47B40068AC8D /* Log-Viewer */ = {
 			isa = PBXGroup;
 			children = (
+				4EA1E5102A2F44F100FF0B32 /* Store */,
 				4E672AD22734773300CBB3CE /* String */,
 				4E672AB32734772A00CBB3CE /* MacOS */,
 				4E672AAA2734771100CBB3CE /* Data */,
@@ -213,6 +222,7 @@
 				4E672AC02734772A00CBB3CE /* CodableColor.swift */,
 				4E672AC12734772A00CBB3CE /* NSGridView.swift */,
 				4E672AC22734772A00CBB3CE /* AttributedButton.swift */,
+				4EA1E5152A2F594E00FF0B32 /* RadioGroup.swift */,
 			);
 			path = MacOS;
 			sourceTree = "<group>";
@@ -225,6 +235,16 @@
 				4E672AD52734773300CBB3CE /* StringLocalizer.swift */,
 			);
 			path = String;
+			sourceTree = "<group>";
+		};
+		4EA1E5102A2F44F100FF0B32 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				4EA1E50E2A2F444100FF0B32 /* Store.swift */,
+				4EA1E5112A2F453400FF0B32 /* StoreWindowController.swift */,
+				4EA1E5132A2F454900FF0B32 /* StoreViewController.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +333,7 @@
 				4E672AD02734772A00CBB3CE /* NSGridView.swift in Sources */,
 				4EAC4CEB258A3D6800554A69 /* LogDocument.swift in Sources */,
 				4E672AC52734772A00CBB3CE /* PopupWindow.swift in Sources */,
+				4EA1E5142A2F454900FF0B32 /* StoreViewController.swift in Sources */,
 				4E672AAF2734771100CBB3CE /* Date.swift in Sources */,
 				4E672AC42734772A00CBB3CE /* Alert.swift in Sources */,
 				4E72F91D264D3A1500EF6AF0 /* LogSelectWindowController.swift in Sources */,
@@ -323,6 +344,8 @@
 				4E672ACC2734772A00CBB3CE /* NSWindowController.swift in Sources */,
 				4E33FA9B257FD0CE007AB6C0 /* GlobalPreferencesWindowController.swift in Sources */,
 				4EAC4CEE258A448C00554A69 /* LogDocumentController.swift in Sources */,
+				4EA1E5122A2F453400FF0B32 /* StoreWindowController.swift in Sources */,
+				4EA1E5162A2F594E00FF0B32 /* RadioGroup.swift in Sources */,
 				4E33FA98257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift in Sources */,
 				4E672AC62734772A00CBB3CE /* NSBox.swift in Sources */,
 				4E672ACD2734772A00CBB3CE /* NSMenuItem.swift in Sources */,
@@ -333,6 +356,7 @@
 				4E672AC72734772A00CBB3CE /* NSScrollView.swift in Sources */,
 				4E50575A25811C7E00A4CC90 /* GlobalPreferences.swift in Sources */,
 				4E672AD62734773300CBB3CE /* String.swift in Sources */,
+				4EA1E50F2A2F444100FF0B32 /* Store.swift in Sources */,
 				4E672AC82734772A00CBB3CE /* WindowController.swift in Sources */,
 				4E672AB12734771100CBB3CE /* Codable.swift in Sources */,
 				4E672AC32734772A00CBB3CE /* ViewController.swift in Sources */,
@@ -479,7 +503,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 5UG99476V8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Log-Viewer/Info.plist";
@@ -487,6 +511,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = de.elbe5.logviewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -504,7 +529,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 5UG99476V8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Log-Viewer/Info.plist";
@@ -512,6 +537,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = de.elbe5.logviewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

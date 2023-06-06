@@ -9,7 +9,6 @@
 
 import Cocoa
 
-
 class LogViewController: ViewController {
     
     let scrollView = NSScrollView()

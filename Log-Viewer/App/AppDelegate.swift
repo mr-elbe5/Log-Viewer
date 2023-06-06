@@ -20,6 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSColorPanel.shared.showsAlpha = false
         GlobalPreferences.load()
         GlobalPreferences.shared.save() // if defaults have been used
+        Task{
+            await Store.shared.load()
+        }
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -43,6 +46,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         openGlobalPreferences()
     }
     
+    @IBAction func openStore(_ sender: Any) {
+        openStore()
+    }
+    
     @IBAction func openHelp(_ sender: Any) {
         if let doc = NSDocumentController.shared.currentDocument as? LogDocument{
             doc.windowController?.openHelp()
@@ -51,6 +58,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func openGlobalPreferences() {
         let controller = GlobalPreferencesWindowController()
+        controller.window?.center()
+        NSApp.runModal(for: controller.window!)
+    }
+    
+    @objc func openStore() {
+        let controller = StoreWindowController()
         controller.window?.center()
         NSApp.runModal(for: controller.window!)
     }

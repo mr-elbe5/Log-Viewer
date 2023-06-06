@@ -21,6 +21,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     let toolbarItemPause = NSToolbarItem.Identifier("ToolbarPauseItem")
     let toolbarItemGlobalPreferences = NSToolbarItem.Identifier("ToolbarGlobalPreferencesItem")
     let toolbarItemDocumentPreferences = NSToolbarItem.Identifier("ToolbarDocumentPreferencesItem")
+    let toolbarItemStore = NSToolbarItem.Identifier("ToolbarStoreItem")
     let toolbarItemHelp = NSToolbarItem.Identifier("ToolbarHelpItem")
 
     var defaultSize = NSMakeSize(900, 600)
@@ -203,6 +204,22 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             return toolbarItem
         }
         
+        if  itemIdentifier == toolbarItemStore {
+            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+            toolbarItem.target = self
+            toolbarItem.action = #selector(openStore)
+            toolbarItem.label = "Tip"
+            toolbarItem.paletteLabel = "Tip"
+            toolbarItem.toolTip = "Leave a tip for the developer"
+            if #available(macOS 11.0, *){
+                toolbarItem.image = NSImage(systemSymbolName: "giftcard", accessibilityDescription: "")
+            }
+            else{
+                toolbarItem.image = NSImage(named: "giftcard")
+            }
+            return toolbarItem
+        }
+        
         if  itemIdentifier == toolbarItemHelp {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
@@ -230,6 +247,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             toolbarItemPause,
             toolbarItemGlobalPreferences,
             toolbarItemDocumentPreferences,
+            toolbarItemStore,
             toolbarItemHelp
         ]
     }
@@ -242,6 +260,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
          toolbarItemPause,
          toolbarItemGlobalPreferences,
          toolbarItemDocumentPreferences,
+         toolbarItemStore,
          toolbarItemHelp,
          NSToolbarItem.Identifier.space,
          NSToolbarItem.Identifier.flexibleSpace]
@@ -271,6 +290,12 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     
     @objc func openDocumentPreferences() {
         let controller = DocumentPreferencesWindowController(log: logDocument)
+        controller.centerInWindow(outerWindow: window)
+        NSApp.runModal(for: controller.window!)
+    }
+    
+    @objc func openStore() {
+        let controller = StoreWindowController()
         controller.centerInWindow(outerWindow: window)
         NSApp.runModal(for: controller.window!)
     }
