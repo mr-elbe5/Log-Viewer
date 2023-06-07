@@ -18,7 +18,7 @@ class DocumentPreferencesWindowController: NSWindowController, NSWindowDelegate 
     
     init(log: LogDocument){
         logDocument = log
-        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 290), styleMask: [.closable, .titled, .resizable], backing: .buffered, defer: false)
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 310), styleMask: [.closable, .titled, .resizable], backing: .buffered, defer: false)
         window.title = "Document Preferences"
         super.init(window: window)
         self.window?.delegate = self

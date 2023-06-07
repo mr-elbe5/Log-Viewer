@@ -127,6 +127,9 @@ class LogViewController: ViewController {
             }
         }
         if parts.isEmpty{
+            if preferences.skipUnmarked{
+                return
+            }
             appendUnmarkedText(string + "\n", font: font, showGray: GlobalPreferences.shared.showUnmarkedGray)
         }
         else{

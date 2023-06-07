@@ -15,6 +15,7 @@ class DocumentPreferencesViewController:ViewController {
     var logDocument : LogDocument? = nil
     
     var fullLineColoringField = NSButton(checkboxWithTitle: "On", target: nil, action: nil)
+    var skipUnmarkedField = NSButton(checkboxWithTitle: "Skip line", target: nil, action: nil)
     var patternFields = [NSTextField]()
     
     override init() {
@@ -30,7 +31,7 @@ class DocumentPreferencesViewController:ViewController {
     
     override func loadView() {
         view = NSView()
-        view.frame = CGRect(x: 0, y: 0, width: 500, height: 290)
+        view.frame = CGRect(x: 0, y: 0, width: 500, height: 310)
         
         if let prefs = logDocument?.preferences{
             fullLineColoringField.state = prefs.fullLineColoring ? .on : .off
@@ -46,9 +47,11 @@ class DocumentPreferencesViewController:ViewController {
         
         let grid = NSGridView()
         grid.addLabeledRow(label: "Full line coloring (first pattern wins):", views: [fullLineColoringField])
+        grid.addLabeledRow(label: "Unmarked lines:", views: [skipUnmarkedField, NSGridCell.emptyContentView]).mergeCells(from: 1)
         for i in 0..<patternFields.count{
             grid.addLabeledRow(label: "Text to mark:", views: [patternFields[i]]).rowAlignment = .firstBaseline
         }
+        reset()
         grid.addSeparator()
         grid.addRow(with: [resetButton, okButton])
         grid.column(at: 1).xPlacement = .trailing
@@ -60,6 +63,13 @@ class DocumentPreferencesViewController:ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func reset(){
+        if let log = logDocument{
+            fullLineColoringField.state = log.preferences.fullLineColoring ? .on : .off
+            skipUnmarkedField.state = log.preferences.skipUnmarked ? .on : .off
+        }
     }
     
     func appearanceChanged(){
@@ -83,6 +93,7 @@ class DocumentPreferencesViewController:ViewController {
     @objc func save(){
         if let log = logDocument{
             log.preferences.fullLineColoring = fullLineColoringField.state == .on
+            log.preferences.skipUnmarked = skipUnmarkedField.state == .on
             for i in 0..<GlobalPreferences.numPatterns{
                 log.preferences.patterns[i] = patternFields[i].stringValue
             }
