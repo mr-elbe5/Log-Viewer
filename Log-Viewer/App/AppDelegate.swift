@@ -63,9 +63,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func openStore() {
-        let controller = StoreWindowController()
-        controller.window?.center()
-        NSApp.runModal(for: controller.window!)
+        if Store.shared.loaded{
+            let controller = StoreWindowController()
+            controller.window?.center()
+            NSApp.runModal(for: controller.window!)
+        }
     }
     
 }

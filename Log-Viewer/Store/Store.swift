@@ -54,19 +54,7 @@ class Store {
             return
         }
         loaded = true
-        startObservingTransactions()
-    }
-    
-    func startObservingTransactions() {
-        Task{
-            for await result in Transaction.updates {
-                print("Transaction update")
-                if case .verified(let transaction) = result {
-                    await transaction.finish()
-                    print("transaction verified")
-                }
-            }
-        }
+        print("store loaded")
     }
     
 }

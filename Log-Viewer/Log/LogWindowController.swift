@@ -9,7 +9,6 @@
 
 import Cocoa
 
-
 class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelegate {
     
     let mainWindowToolbarIdentifier = NSToolbar.Identifier("MainWindowToolbar")

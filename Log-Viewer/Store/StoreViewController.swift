@@ -71,7 +71,7 @@ class StoreViewController:ViewController {
         if value != -1{
             let selectedProductInfo = Store.shared.productInfos[value]
             selectedProductInfo.purchase()
-            self.dismiss(self)
+            NSApp.stopModal()
         }
     }
     
