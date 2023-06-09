@@ -16,6 +16,8 @@
 		4E50575A25811C7E00A4CC90 /* GlobalPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50575925811C7E00A4CC90 /* GlobalPreferences.swift */; };
 		4E539550258222D400CC56A8 /* HelpWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E53954F258222D400CC56A8 /* HelpWindowController.swift */; };
 		4E5395562582230C00CC56A8 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5395552582230C00CC56A8 /* HelpViewController.swift */; };
+		4E58F67A2A33B7560037CE1E /* TabbedLogWindows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58F6792A33B7560037CE1E /* TabbedLogWindows.swift */; };
+		4E58F67C2A33B9500037CE1E /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58F67B2A33B9500037CE1E /* NotificationCenter.swift */; };
 		4E672AAF2734771100CBB3CE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E672AAB2734771100CBB3CE /* Date.swift */; };
 		4E672AB02734771100CBB3CE /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E672AAC2734771100CBB3CE /* Array.swift */; };
 		4E672AB12734771100CBB3CE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E672AAD2734771100CBB3CE /* Codable.swift */; };
@@ -68,6 +70,8 @@
 		4E50575925811C7E00A4CC90 /* GlobalPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPreferences.swift; sourceTree = "<group>"; };
 		4E53954F258222D400CC56A8 /* HelpWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpWindowController.swift; sourceTree = "<group>"; };
 		4E5395552582230C00CC56A8 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		4E58F6792A33B7560037CE1E /* TabbedLogWindows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedLogWindows.swift; sourceTree = "<group>"; };
+		4E58F67B2A33B9500037CE1E /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		4E672AAB2734771100CBB3CE /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4E672AAC2734771100CBB3CE /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		4E672AAD2734771100CBB3CE /* Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				4E20A7B1257E484F0068AC8D /* LogViewController.swift */,
 				4E20A7AB257E48140068AC8D /* LogWindowController.swift */,
 				4EC9215E2A333FEC004C2A32 /* LogWindow.swift */,
+				4E58F6792A33B7560037CE1E /* TabbedLogWindows.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				4E672AC12734772A00CBB3CE /* NSGridView.swift */,
 				4E672AC22734772A00CBB3CE /* AttributedButton.swift */,
 				4EA1E5152A2F594E00FF0B32 /* RadioGroup.swift */,
+				4E58F67B2A33B9500037CE1E /* NotificationCenter.swift */,
 			);
 			path = MacOS;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 				4EA1E5182A2F939A00FF0B32 /* Log.swift in Sources */,
 				4E672AB22734771100CBB3CE /* Dictionary.swift in Sources */,
 				4E672ACF2734772A00CBB3CE /* CodableColor.swift in Sources */,
+				4E58F67C2A33B9500037CE1E /* NotificationCenter.swift in Sources */,
 				4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */,
 				4E672ACE2734772A00CBB3CE /* NSView.swift in Sources */,
 				4E903C17258CD52000E542AD /* DocumentPreferences.swift in Sources */,
@@ -342,6 +349,7 @@
 				4E672AC52734772A00CBB3CE /* PopupWindow.swift in Sources */,
 				4EA1E5142A2F454900FF0B32 /* StoreViewController.swift in Sources */,
 				4E672AAF2734771100CBB3CE /* Date.swift in Sources */,
+				4E58F67A2A33B7560037CE1E /* TabbedLogWindows.swift in Sources */,
 				4E672AC42734772A00CBB3CE /* Alert.swift in Sources */,
 				4E72F91D264D3A1500EF6AF0 /* LogSelectWindowController.swift in Sources */,
 				4EC9215D2A333E2F004C2A32 /* main.swift in Sources */,

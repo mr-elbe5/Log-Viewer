@@ -25,6 +25,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
 
     var defaultSize = NSMakeSize(900, 600)
     
+    var delegate : TabbedLogWindowsDelegate? = nil
+    
     var logDocument : LogDocument
     var logViewController : LogViewController {
         get{
