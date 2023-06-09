@@ -10,16 +10,11 @@
 import Cocoa
 
 
-class LogDocumentController: NSDocumentController {
+class LogDocumentController: NSObject {
     
-    public static var sharedController : LogDocumentController{
-        get{
-            NSDocumentController.shared as! LogDocumentController
-        }
-    }
+    static var shared = LogDocumentController()
     
-    override func clearRecentDocuments(_ sender: Any?) {
-        super.clearRecentDocuments(sender)
+    func clearRecentDocuments(_ sender: Any?) {
         GlobalPreferences.shared.resetDocumentPreferences()
         GlobalPreferences.shared.save()
     }

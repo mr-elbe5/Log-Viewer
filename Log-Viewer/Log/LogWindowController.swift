@@ -31,6 +31,21 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             contentViewController as! LogViewController
         }
     }
+
+    // Window delegate
+    
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        NSApplication.shared.terminate(self)
+        return true
+    }
+    
+    override public func newWindowForTab(_ sender: Any?) {
+        let window = LogWindow()
+        window.delegate = self
+        window.windowController = self
+        contentViewController = LogViewController()
+        self.window!.addTabbedWindow(window, ordered: .above)
+    }
     
     init(document: LogDocument){
         logDocument = document
@@ -65,6 +80,13 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadWindow() {
+        let window = LogWindow()
+        window.delegate = self
+        contentViewController = LogViewController()
+        self.window = window
+    }
+    
     func windowWillClose(_ notification: Notification) {
         logDocument.releaseEventSource()
         if GlobalPreferences.shared.rememberWindowFrame{
@@ -76,13 +98,6 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     
     func windowDidBecomeKey(_ notification: Notification) {
         updateStartPause()
-    }
-    
-    override public func newWindowForTab(_ sender: Any?) {
-        if let url = LogDocumentController.sharedController.showSelectDialog(){
-            LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
-            }
-        }
     }
     
     // Toolbar Delegate
@@ -266,11 +281,11 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     }
     
     @objc func openFile() {
-        if let url = LogDocumentController.sharedController.showSelectDialog(){
+        /*if let url = LogDocumentController.sharedController.showSelectDialog(){
             LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
                 NSApp.activate(ignoringOtherApps: true)
             }
-        }
+        }*/
     }
     
     @objc func clearView() {

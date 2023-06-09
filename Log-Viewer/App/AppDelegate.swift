@@ -9,17 +9,19 @@
 
 import Cocoa
 
-
-@main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    lazy var mainWindowController = LogWindowController(document: LogDocument())
+    
     func applicationWillFinishLaunching(_ notification: Notification) {
-        let _ = LogDocumentController()
+        mainWindowController.showWindow(nil)
+        mainWindowController.window?.toggleTabBar(nil)
         NSColorPanel.setPickerMode(.wheel)
         NSColorPanel.setPickerMask(.wheelModeMask)
         NSColorPanel.shared.showsAlpha = false
         GlobalPreferences.load()
         GlobalPreferences.shared.save() // if defaults have been used
+        createMenu()
         Task{
             await Store.shared.load()
         }
@@ -28,32 +30,63 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         return true
     }
-    
-    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool{
-        if let url = LogDocumentController.sharedController.showSelectDialog(){
-            LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
-                NSApp.activate(ignoringOtherApps: true)
-            }
-        }
-        return false
-    }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         GlobalPreferences.shared.save()
     }
-
-    @IBAction func openPreferences(_ sender: Any) {
-        openGlobalPreferences()
+    
+    func createMenu(){
+        let mainMenu = NSMenu()
+        
+        let appMenu = NSMenuItem(title: "", action: nil, keyEquivalent: "")
+        appMenu.submenu = NSMenu(title: "")
+        appMenu.submenu?.addItem(withTitle: "About Log-Viewer", action: #selector(openAbout), keyEquivalent: "n")
+        appMenu.submenu?.addItem(NSMenuItem.separator())
+        appMenu.submenu?.addItem(withTitle: "Global Preferences...", action: #selector(openGlobalPreferences), keyEquivalent: "p")
+        appMenu.submenu?.addItem(withTitle: "Tip...", action: #selector(openStore), keyEquivalent: "")
+        appMenu.submenu?.addItem(NSMenuItem.separator())
+        appMenu.submenu?.addItem(withTitle: "Hide Me", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
+        appMenu.submenu?.addItem({ () -> NSMenuItem in
+            let m = NSMenuItem(title: "Hide Others", action: #selector(NSApplication.hideOtherApplications(_:)), keyEquivalent: "h")
+            m.keyEquivalentModifierMask = [.command, .option]
+            return m
+        }())
+        appMenu.submenu?.addItem(withTitle: "Show All", action: #selector(NSApplication.unhideAllApplications(_:)), keyEquivalent: "")
+        appMenu.submenu?.addItem(NSMenuItem.separator())
+        let appServicesMenu     = NSMenu()
+        NSApp.servicesMenu      = appServicesMenu
+        appMenu.submenu?.addItem(withTitle: "Services", action: nil, keyEquivalent: "").submenu = appServicesMenu
+        appMenu.submenu?.addItem(NSMenuItem.separator())
+        appMenu.submenu?.addItem(withTitle: "Quit Log-Viewer", action: #selector(quitApp), keyEquivalent: "q")
+        
+        let fileMenu = NSMenuItem(title: "File", action: nil, keyEquivalent: "")
+        fileMenu.submenu = NSMenu(title: "File")
+        fileMenu.submenu?.addItem(withTitle: "Open File...", action: #selector(openFile), keyEquivalent: "")
+        fileMenu.submenu?.addItem(withTitle: "Open Remote...", action: #selector(openRemote), keyEquivalent: "")
+        fileMenu.submenu?.addItem(withTitle: "Open Recent...", action: #selector(openRecent), keyEquivalent: "")
+        fileMenu.submenu?.addItem(NSMenuItem.separator())
+        fileMenu.submenu?.addItem(withTitle: "Close", action: #selector(closeFile), keyEquivalent: "w")
+        
+        let appWindowMenu     = NSMenu(title: "Window")
+        NSApp.windowsMenu     = appWindowMenu
+        let windowMenu = NSMenuItem(title: "Window", action: nil, keyEquivalent: "")
+        windowMenu.submenu = appWindowMenu
+        
+        let helpMenu = NSMenuItem(title: "Help", action: nil, keyEquivalent: "")
+        helpMenu.submenu = NSMenu(title: "Help")
+        helpMenu.submenu?.addItem(withTitle: "Log-Viewer Help", action: #selector(openHelp), keyEquivalent: "o")
+        
+        
+        mainMenu.addItem(appMenu)
+        mainMenu.addItem(fileMenu)
+        mainMenu.addItem(windowMenu)
+        mainMenu.addItem(helpMenu)
+        
+        NSApp.mainMenu = mainMenu
     }
     
-    @IBAction func openStore(_ sender: Any) {
-        openStore()
-    }
-    
-    @IBAction func openHelp(_ sender: Any) {
-        if let doc = NSDocumentController.shared.currentDocument as? LogDocument{
-            doc.windowController?.openHelp()
-        }
+    @objc func openAbout() {
+        NSApplication.shared.orderFrontStandardAboutPanel(nil)
     }
     
     @objc func openGlobalPreferences() {
@@ -67,6 +100,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let controller = StoreWindowController()
             controller.window?.center()
             NSApp.runModal(for: controller.window!)
+        }
+    }
+    
+    @objc func quitApp() {
+        NSApplication.shared.terminate(nil)
+    }
+    
+    @objc func openFile() {
+        
+    }
+    
+    @objc func openRemote() {
+        
+    }
+    
+    @objc func openRecent() {
+        
+    }
+    
+    @objc func closeFile() {
+        
+    }
+    
+    @objc func openHelp() {
+        if let doc = NSDocumentController.shared.currentDocument{
+            //doc.windowController?.openHelp()
         }
     }
     

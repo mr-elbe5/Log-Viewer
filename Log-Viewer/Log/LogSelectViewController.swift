@@ -23,7 +23,7 @@ class LogSelectViewController: ViewController {
         scrollView.asVerticalScrollView(inView: view, contentView: contentView)
         
         var lastView: NSView? = nil
-        let documents = LogDocumentController.sharedController.recentDocumentURLs
+        let documents = Array<LogDocument>()
         if documents.isEmpty{
             let label = NSTextField(labelWithString: "There are no recent files")
             contentView.addSubview(label)
@@ -32,7 +32,7 @@ class LogSelectViewController: ViewController {
         }
         else{
             for document in documents{
-                let button = NSButton(title: document.path, target: self, action: #selector(openRecent(sender:)))
+                let button = NSButton(title: document.url?.path ?? "", target: self, action: #selector(openRecent(sender:)))
                 contentView.addSubview(button)
                 button.placeBelow(anchor: lastView?.bottomAnchor ?? contentView.topAnchor, insets: Insets.defaultInsets)
                 button.refusesFirstResponder = true
@@ -56,8 +56,8 @@ class LogSelectViewController: ViewController {
     }
     
     @objc open func open(){
-        LogDocumentController.sharedController.openDocument(self)
-        view.window?.close()
+        /*LogDocumentController.sharedController.openDocument(self)
+        view.window?.close()*/
     }
     
 }

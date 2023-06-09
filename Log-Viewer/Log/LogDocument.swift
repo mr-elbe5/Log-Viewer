@@ -10,7 +10,7 @@
 import Foundation
 import Cocoa
 
-class LogDocument: NSDocument, PreferencesDelegate{
+class LogDocument: NSObject, PreferencesDelegate{
     
     var url : URL? = nil
     var preferences =  DocumentPreferences()
@@ -33,24 +33,8 @@ class LogDocument: NSDocument, PreferencesDelegate{
         fileHandle = nil
         url = nil
     }
-
-    override class var autosavesDrafts: Bool {
-        false
-    }
     
-    override class var autosavesInPlace: Bool {
-        false
-    }
-    
-    override func makeWindowControllers() {
-        windowController = LogWindowController(document: self)
-        addWindowController(windowController!)
-    }
-    
-    override func write(to url: URL, ofType typeName: String) throws {
-    }
-    
-    override func read(from url: URL, ofType typeName: String) throws {
+    func read(from url: URL, ofType typeName: String) throws {
         if FileManager.default.fileExists(atPath: url.path){
             do{
                 preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)

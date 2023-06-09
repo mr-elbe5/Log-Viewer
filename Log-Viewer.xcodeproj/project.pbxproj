@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4E20A79D257E47B40068AC8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A79C257E47B40068AC8D /* AppDelegate.swift */; };
 		4E20A79F257E47B50068AC8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A79E257E47B50068AC8D /* Assets.xcassets */; };
-		4E20A7A2257E47B50068AC8D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A7A0257E47B50068AC8D /* MainMenu.xib */; };
 		4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7AB257E48140068AC8D /* LogWindowController.swift */; };
 		4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7B1257E484F0068AC8D /* LogViewController.swift */; };
 		4E33FA98257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33FA97257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift */; };
@@ -50,6 +49,8 @@
 		4EAC4CEB258A3D6800554A69 /* LogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CEA258A3D6800554A69 /* LogDocument.swift */; };
 		4EAC4CEE258A448C00554A69 /* LogDocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CED258A448C00554A69 /* LogDocumentController.swift */; };
 		4EAC4CF5258A738200554A69 /* LogChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CF4258A738200554A69 /* LogChunk.swift */; };
+		4EC9215D2A333E2F004C2A32 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9215C2A333E2F004C2A32 /* main.swift */; };
+		4EC9215F2A333FEC004C2A32 /* LogWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9215E2A333FEC004C2A32 /* LogWindow.swift */; };
 		4ED97A61263A9F7C00F79137 /* DocumentPreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED97A60263A9F7C00F79137 /* DocumentPreferencesWindowController.swift */; };
 		4ED97A63263A9F9900F79137 /* DocumentPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED97A62263A9F9900F79137 /* DocumentPreferencesViewController.swift */; };
 /* End PBXBuildFile section */
@@ -58,7 +59,6 @@
 		4E20A799257E47B40068AC8D /* Log-Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Log-Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E20A79C257E47B40068AC8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E20A79E257E47B50068AC8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4E20A7A1257E47B50068AC8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4E20A7A3257E47B50068AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E20A7A4257E47B50068AC8D /* LogViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LogViewer.entitlements; sourceTree = "<group>"; };
 		4E20A7AB257E48140068AC8D /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
@@ -101,6 +101,8 @@
 		4EAC4CEA258A3D6800554A69 /* LogDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocument.swift; sourceTree = "<group>"; };
 		4EAC4CED258A448C00554A69 /* LogDocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocumentController.swift; sourceTree = "<group>"; };
 		4EAC4CF4258A738200554A69 /* LogChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogChunk.swift; sourceTree = "<group>"; };
+		4EC9215C2A333E2F004C2A32 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		4EC9215E2A333FEC004C2A32 /* LogWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindow.swift; sourceTree = "<group>"; };
 		4ED97A60263A9F7C00F79137 /* DocumentPreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferencesWindowController.swift; sourceTree = "<group>"; };
 		4ED97A62263A9F9900F79137 /* DocumentPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferencesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,7 +143,6 @@
 				4E672AAA2734771100CBB3CE /* Data */,
 				4E5C9AA2257F799200E0D8BB /* App */,
 				4E20A79E257E47B50068AC8D /* Assets.xcassets */,
-				4E20A7A0257E47B50068AC8D /* MainMenu.xib */,
 				4E20A7A3257E47B50068AC8D /* Info.plist */,
 				4E20A7A4257E47B50068AC8D /* LogViewer.entitlements */,
 				4E5C9AA4257F79A300E0D8BB /* Log */,
@@ -178,6 +179,7 @@
 			children = (
 				4E20A79C257E47B40068AC8D /* AppDelegate.swift */,
 				4EA1E5172A2F939A00FF0B32 /* Log.swift */,
+				4EC9215C2A333E2F004C2A32 /* main.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -185,13 +187,14 @@
 		4E5C9AA4257F79A300E0D8BB /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				4E20A7AB257E48140068AC8D /* LogWindowController.swift */,
-				4E20A7B1257E484F0068AC8D /* LogViewController.swift */,
-				4EAC4CEA258A3D6800554A69 /* LogDocument.swift */,
 				4EAC4CF4258A738200554A69 /* LogChunk.swift */,
-				4E72F91C264D3A1500EF6AF0 /* LogSelectWindowController.swift */,
+				4EAC4CEA258A3D6800554A69 /* LogDocument.swift */,
 				4EAC4CED258A448C00554A69 /* LogDocumentController.swift */,
 				4E72F91E264D3DF500EF6AF0 /* LogSelectViewController.swift */,
+				4E72F91C264D3A1500EF6AF0 /* LogSelectWindowController.swift */,
+				4E20A7B1257E484F0068AC8D /* LogViewController.swift */,
+				4E20A7AB257E48140068AC8D /* LogWindowController.swift */,
+				4EC9215E2A333FEC004C2A32 /* LogWindow.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -312,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E20A79F257E47B50068AC8D /* Assets.xcassets in Resources */,
-				4E20A7A2257E47B50068AC8D /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +343,7 @@
 				4E672AAF2734771100CBB3CE /* Date.swift in Sources */,
 				4E672AC42734772A00CBB3CE /* Alert.swift in Sources */,
 				4E72F91D264D3A1500EF6AF0 /* LogSelectWindowController.swift in Sources */,
+				4EC9215D2A333E2F004C2A32 /* main.swift in Sources */,
 				4ED97A61263A9F7C00F79137 /* DocumentPreferencesWindowController.swift in Sources */,
 				4E672AC92734772A00CBB3CE /* NSInsets.swift in Sources */,
 				4E672AB02734771100CBB3CE /* Array.swift in Sources */,
@@ -358,6 +361,7 @@
 				4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */,
 				4ED97A63263A9F9900F79137 /* DocumentPreferencesViewController.swift in Sources */,
 				4E672AC72734772A00CBB3CE /* NSScrollView.swift in Sources */,
+				4EC9215F2A333FEC004C2A32 /* LogWindow.swift in Sources */,
 				4E50575A25811C7E00A4CC90 /* GlobalPreferences.swift in Sources */,
 				4E672AD62734773300CBB3CE /* String.swift in Sources */,
 				4EA1E50F2A2F444100FF0B32 /* Store.swift in Sources */,
@@ -370,17 +374,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4E20A7A0257E47B50068AC8D /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4E20A7A1257E47B50068AC8D /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4E20A7A5257E47B50068AC8D /* Debug */ = {
