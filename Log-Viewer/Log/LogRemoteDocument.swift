@@ -7,21 +7,14 @@
  You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
 */
 
+import Foundation
 import Cocoa
 
-class LogWindow: NSWindow {
+class LogFRemoteDocument: LogDocument{
     
-    convenience init(){
-        var x : CGFloat = 0
-        var y : CGFloat = 0
-        if let screen = NSScreen.main{
-            x = screen.frame.width/2 - 800.0/2
-            y = screen.frame.height/2 - 600.0/2
-        }
-        self.init(contentRect: NSMakeRect(x, y, 800.0, 600.0), styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
-        title = "Title"
-        tabbingMode = .preferred
+    override func releaseLogSource(){
+        
     }
-    
+      
 }
 

@@ -10,33 +10,39 @@
 import Cocoa
 
 protocol TabbedLogWindowsDelegate: AnyObject {
-    func createTab(windowController: LogWindowController, window: LogWindow)
+    func createTab(windowController: LogWindowController, window: NSWindow)
 }
 
 class TabbedLogWindows: TabbedLogWindowsDelegate{
 
     fileprivate(set) var tabbedLogWindows = Array<TabbedLogWindow>()
     
-    var mainWindow: LogWindow? {
+    static var shared : TabbedLogWindows? = nil
+    
+    var mainWindow: NSWindow? {
         let mainManagedWindow = tabbedLogWindows.first { $0.window.isMainWindow }
         assert(mainManagedWindow != nil || tabbedLogWindows.isEmpty)
         return (mainManagedWindow ?? tabbedLogWindows.first).map { $0.window }
+    }
+    
+    init(document: LogDocument) {
+        precondition(addWindow(windowController: LogWindowController(document: document)) != nil)
     }
 
     init(initialWindowController: LogWindowController) {
         precondition(addWindow(windowController: initialWindowController) != nil)
     }
 
-    func createTab(windowController: LogWindowController, window: LogWindow){
+    func createTab(windowController: LogWindowController, window: NSWindow){
         guard let newWindow = addWindow(windowController: windowController)?.window else { preconditionFailure() }
         window.addTabbedWindow(newWindow, ordered: .above)
-        newWindow.makeKeyAndOrderFront(nil as LogWindow?)
+        newWindow.makeKeyAndOrderFront(nil as NSWindow?)
     }
 
     private func addWindow(windowController: LogWindowController) -> TabbedLogWindow? {
-        guard let window = windowController.window as? LogWindow else { return nil }
+        guard let window = windowController.window else { return nil }
         let subscription = NotificationCenter.default.observe(name: NSWindow.willCloseNotification, object: window) { [unowned self] notification in
-            guard let window = notification.object as? LogWindow else { return }
+            guard let window = notification.object as? NSWindow else { return }
             self.removeTabbedWindow(forWindow: window)
         }
         let tabbedWindow = TabbedLogWindow(windowController: windowController, window: window, closingSubscription: subscription)
@@ -45,14 +51,25 @@ class TabbedLogWindows: TabbedLogWindowsDelegate{
         return tabbedWindow
     }
 
-    private func removeTabbedWindow(forWindow window: LogWindow) {
+    private func removeTabbedWindow(forWindow window: NSWindow) {
         tabbedLogWindows.removeAll(where: { $0.window === window })
     }
     
 }
 
-struct TabbedLogWindow{
-    let windowController: LogWindowController
-    let window: LogWindow
-    let closingSubscription: NotificationToken
+class TabbedLogWindow{
+    var windowController: LogWindowController
+    var window: NSWindow
+    var closingSubscription: NotificationToken
+    
+    var document: LogDocument?{
+        windowController.logDocument
+    }
+    
+    init(windowController: LogWindowController, window: NSWindow, closingSubscription: NotificationToken) {
+        self.windowController = windowController
+        self.window = window
+        self.closingSubscription = closingSubscription
+    }
+    
 }

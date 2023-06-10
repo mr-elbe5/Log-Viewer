@@ -9,10 +9,9 @@
 
 import Cocoa
 
-class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelegate {
+class LogWindowController: NSWindowController, NSWindowDelegate {
     
     let mainWindowToolbarIdentifier = NSToolbar.Identifier("MainWindowToolbar")
-    
     let toolbarItemOpen = NSToolbarItem.Identifier("ToolbarOpenItem")
     let toolbarItemClear = NSToolbarItem.Identifier("ToolbarClearItem")
     let toolbarItemReload = NSToolbarItem.Identifier("ToolbarReloadItem")
@@ -23,8 +22,6 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     let toolbarItemStore = NSToolbarItem.Identifier("ToolbarStoreItem")
     let toolbarItemHelp = NSToolbarItem.Identifier("ToolbarHelpItem")
 
-    var defaultSize = NSMakeSize(900, 600)
-    
     var delegate : TabbedLogWindowsDelegate? = nil
     
     var logDocument : LogDocument
@@ -42,7 +39,7 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     }
     
     override public func newWindowForTab(_ sender: Any?) {
-        let window = LogWindow()
+        let window = NSWindow()
         window.delegate = self
         window.windowController = self
         contentViewController = LogViewController()
@@ -51,28 +48,13 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     
     init(document: LogDocument){
         logDocument = document
-        var x : CGFloat = 0
-        var y : CGFloat = 0
-        if let screen = NSScreen.main{
-            x = screen.frame.width/2 - defaultSize.width/2
-            y = screen.frame.height/2 - defaultSize.height/2
-        }
-        let window = NSWindow(contentRect: NSMakeRect(x, y, defaultSize.width, defaultSize.height), styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
+        let window = NSWindow(contentRect: LogWindowPool.shared.frameRect, styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
         window.title = "Log-Viewer"
         window.tabbingMode = GlobalPreferences.shared.useTabs ? .preferred : .automatic
         super.init(window: window)
         self.window?.delegate = self
-        let toolbar = NSToolbar(identifier: mainWindowToolbarIdentifier)
-        toolbar.delegate = self
-        toolbar.allowsUserCustomization = false
-        toolbar.autosavesConfiguration = false
-        toolbar.displayMode = .iconAndLabel
-        self.window?.toolbar = toolbar
-        self.window?.toolbar?.validateVisibleItems()
-        let viewController = LogViewController()
-        viewController.logDocument = logDocument
-        contentViewController = viewController
-        logViewController.updateFromDocument()
+        addToolbar()
+        setupViewController()
         if GlobalPreferences.shared.rememberWindowFrame{
             self.window?.setFrameUsingName(logDocument.preferences.id)
         }
@@ -82,15 +64,15 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadWindow() {
-        let window = LogWindow()
-        window.delegate = self
-        contentViewController = LogViewController()
-        self.window = window
+    func setupViewController(){
+        let viewController = LogViewController()
+        viewController.logDocument = logDocument
+        contentViewController = viewController
+        logViewController.updateFromDocument()
     }
     
     func windowWillClose(_ notification: Notification) {
-        logDocument.releaseEventSource()
+        logDocument.releaseLogSource()
         if GlobalPreferences.shared.rememberWindowFrame{
             window?.saveFrame(usingName: logDocument.preferences.id)
         }
@@ -100,255 +82,6 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
     
     func windowDidBecomeKey(_ notification: Notification) {
         updateStartPause()
-    }
-    
-    // Toolbar Delegate
-    
-    func toolbar(_ toolbar: NSToolbar,
-                 itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
-                 willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem?
-    {
-        if  itemIdentifier == toolbarItemOpen {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(openFile)
-            toolbarItem.label = "Open File"
-            toolbarItem.paletteLabel = "Open File"
-            toolbarItem.toolTip = "Open new file"
-            if #available(macOS 11.0, *){
-                toolbarItem.image = NSImage(systemSymbolName: "plus.circle", accessibilityDescription: "")
-            }
-            else{
-                toolbarItem.image = NSImage(named: "plus.circle")
-            }
-            return toolbarItem
-        }
-        
-        if  itemIdentifier == toolbarItemClear {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(clearView)
-            toolbarItem.label = "Clear View"
-            toolbarItem.paletteLabel = "Clear View"
-            toolbarItem.toolTip = "Clear view and proceed with incoming messages"
-            if #available(macOS 11.0, *){
-                toolbarItem.image = NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: "")
-            }
-            else{
-                toolbarItem.image = NSImage(named: "xmark.circle")
-            }
-            return toolbarItem
-        }
-        
-        if  itemIdentifier == toolbarItemReload {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(reloadView)
-            toolbarItem.label = "Reload File"
-            toolbarItem.paletteLabel = "Reload File"
-            toolbarItem.toolTip = "Reload File"
-            if #available(macOS 11.0, *){
-                toolbarItem.image = NSImage(systemSymbolName: "arrow.clockwise.circle", accessibilityDescription: "")
-            }
-            else{
-                toolbarItem.image = NSImage(named: "arrow.clockwise.circle")
-            }
-            return toolbarItem
-        }
-        
-        if  itemIdentifier == toolbarItemStart {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(start)
-            toolbarItem.label = "Start Following"
-            toolbarItem.paletteLabel = "Start Following"
-            toolbarItem.toolTip = "Follow changes of the log file"
-            if #available(macOS 11.0, *){
-                toolbarItem.image = NSImage(systemSymbolName: "play.circle", accessibilityDescription: "")
-            }
-            else{
-                toolbarItem.image = NSImage(named: "play.circle")
-            }
-            return toolbarItem
-        }
-        
-        if  itemIdentifier == toolbarItemPause {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(pause)
-            toolbarItem.label = "Pause Following"
-            toolbarItem.paletteLabel = "Pause Following"
-            toolbarItem.toolTip = "Pause following the log file"
-            if #available(macOS 11.0, *){
-                toolbarItem.image = NSImage(systemSymbolName: "pause.circle", accessibilityDescription: "")
-            }
-            else{
-                toolbarItem.image = NSImage(named: "pause.circle")
-            }
-            return toolbarItem
-        }
-        
-        if  itemIdentifier == toolbarItemGlobalPreferences {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(openGlobalPreferences)
-            toolbarItem.label = "Global Preferences"
-            toolbarItem.paletteLabel = "Global Preferences"
-            toolbarItem.toolTip = "Set global preferences and colors"
-            if #available(macOS 11.0, *){
-                toolbarItem.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: "")
-            }
-            else{
-                toolbarItem.image = NSImage(named: "gearshape")
-            }
-            return toolbarItem
-        }
-        
-        if  itemIdentifier == toolbarItemDocumentPreferences {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(openDocumentPreferences)
-            toolbarItem.label = "Document Preferences"
-            toolbarItem.paletteLabel = "Document Preferences"
-            toolbarItem.toolTip = "Set document log preferences"
-            if #available(macOS 11.0, *){
-                toolbarItem.image = NSImage(systemSymbolName: "doc.badge.gearshape", accessibilityDescription: "")
-            }
-            else{
-                toolbarItem.image = NSImage(named: "doc.badge.gearshape")
-            }
-            return toolbarItem
-        }
-        
-        if  itemIdentifier == toolbarItemStore {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(openStore)
-            toolbarItem.label = "Tip"
-            toolbarItem.paletteLabel = "Tip"
-            toolbarItem.toolTip = "Leave a tip for the developer"
-            if #available(macOS 11.0, *){
-                toolbarItem.image = NSImage(systemSymbolName: "giftcard", accessibilityDescription: "")
-            }
-            else{
-                toolbarItem.image = NSImage(named: "giftcard")
-            }
-            return toolbarItem
-        }
-        
-        if  itemIdentifier == toolbarItemHelp {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(openHelp)
-            toolbarItem.label = "Help"
-            toolbarItem.paletteLabel = "Help"
-            toolbarItem.toolTip = "Help"
-            if #available(macOS 11.0, *){
-                toolbarItem.image = NSImage(systemSymbolName: "questionmark.circle", accessibilityDescription: "")
-            }
-            else{
-                toolbarItem.image = NSImage(named: "questionmark.circle")
-            }
-            return toolbarItem
-        }
-    
-        return nil
-    }
-    
-    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        [
-            toolbarItemOpen,
-            toolbarItemClear,
-            toolbarItemReload,
-            toolbarItemPause,
-            toolbarItemGlobalPreferences,
-            toolbarItemDocumentPreferences,
-            toolbarItemStore,
-            toolbarItemHelp
-        ]
-    }
-    
-    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        [toolbarItemOpen,
-         toolbarItemClear,
-         toolbarItemReload,
-         toolbarItemStart,
-         toolbarItemPause,
-         toolbarItemGlobalPreferences,
-         toolbarItemDocumentPreferences,
-         toolbarItemStore,
-         toolbarItemHelp,
-         NSToolbarItem.Identifier.space,
-         NSToolbarItem.Identifier.flexibleSpace]
-    }
-    
-    @objc func openFile() {
-        /*if let url = LogDocumentController.sharedController.showSelectDialog(){
-            LogDocumentController.sharedController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
-                NSApp.activate(ignoringOtherApps: true)
-            }
-        }*/
-    }
-    
-    @objc func clearView() {
-        logViewController.clear()
-    }
-    
-    @objc func reloadView() {
-        logViewController.reloadFullFile()
-    }
-    
-    @objc func openGlobalPreferences() {
-        let controller = GlobalPreferencesWindowController()
-        controller.centerInWindow(outerWindow: window)
-        NSApp.runModal(for: controller.window!)
-    }
-    
-    @objc func openDocumentPreferences() {
-        let controller = DocumentPreferencesWindowController(log: logDocument)
-        controller.centerInWindow(outerWindow: window)
-        NSApp.runModal(for: controller.window!)
-    }
-    
-    @objc func openStore() {
-        let controller = StoreWindowController()
-        controller.centerInWindow(outerWindow: window)
-        NSApp.runModal(for: controller.window!)
-    }
-    
-    @objc func openHelp() {
-        let controller = HelpWindowController()
-        controller.centerInWindow(outerWindow: window)
-        NSApp.runModal(for: controller.window!)
-    }
-    
-    @objc func start() {
-        logViewController.follow = true
-        logViewController.updateFromDocument()
-        if let toolbar = window?.toolbar{
-            toolbar.removeItem(at: 3)
-            toolbar.insertItem(withItemIdentifier: toolbarItemPause, at: 3)
-        }
-    }
-    
-    @objc func pause() {
-        logViewController.follow = false
-        if let toolbar = window?.toolbar{
-            toolbar.removeItem(at: 3)
-            toolbar.insertItem(withItemIdentifier: toolbarItemStart, at: 3)
-        }
-    }
-    
-    func updateStartPause(){
-        if let toolbar = window?.toolbar{
-            toolbar.removeItem(at: 3)
-            if logViewController.follow{
-                toolbar.insertItem(withItemIdentifier: toolbarItemPause, at: 3)
-            }
-            else{
-                toolbar.insertItem(withItemIdentifier: toolbarItemStart, at: 3)
-            }
-        }
     }
     
 }

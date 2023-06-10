@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     lazy var mainWindowController = LogWindowController(document: LogDocument())
     
     func applicationWillFinishLaunching(_ notification: Notification) {
+        LogWindowPool.loadAppState()
         mainWindowController.showWindow(nil)
         mainWindowController.window?.toggleTabBar(nil)
         NSColorPanel.setPickerMode(.wheel)
@@ -124,8 +125,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func openHelp() {
-        if let doc = NSDocumentController.shared.currentDocument{
-            //doc.windowController?.openHelp()
+        if let tabs = TabbedLogWindows.shared, let windowsController = tabs.mainWindow{
+            //windowsController.openHelp()
         }
     }
     

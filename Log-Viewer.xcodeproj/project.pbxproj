@@ -40,6 +40,11 @@
 		4E672AD62734773300CBB3CE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E672AD32734773300CBB3CE /* String.swift */; };
 		4E672AD72734773300CBB3CE /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E672AD42734773300CBB3CE /* StringProtocol.swift */; };
 		4E672AD82734773300CBB3CE /* StringLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E672AD52734773300CBB3CE /* StringLocalizer.swift */; };
+		4E6730AC2A34649900990CA1 /* LogFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730AB2A34649900990CA1 /* LogFileDocument.swift */; };
+		4E6730AE2A3465EF00990CA1 /* LogRemoteDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730AD2A3465EF00990CA1 /* LogRemoteDocument.swift */; };
+		4E6730B02A34AC7B00990CA1 /* LogWindowPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730AF2A34AC7B00990CA1 /* LogWindowPool.swift */; };
+		4E6730B22A34B19E00990CA1 /* LogDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730B12A34B19E00990CA1 /* LogDescriptor.swift */; };
+		4E6730B42A34EA8000990CA1 /* LogWindowController+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730B32A34EA8000990CA1 /* LogWindowController+Toolbar.swift */; };
 		4E72F91D264D3A1500EF6AF0 /* LogSelectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E72F91C264D3A1500EF6AF0 /* LogSelectWindowController.swift */; };
 		4E72F91F264D3DF500EF6AF0 /* LogSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E72F91E264D3DF500EF6AF0 /* LogSelectViewController.swift */; };
 		4E903C17258CD52000E542AD /* DocumentPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E903C16258CD52000E542AD /* DocumentPreferences.swift */; };
@@ -52,7 +57,6 @@
 		4EAC4CEE258A448C00554A69 /* LogDocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CED258A448C00554A69 /* LogDocumentController.swift */; };
 		4EAC4CF5258A738200554A69 /* LogChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CF4258A738200554A69 /* LogChunk.swift */; };
 		4EC9215D2A333E2F004C2A32 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9215C2A333E2F004C2A32 /* main.swift */; };
-		4EC9215F2A333FEC004C2A32 /* LogWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9215E2A333FEC004C2A32 /* LogWindow.swift */; };
 		4ED97A61263A9F7C00F79137 /* DocumentPreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED97A60263A9F7C00F79137 /* DocumentPreferencesWindowController.swift */; };
 		4ED97A63263A9F9900F79137 /* DocumentPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED97A62263A9F9900F79137 /* DocumentPreferencesViewController.swift */; };
 /* End PBXBuildFile section */
@@ -94,6 +98,11 @@
 		4E672AD32734773300CBB3CE /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4E672AD42734773300CBB3CE /* StringProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
 		4E672AD52734773300CBB3CE /* StringLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringLocalizer.swift; sourceTree = "<group>"; };
+		4E6730AB2A34649900990CA1 /* LogFileDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFileDocument.swift; sourceTree = "<group>"; };
+		4E6730AD2A3465EF00990CA1 /* LogRemoteDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRemoteDocument.swift; sourceTree = "<group>"; };
+		4E6730AF2A34AC7B00990CA1 /* LogWindowPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowPool.swift; sourceTree = "<group>"; };
+		4E6730B12A34B19E00990CA1 /* LogDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDescriptor.swift; sourceTree = "<group>"; };
+		4E6730B32A34EA8000990CA1 /* LogWindowController+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogWindowController+Toolbar.swift"; sourceTree = "<group>"; };
 		4E72F91C264D3A1500EF6AF0 /* LogSelectWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSelectWindowController.swift; sourceTree = "<group>"; };
 		4E72F91E264D3DF500EF6AF0 /* LogSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSelectViewController.swift; sourceTree = "<group>"; };
 		4E903C16258CD52000E542AD /* DocumentPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferences.swift; sourceTree = "<group>"; };
@@ -106,7 +115,6 @@
 		4EAC4CED258A448C00554A69 /* LogDocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocumentController.swift; sourceTree = "<group>"; };
 		4EAC4CF4258A738200554A69 /* LogChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogChunk.swift; sourceTree = "<group>"; };
 		4EC9215C2A333E2F004C2A32 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		4EC9215E2A333FEC004C2A32 /* LogWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindow.swift; sourceTree = "<group>"; };
 		4ED97A60263A9F7C00F79137 /* DocumentPreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferencesWindowController.swift; sourceTree = "<group>"; };
 		4ED97A62263A9F9900F79137 /* DocumentPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferencesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +199,7 @@
 		4E5C9AA4257F79A300E0D8BB /* Log */ = {
 			isa = PBXGroup;
 			children = (
+				4E6730AF2A34AC7B00990CA1 /* LogWindowPool.swift */,
 				4EAC4CF4258A738200554A69 /* LogChunk.swift */,
 				4EAC4CEA258A3D6800554A69 /* LogDocument.swift */,
 				4EAC4CED258A448C00554A69 /* LogDocumentController.swift */,
@@ -198,8 +207,11 @@
 				4E72F91C264D3A1500EF6AF0 /* LogSelectWindowController.swift */,
 				4E20A7B1257E484F0068AC8D /* LogViewController.swift */,
 				4E20A7AB257E48140068AC8D /* LogWindowController.swift */,
-				4EC9215E2A333FEC004C2A32 /* LogWindow.swift */,
+				4E6730B32A34EA8000990CA1 /* LogWindowController+Toolbar.swift */,
 				4E58F6792A33B7560037CE1E /* TabbedLogWindows.swift */,
+				4E6730AB2A34649900990CA1 /* LogFileDocument.swift */,
+				4E6730AD2A3465EF00990CA1 /* LogRemoteDocument.swift */,
+				4E6730B12A34B19E00990CA1 /* LogDescriptor.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -333,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E72F91F264D3DF500EF6AF0 /* LogSelectViewController.swift in Sources */,
+				4E6730AC2A34649900990CA1 /* LogFileDocument.swift in Sources */,
 				4EA1E5182A2F939A00FF0B32 /* Log.swift in Sources */,
 				4E672AB22734771100CBB3CE /* Dictionary.swift in Sources */,
 				4E672ACF2734772A00CBB3CE /* CodableColor.swift in Sources */,
@@ -350,9 +363,11 @@
 				4EA1E5142A2F454900FF0B32 /* StoreViewController.swift in Sources */,
 				4E672AAF2734771100CBB3CE /* Date.swift in Sources */,
 				4E58F67A2A33B7560037CE1E /* TabbedLogWindows.swift in Sources */,
+				4E6730B22A34B19E00990CA1 /* LogDescriptor.swift in Sources */,
 				4E672AC42734772A00CBB3CE /* Alert.swift in Sources */,
 				4E72F91D264D3A1500EF6AF0 /* LogSelectWindowController.swift in Sources */,
 				4EC9215D2A333E2F004C2A32 /* main.swift in Sources */,
+				4E6730AE2A3465EF00990CA1 /* LogRemoteDocument.swift in Sources */,
 				4ED97A61263A9F7C00F79137 /* DocumentPreferencesWindowController.swift in Sources */,
 				4E672AC92734772A00CBB3CE /* NSInsets.swift in Sources */,
 				4E672AB02734771100CBB3CE /* Array.swift in Sources */,
@@ -369,8 +384,9 @@
 				4E672AD72734773300CBB3CE /* StringProtocol.swift in Sources */,
 				4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */,
 				4ED97A63263A9F9900F79137 /* DocumentPreferencesViewController.swift in Sources */,
+				4E6730B42A34EA8000990CA1 /* LogWindowController+Toolbar.swift in Sources */,
 				4E672AC72734772A00CBB3CE /* NSScrollView.swift in Sources */,
-				4EC9215F2A333FEC004C2A32 /* LogWindow.swift in Sources */,
+				4E6730B02A34AC7B00990CA1 /* LogWindowPool.swift in Sources */,
 				4E50575A25811C7E00A4CC90 /* GlobalPreferences.swift in Sources */,
 				4E672AD62734773300CBB3CE /* String.swift in Sources */,
 				4EA1E50F2A2F444100FF0B32 /* Store.swift in Sources */,
@@ -509,6 +525,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Log-Viewer/LogViewer.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 8;
@@ -536,6 +553,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Log-Viewer/LogViewer.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 8;

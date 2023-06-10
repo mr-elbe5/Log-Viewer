@@ -25,77 +25,11 @@ class LogDocument: NSObject, PreferencesDelegate{
     
     var chunks = [LogChunk]()
     
-    private var fileHandle: FileHandle? = nil
-    private var eventSource: DispatchSourceFileSystemObject? = nil
-
     deinit {
-        releaseEventSource()
-        fileHandle = nil
-        url = nil
+        releaseLogSource()
     }
     
-    func read(from url: URL, ofType typeName: String) throws {
-        if FileManager.default.fileExists(atPath: url.path){
-            do{
-                preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)
-                fileHandle = try FileHandle(forReadingFrom: url)
-                Log.debug("start read")
-                if GlobalPreferences.shared.showFullFile, let data = fileHandle?.readDataToEndOfFile(){
-                    let str = String(data: data, encoding: .utf8) ?? ""
-                    if GlobalPreferences.shared.maxLines != 0{
-                        chunks.append(LogChunk(str.substr(lines: GlobalPreferences.shared.maxLines)))
-                    }
-                    else{
-                        chunks.append(LogChunk(str))
-                    }
-                }
-                setEventSource()
-            }
-            catch{
-                Swift.print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func setEventSource(){
-        if let fileHandle = fileHandle{
-            let eventSource = DispatchSource.makeFileSystemObjectSource(
-                fileDescriptor: fileHandle.fileDescriptor,
-                eventMask: .extend,
-                queue: DispatchQueue.main
-            )
-            eventSource.setEventHandler {
-                let event = eventSource.data
-                self.processEvent(event: event)
-            }
-            eventSource.setCancelHandler {
-                if #available(macOS 10.15, *){
-                    try? fileHandle.close()
-                }
-                else{
-                    fileHandle.closeFile()
-                }
-            }
-            fileHandle.seekToEndOfFile()
-            eventSource.resume()
-            self.eventSource = eventSource
-        }
-    }
-    
-    func releaseEventSource(){
-        eventSource?.cancel()
-        eventSource = nil
-    }
-    
-    func processEvent(event: DispatchSource.FileSystemEvent) {
-        guard event.contains(.extend) else {
-            return
-        }
-        if let data = fileHandle?.readDataToEndOfFile(){
-            let chunk = LogChunk(String(data: data, encoding: .utf8) ?? "")
-            chunks.append(chunk)
-            viewController?.updateFromDocument()
-        }
+    func releaseLogSource(){
     }
     
     func savePreferences(){
