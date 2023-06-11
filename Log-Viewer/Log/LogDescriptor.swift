@@ -14,7 +14,11 @@ enum LogType: String{
     case remote
 }
 
-class LogDescriptor: NSObject, Codable {
+class LogDescriptor: Equatable, Codable {
+    
+    static func == (lhs: LogDescriptor, rhs: LogDescriptor) -> Bool {
+        lhs.type == rhs.type && lhs.path == rhs.path
+    }
     
     enum CodingKeys: String, CodingKey {
         case type

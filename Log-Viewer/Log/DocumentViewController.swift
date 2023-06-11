@@ -16,11 +16,13 @@ class DocumentViewController: ViewController {
 
     var defaultSize = NSMakeSize(900, 600)
     
-    var logDocument : LogDocument!
+    var logDocument : LogDocument
+    var loaded = false
     
     var follow = true
     
-    override init() {
+    init(logDocument: LogDocument) {
+        self.logDocument = logDocument
         super.init()
         view.frame = CGRect(x: 0, y: 0, width: defaultSize.width, height: defaultSize.height)
         view.wantsLayer = true
@@ -41,6 +43,13 @@ class DocumentViewController: ViewController {
         scrollView.documentView = textView
     }
     
+    override func viewDidAppear() {
+        /*if !loaded{
+            reloadFullFile()
+            loaded = true
+        }*/
+    }
+    
     func reset(){
         textView.textStorage?.setAttributedString(NSAttributedString(string: ""))
     }
@@ -49,12 +58,10 @@ class DocumentViewController: ViewController {
         if !follow{
             return
         }
-        if let log = logDocument{
-            for chunk in log.chunks{
-                if !chunk.displayed{
-                    chunk.displayed = true
-                    appendText(string: chunk.string)
-                }
+        for chunk in logDocument.chunks{
+            if !chunk.displayed{
+                chunk.displayed = true
+                appendText(string: chunk.string)
             }
         }
     }
@@ -63,11 +70,9 @@ class DocumentViewController: ViewController {
         let oldFollow = follow
         follow = false;
         reset()
-        if let log = logDocument{
-            for chunk in log.chunks{
-                if chunk.displayed{
-                    appendText(string: chunk.string)
-                }
+        for chunk in logDocument.chunks{
+            if chunk.displayed{
+                appendText(string: chunk.string)
             }
         }
         follow = oldFollow
@@ -76,17 +81,15 @@ class DocumentViewController: ViewController {
     
     func appendText(string: String) {
         Log.debug("start append text")
-        let prefs = logDocument?.preferences ?? DocumentPreferences()
+        let prefs = logDocument.preferences
         let font : NSFont = NSFont.monospacedSystemFont(ofSize: CGFloat(GlobalPreferences.shared.fontSize), weight: .medium)
-        if let document = logDocument{
-            if document.preferences.hasColorCoding{
-                appendColorMarkedText(string, font : font, preferences: prefs)
-            }
-            else{
-                appendDefaultText(string, font : font)
-            }
-            textView.scrollToEndOfDocument(nil)
+        if logDocument.preferences.hasColorCoding{
+            appendColorMarkedText(string, font : font, preferences: prefs)
         }
+        else{
+            appendDefaultText(string, font : font)
+        }
+        textView.scrollToEndOfDocument(nil)
         Log.debug("end append text")
     }
     
@@ -96,11 +99,9 @@ class DocumentViewController: ViewController {
     
     func reloadFullFile(){
         reset()
-        if let log = logDocument{
-            for chunk in log.chunks{
-                chunk.displayed = true
-                appendText(string: chunk.string)
-            }
+        for chunk in logDocument.chunks{
+            chunk.displayed = true
+            appendText(string: chunk.string)
         }
     }
     

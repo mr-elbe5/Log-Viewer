@@ -32,6 +32,10 @@ class LogDocument: NSObject, PreferencesDelegate{
     func releaseLogSource(){
     }
     
+    func load(){
+        
+    }
+    
     func savePreferences(){
         GlobalPreferences.shared.save()
     }

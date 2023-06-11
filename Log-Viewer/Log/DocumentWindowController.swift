@@ -56,10 +56,12 @@ class DocumentWindowController: NSWindowController {
     }
     
     func setupViewController(){
-        let viewController = DocumentViewController()
-        viewController.logDocument = logDocument
+        let viewController = DocumentViewController(logDocument: logDocument)
         contentViewController = viewController
-        documentViewController.updateFromDocument()
+        DispatchQueue.main.async{
+            self.logDocument.load()
+            self.documentViewController.updateFromDocument()
+        }
     }
     
 }

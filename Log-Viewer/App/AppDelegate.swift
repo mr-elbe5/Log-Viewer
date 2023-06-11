@@ -12,7 +12,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        LogDocumentPool.loadAppState()
+        LogDocumentPool.loadDocumentPool()
         NSColorPanel.setPickerMode(.wheel)
         NSColorPanel.setPickerMask(.wheelModeMask)
         NSColorPanel.shared.showsAlpha = false
@@ -81,6 +81,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mainMenu.addItem(helpMenu)
         
         NSApp.mainMenu = mainMenu
+        
+        NSApp.activate(ignoringOtherApps: true)
     }
     
     @objc func openAbout() {

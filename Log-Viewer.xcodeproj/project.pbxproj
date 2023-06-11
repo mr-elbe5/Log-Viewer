@@ -216,22 +216,22 @@
 		4E672AB32734772A00CBB3CE /* MacOS */ = {
 			isa = PBXGroup;
 			children = (
-				4E672AB42734772A00CBB3CE /* ViewController.swift */,
 				4E672AB52734772A00CBB3CE /* Alert.swift */,
-				4E672AB62734772A00CBB3CE /* PopupWindow.swift */,
-				4E672AB72734772A00CBB3CE /* NSBox.swift */,
-				4E672AB82734772A00CBB3CE /* NSScrollView.swift */,
-				4E672AB92734772A00CBB3CE /* WindowController.swift */,
-				4E672ABA2734772A00CBB3CE /* NSInsets.swift */,
-				4E672ABB2734772A00CBB3CE /* PopupWindowController.swift */,
-				4E672ABC2734772A00CBB3CE /* NSTextView.swift */,
-				4E672ABD2734772A00CBB3CE /* NSWindowController.swift */,
-				4E672ABE2734772A00CBB3CE /* NSMenuItem.swift */,
-				4E672ABF2734772A00CBB3CE /* NSView.swift */,
-				4E672AC02734772A00CBB3CE /* CodableColor.swift */,
-				4E672AC12734772A00CBB3CE /* NSGridView.swift */,
 				4E672AC22734772A00CBB3CE /* AttributedButton.swift */,
+				4E672AC02734772A00CBB3CE /* CodableColor.swift */,
+				4E672AB72734772A00CBB3CE /* NSBox.swift */,
+				4E672AC12734772A00CBB3CE /* NSGridView.swift */,
+				4E672ABA2734772A00CBB3CE /* NSInsets.swift */,
+				4E672ABE2734772A00CBB3CE /* NSMenuItem.swift */,
+				4E672AB82734772A00CBB3CE /* NSScrollView.swift */,
+				4E672ABC2734772A00CBB3CE /* NSTextView.swift */,
+				4E672ABF2734772A00CBB3CE /* NSView.swift */,
+				4E672ABD2734772A00CBB3CE /* NSWindowController.swift */,
+				4E672AB62734772A00CBB3CE /* PopupWindow.swift */,
+				4E672ABB2734772A00CBB3CE /* PopupWindowController.swift */,
 				4EA1E5152A2F594E00FF0B32 /* RadioGroup.swift */,
+				4E672AB42734772A00CBB3CE /* ViewController.swift */,
+				4E672AB92734772A00CBB3CE /* WindowController.swift */,
 			);
 			path = MacOS;
 			sourceTree = "<group>";

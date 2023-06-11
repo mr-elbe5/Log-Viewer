@@ -21,6 +21,7 @@ class GlobalPreferences: Identifiable, Codable{
     
     static var fontSizes = [10, 12, 14, 16, 18, 20, 24]
     static var numPatterns : Int = 5
+    static var defaultMaxLines = 1000
     
     static var defaultTextColorSet : [CodableColor] = [
         CodableColor(red: 0, green: 0, blue: 0),
@@ -76,7 +77,7 @@ class GlobalPreferences: Identifiable, Codable{
     var textColors : [CodableColor] = isDarkMode ? darkmodeTextColorSet : defaultTextColorSet
     var backgroundColors : [CodableColor] = isDarkMode ? darkmodeBackgroundColorSet : defaultBackgroundColorSet
     var documentPreferences = [URL: DocumentPreferences]()
-    var maxLines = 0
+    var maxLines = GlobalPreferences.defaultMaxLines
 
     static var isDarkMode : Bool{
         get{
@@ -98,7 +99,7 @@ class GlobalPreferences: Identifiable, Codable{
         textColors = try values.decodeIfPresent([CodableColor].self, forKey: .textColors) ?? (GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeTextColorSet : GlobalPreferences.defaultTextColorSet)
         backgroundColors = try values.decodeIfPresent([CodableColor].self, forKey: .backgroundColors) ?? (GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeBackgroundColorSet : GlobalPreferences.defaultBackgroundColorSet)
         documentPreferences = try values.decodeIfPresent([URL: DocumentPreferences].self, forKey: .documentPreferences) ?? [URL: DocumentPreferences]()
-        maxLines = try values.decodeIfPresent(Int.self, forKey: .maxLines) ?? 0
+        maxLines = try values.decodeIfPresent(Int.self, forKey: .maxLines) ?? GlobalPreferences.defaultMaxLines
         save()
     }
     

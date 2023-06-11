@@ -20,25 +20,28 @@ class LogFileDocument: LogDocument{
         fileHandle = nil
     }
     
-    func read(from url: URL, ofType typeName: String) throws {
-        if FileManager.default.fileExists(atPath: url.path){
-            do{
-                preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)
-                fileHandle = try FileHandle(forReadingFrom: url)
-                Log.debug("start read")
-                if GlobalPreferences.shared.showFullFile, let data = fileHandle?.readDataToEndOfFile(){
-                    let str = String(data: data, encoding: .utf8) ?? ""
-                    if GlobalPreferences.shared.maxLines != 0{
-                        chunks.append(LogDocumentChunk(str.substr(lines: GlobalPreferences.shared.maxLines)))
+    override func load(){
+        if let url = url{
+            if FileManager.default.fileExists(atPath: url.path){
+                do{
+                    preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)
+                    fileHandle = try FileHandle(forReadingFrom: url)
+                    Log.debug("start read")
+                    if GlobalPreferences.shared.showFullFile, let data = fileHandle?.readDataToEndOfFile(){
+                        let str = String(data: data, encoding: .utf8) ?? ""
+                        if GlobalPreferences.shared.maxLines != 0{
+                            chunks.append(LogDocumentChunk(str.substr(lines: GlobalPreferences.shared.maxLines)))
+                        }
+                        else{
+                            chunks.append(LogDocumentChunk(str))
+                        }
                     }
-                    else{
-                        chunks.append(LogDocumentChunk(str))
-                    }
+                    Log.debug("end read")
+                    setEventSource()
                 }
-                setEventSource()
-            }
-            catch{
-                Swift.print(error.localizedDescription)
+                catch{
+                    Swift.print(error.localizedDescription)
+                }
             }
         }
     }

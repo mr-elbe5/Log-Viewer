@@ -18,9 +18,15 @@ public class OpenDocumentDialog: NSWindowController, NSWindowDelegate {
         }
     }
     
+    var type : LogType{
+        get{
+            (contentViewController as! OpenDocumentViewController).type
+        }
+    }
+    
     init(){
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 400, height: 200), styleMask: [.closable, .titled, .resizable], backing: .buffered, defer: false)
-        window.title = "Open file"
+        window.title = "Open Log File"
         super.init(window: window)
         self.window?.delegate = self
         let controller = OpenDocumentViewController()
@@ -29,6 +35,11 @@ public class OpenDocumentDialog: NSWindowController, NSWindowDelegate {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func windowDidLoad() {
+        super.windowDidLoad()
+        window?.makeKeyAndOrderFront(nil)
     }
     
     public func windowWillClose(_ notification: Notification) {
@@ -40,6 +51,7 @@ public class OpenDocumentDialog: NSWindowController, NSWindowDelegate {
 class OpenDocumentViewController: ViewController {
     
     var url : URL? = nil
+    var type: LogType = .file
     
     override public func loadView() {
         view = NSView()
@@ -50,16 +62,23 @@ class OpenDocumentViewController: ViewController {
         scrollView.asVerticalScrollView(inView: view, contentView: contentView)
         
         var lastView: NSView? = nil
-        let documents = Array<LogDocument>()
-        if documents.isEmpty{
+        let logDescriptors = LogDocumentPool.shared.documentHistory
+        if logDescriptors.isEmpty{
             let label = NSTextField(labelWithString: "There are no recent files")
             contentView.addSubview(label)
             label.placeBelow(anchor: contentView.topAnchor, insets: Insets.defaultInsets)
             lastView = label
         }
         else{
-            for document in documents{
-                let button = NSButton(title: document.url?.path ?? "", target: self, action: #selector(openRecent(sender:)))
+            for descriptor in logDescriptors{
+                var selector : Selector
+                switch descriptor.type{
+                case .file:
+                    selector = #selector(openRecentFile)
+                case .remote:
+                    selector = #selector(openRecentRemote)
+                }
+                let button = NSButton(title: descriptor.path, target: self, action: selector)
                 contentView.addSubview(button)
                 button.placeBelow(anchor: lastView?.bottomAnchor ?? contentView.topAnchor, insets: Insets.defaultInsets)
                 button.refusesFirstResponder = true
@@ -75,11 +94,16 @@ class OpenDocumentViewController: ViewController {
         openButton.bottom(view.bottomAnchor, inset: Insets.defaultInset)
     }
     
-    @objc open func openRecent(sender: Any){
+    @objc open func openRecentFile(sender: Any){
         if let button = sender as? NSButton{
             url = URL(fileURLWithPath: button.title)
+            self.type = .file
             view.window?.close()
         }
+    }
+    
+    @objc open func openRecentRemote(sender: Any){
+        self.type = .remote
     }
     
     @objc open func open(){
@@ -89,9 +113,9 @@ class OpenDocumentViewController: ViewController {
         panel.canChooseDirectories = false
         if NSApp.runModal(for: panel) == .OK, let url = panel.urls.first{
             self.url = url
+            self.type = .file
+            view.window?.close()
         }
-        view.window?.close()
-        NSApp.stopModal()
     }
     
     

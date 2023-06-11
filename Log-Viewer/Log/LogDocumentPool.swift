@@ -24,7 +24,7 @@ class LogDocumentPool: NSObject, Codable {
     
     static var shared = LogDocumentPool()
     
-    static func loadAppState(){
+    static func loadDocumentPool(){
         if let storedString = UserDefaults.standard.value(forKey: "appState") as? String {
             if let state : LogDocumentPool = LogDocumentPool.fromJSON(encoded: storedString){
                 LogDocumentPool.shared = state
@@ -38,7 +38,7 @@ class LogDocumentPool: NSObject, Codable {
     
     enum CodingKeys: String, CodingKey {
         case frameRect
-        case logHistory
+        case documentHistory
     }
     
     var frameRect: NSRect
@@ -72,13 +72,20 @@ class LogDocumentPool: NSObject, Codable {
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         frameRect = try values.decodeIfPresent(NSRect.self, forKey: .frameRect) ?? LogDocumentPool.defaultRect
-        documentHistory = try values.decodeIfPresent(Array<LogDescriptor>.self, forKey: .logHistory) ?? Array<LogDescriptor>()
+        documentHistory = try values.decodeIfPresent(Array<LogDescriptor>.self, forKey: .documentHistory) ?? Array<LogDescriptor>()
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(frameRect, forKey: .frameRect)
-        try container.encode(documentHistory, forKey: .logHistory)
+        try container.encode(documentHistory, forKey: .documentHistory)
+    }
+    
+    func addToHistory(_ descriptor: LogDescriptor){
+        if !documentHistory.contains(descriptor){
+            documentHistory.append(descriptor)
+            save()
+        }
     }
     
     func save(){
@@ -116,7 +123,11 @@ extension LogDocumentPool: DocumentWindowDelegate{
         let dialog = OpenDocumentDialog()
         NSApp.runModal(for: dialog.window!)
         if let url = dialog.url{
-            let document = LogDocument()
+            var document : LogDocument
+            switch dialog.type{
+            case .remote: document = LogRemoteDocument()
+            case .file: document = LogFileDocument()
+            }
             document.url = url
             let controller = DocumentWindowController(document: document)
             controller.delegate = self
@@ -126,6 +137,7 @@ extension LogDocumentPool: DocumentWindowDelegate{
                 self.removeController(forWindow: window)
             }
             documentWindowControllers.append(controller)
+            addToHistory(LogDescriptor(type: dialog.type, path: url.path))
             if GlobalPreferences.shared.useTabs, let sender = sender{
                 sender.window!.addTabbedWindow(controller.window!, ordered: .above)
             }
