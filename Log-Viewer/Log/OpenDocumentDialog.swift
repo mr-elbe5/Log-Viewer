@@ -7,10 +7,37 @@
  You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import Cocoa
 
-class LogSelectViewController: ViewController {
+
+public class OpenDocumentDialog: NSWindowController, NSWindowDelegate {
+    
+    var url : URL?{
+        get{
+            (contentViewController as! OpenDocumentViewController).url
+        }
+    }
+    
+    init(){
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 400, height: 200), styleMask: [.closable, .titled, .resizable], backing: .buffered, defer: false)
+        window.title = "Open file"
+        super.init(window: window)
+        self.window?.delegate = self
+        let controller = OpenDocumentViewController()
+        contentViewController = controller
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func windowWillClose(_ notification: Notification) {
+        NSApp.stopModal(withCode: url != nil ? .OK : .cancel)
+    }
+
+}
+
+class OpenDocumentViewController: ViewController {
     
     var url : URL? = nil
     
@@ -56,8 +83,19 @@ class LogSelectViewController: ViewController {
     }
     
     @objc open func open(){
-        /*LogDocumentController.sharedController.openDocument(self)
-        view.window?.close()*/
+        let panel = NSOpenPanel()
+        panel.allowsMultipleSelection = false
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        if NSApp.runModal(for: panel) == .OK, let url = panel.urls.first{
+            self.url = url
+        }
+        view.window?.close()
+        NSApp.stopModal()
     }
     
+    
+    
 }
+
+

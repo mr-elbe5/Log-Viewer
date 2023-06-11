@@ -9,7 +9,7 @@
 
 import Cocoa
 
-extension LogWindowController: NSToolbarDelegate {
+extension DocumentWindowController: NSToolbarDelegate {
     
     func addToolbar(){
         let toolbar = NSToolbar(identifier: mainWindowToolbarIdentifier)
@@ -200,19 +200,15 @@ extension LogWindowController: NSToolbarDelegate {
     }
     
     @objc func openFile() {
-        if let url = LogDocumentController.shared.showSelectDialog(){
-            /*LogDocumentController.openDocument(withContentsOf: url, display: true){ doc, wasOpen, error in
-                NSApp.activate(ignoringOtherApps: true)
-            }*/
-        }
+        delegate?.openDocument(sender: self)
     }
     
     @objc func clearView() {
-        logViewController.clear()
+        documentViewController.clear()
     }
     
     @objc func reloadView() {
-        logViewController.reloadFullFile()
+        documentViewController.reloadFullFile()
     }
     
     @objc func openGlobalPreferences() {
@@ -240,8 +236,8 @@ extension LogWindowController: NSToolbarDelegate {
     }
     
     @objc func start() {
-        logViewController.follow = true
-        logViewController.updateFromDocument()
+        documentViewController.follow = true
+        documentViewController.updateFromDocument()
         if let toolbar = window?.toolbar{
             toolbar.removeItem(at: 3)
             toolbar.insertItem(withItemIdentifier: toolbarItemPause, at: 3)
@@ -249,7 +245,7 @@ extension LogWindowController: NSToolbarDelegate {
     }
     
     @objc func pause() {
-        logViewController.follow = false
+        documentViewController.follow = false
         if let toolbar = window?.toolbar{
             toolbar.removeItem(at: 3)
             toolbar.insertItem(withItemIdentifier: toolbarItemStart, at: 3)
@@ -259,7 +255,7 @@ extension LogWindowController: NSToolbarDelegate {
     func updateStartPause(){
         if let toolbar = window?.toolbar{
             toolbar.removeItem(at: 3)
-            if logViewController.follow{
+            if documentViewController.follow{
                 toolbar.insertItem(withItemIdentifier: toolbarItemPause, at: 3)
             }
             else{

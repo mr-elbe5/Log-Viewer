@@ -11,12 +11,8 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    lazy var mainWindowController = LogWindowController(document: LogDocument())
-    
     func applicationWillFinishLaunching(_ notification: Notification) {
-        LogWindowPool.loadAppState()
-        mainWindowController.showWindow(nil)
-        mainWindowController.window?.toggleTabBar(nil)
+        LogDocumentPool.loadAppState()
         NSColorPanel.setPickerMode(.wheel)
         NSColorPanel.setPickerMask(.wheelModeMask)
         NSColorPanel.shared.showsAlpha = false
@@ -25,6 +21,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         createMenu()
         Task{
             await Store.shared.load()
+        }
+        if LogDocumentPool.shared.documentWindowControllers.isEmpty{
+            LogDocumentPool.shared.openDocument(sender: nil)
         }
     }
     
@@ -62,9 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let fileMenu = NSMenuItem(title: "File", action: nil, keyEquivalent: "")
         fileMenu.submenu = NSMenu(title: "File")
-        fileMenu.submenu?.addItem(withTitle: "Open File...", action: #selector(openFile), keyEquivalent: "")
-        fileMenu.submenu?.addItem(withTitle: "Open Remote...", action: #selector(openRemote), keyEquivalent: "")
-        fileMenu.submenu?.addItem(withTitle: "Open Recent...", action: #selector(openRecent), keyEquivalent: "")
+        fileMenu.submenu?.addItem(withTitle: "Open Log File...", action: #selector(openLogFile), keyEquivalent: "")
         fileMenu.submenu?.addItem(NSMenuItem.separator())
         fileMenu.submenu?.addItem(withTitle: "Close", action: #selector(closeFile), keyEquivalent: "w")
         
@@ -108,16 +105,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.terminate(nil)
     }
     
-    @objc func openFile() {
-        
-    }
-    
-    @objc func openRemote() {
-        
-    }
-    
-    @objc func openRecent() {
-        
+    @objc func openLogFile() {
+        LogDocumentPool.shared.openDocument(sender: nil)
     }
     
     @objc func closeFile() {
@@ -125,8 +114,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func openHelp() {
-        if let tabs = TabbedLogWindows.shared, let windowsController = tabs.mainWindow{
-            //windowsController.openHelp()
+        if let windowsController = LogDocumentPool.shared.mainWindowController{
+            windowsController.openHelp()
         }
     }
     

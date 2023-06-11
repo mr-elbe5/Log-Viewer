@@ -9,7 +9,12 @@
 
 import Cocoa
 
-class LogWindowController: NSWindowController, NSWindowDelegate {
+protocol DocumentWindowDelegate{
+    func openDocument(sender: DocumentWindowController?)
+    func newWindowForTab(from: DocumentWindowController)
+}
+
+class DocumentWindowController: NSWindowController {
     
     let mainWindowToolbarIdentifier = NSToolbar.Identifier("MainWindowToolbar")
     let toolbarItemOpen = NSToolbarItem.Identifier("ToolbarOpenItem")
@@ -22,33 +27,19 @@ class LogWindowController: NSWindowController, NSWindowDelegate {
     let toolbarItemStore = NSToolbarItem.Identifier("ToolbarStoreItem")
     let toolbarItemHelp = NSToolbarItem.Identifier("ToolbarHelpItem")
 
-    var delegate : TabbedLogWindowsDelegate? = nil
+    var delegate : DocumentWindowDelegate? = nil
     
     var logDocument : LogDocument
-    var logViewController : LogViewController {
+    
+    var documentViewController : DocumentViewController {
         get{
-            contentViewController as! LogViewController
+            contentViewController as! DocumentViewController
         }
-    }
-
-    // Window delegate
-    
-    func windowShouldClose(_ sender: NSWindow) -> Bool {
-        NSApplication.shared.terminate(self)
-        return true
-    }
-    
-    override public func newWindowForTab(_ sender: Any?) {
-        let window = NSWindow()
-        window.delegate = self
-        window.windowController = self
-        contentViewController = LogViewController()
-        self.window!.addTabbedWindow(window, ordered: .above)
     }
     
     init(document: LogDocument){
         logDocument = document
-        let window = NSWindow(contentRect: LogWindowPool.shared.frameRect, styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
+        let window = NSWindow(contentRect: LogDocumentPool.shared.frameRect, styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
         window.title = "Log-Viewer"
         window.tabbingMode = GlobalPreferences.shared.useTabs ? .preferred : .automatic
         super.init(window: window)
@@ -65,24 +56,28 @@ class LogWindowController: NSWindowController, NSWindowDelegate {
     }
     
     func setupViewController(){
-        let viewController = LogViewController()
+        let viewController = DocumentViewController()
         viewController.logDocument = logDocument
         contentViewController = viewController
-        logViewController.updateFromDocument()
+        documentViewController.updateFromDocument()
     }
     
+}
+
+extension DocumentWindowController: NSWindowDelegate{
+    
     func windowWillClose(_ notification: Notification) {
-        logDocument.releaseLogSource()
         if GlobalPreferences.shared.rememberWindowFrame{
             window?.saveFrame(usingName: logDocument.preferences.id)
         }
     }
     
-    // Window delegate
+    override public func newWindowForTab(_ sender: Any?) {
+        delegate?.newWindowForTab(from: self)
+    }
     
     func windowDidBecomeKey(_ notification: Notification) {
         updateStartPause()
     }
-    
 }
 

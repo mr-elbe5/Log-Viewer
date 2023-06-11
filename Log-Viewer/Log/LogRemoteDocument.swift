@@ -10,7 +10,7 @@
 import Foundation
 import Cocoa
 
-class LogFRemoteDocument: LogDocument{
+class LogRemoteDocument: LogDocument{
     
     override func releaseLogSource(){
         

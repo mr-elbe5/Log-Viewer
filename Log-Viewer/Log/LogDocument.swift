@@ -15,15 +15,15 @@ class LogDocument: NSObject, PreferencesDelegate{
     var url : URL? = nil
     var preferences =  DocumentPreferences()
     
-    var windowController : LogWindowController? = nil
+    var windowController : DocumentWindowController? = nil
     
-    var viewController : LogViewController?{
+    var viewController : DocumentViewController?{
         get{
-            windowController?.logViewController
+            windowController?.documentViewController
         }
     }
     
-    var chunks = [LogChunk]()
+    var chunks = [LogDocumentChunk]()
     
     deinit {
         releaseLogSource()
@@ -54,3 +54,13 @@ class LogDocument: NSObject, PreferencesDelegate{
 
 }
 
+class LogDocumentChunk{
+    
+    var string : String
+    var displayed : Bool = false
+    
+    init(_ string: String){
+        self.string = string
+    }
+    
+}

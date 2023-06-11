@@ -9,7 +9,7 @@
 
 import Cocoa
 
-class LogViewController: ViewController {
+class DocumentViewController: ViewController {
     
     let scrollView = NSScrollView()
     let textView = NSTextView()

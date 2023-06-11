@@ -29,10 +29,10 @@ class LogFileDocument: LogDocument{
                 if GlobalPreferences.shared.showFullFile, let data = fileHandle?.readDataToEndOfFile(){
                     let str = String(data: data, encoding: .utf8) ?? ""
                     if GlobalPreferences.shared.maxLines != 0{
-                        chunks.append(LogChunk(str.substr(lines: GlobalPreferences.shared.maxLines)))
+                        chunks.append(LogDocumentChunk(str.substr(lines: GlobalPreferences.shared.maxLines)))
                     }
                     else{
-                        chunks.append(LogChunk(str))
+                        chunks.append(LogDocumentChunk(str))
                     }
                 }
                 setEventSource()
@@ -78,7 +78,7 @@ class LogFileDocument: LogDocument{
             return
         }
         if let data = fileHandle?.readDataToEndOfFile(){
-            let chunk = LogChunk(String(data: data, encoding: .utf8) ?? "")
+            let chunk = LogDocumentChunk(String(data: data, encoding: .utf8) ?? "")
             chunks.append(chunk)
             viewController?.updateFromDocument()
         }
