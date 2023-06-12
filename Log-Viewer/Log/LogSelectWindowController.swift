@@ -31,6 +31,11 @@ public class LogSelectWindowController: NSWindowController, NSWindowDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override func windowDidLoad() {
+            super.windowDidLoad()
+            window?.makeKeyAndOrderFront(nil)
+        }
+    
     public func windowWillClose(_ notification: Notification) {
         NSApp.stopModal(withCode: url != nil ? .OK : .cancel)
     }
