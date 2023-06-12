@@ -9,19 +9,19 @@
 
 import Cocoa
 
-class DocumentViewController: ViewController {
+class LogViewController: ViewController {
     
     let scrollView = NSScrollView()
     let textView = NSTextView()
 
     var defaultSize = NSMakeSize(900, 600)
     
-    var logDocument : LogDocument
+    var logDocument : LogFile
     var loaded = false
     
     var follow = true
     
-    init(logDocument: LogDocument) {
+    init(logDocument: LogFile) {
         self.logDocument = logDocument
         super.init()
         view.frame = CGRect(x: 0, y: 0, width: defaultSize.width, height: defaultSize.height)

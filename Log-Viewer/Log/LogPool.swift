@@ -9,7 +9,7 @@
 
 import Cocoa
 
-class LogDocumentPool: NSObject, Codable {
+class LogPool {
     
     static var defaultSize: NSSize = NSMakeSize(900, 600)
     static var defaultRect: NSRect{
@@ -19,34 +19,14 @@ class LogDocumentPool: NSObject, Codable {
             x = screen.frame.width/2 - defaultSize.width/2
             y = screen.frame.height/2 - defaultSize.height/2
         }
-        return NSMakeRect(x, y, LogDocumentPool.defaultSize.width, LogDocumentPool.defaultSize.height)
+        return NSMakeRect(x, y, LogPool.defaultSize.width, LogPool.defaultSize.height)
     }
     
-    static var shared = LogDocumentPool()
+    static var shared = LogPool()
     
-    static func loadDocumentPool(){
-        if let storedString = UserDefaults.standard.value(forKey: "appState") as? String {
-            if let state : LogDocumentPool = LogDocumentPool.fromJSON(encoded: storedString){
-                LogDocumentPool.shared = state
-            }
-        }
-        else{
-            print("no saved data available for app state")
-            LogDocumentPool.shared = LogDocumentPool()
-        }
-    }
+    var documentWindowControllers = Array<LogWindowController>()
     
-    enum CodingKeys: String, CodingKey {
-        case frameRect
-        case documentHistory
-    }
-    
-    var frameRect: NSRect
-    var documentHistory = Array<LogDescriptor>()
-    
-    var documentWindowControllers = Array<DocumentWindowController>()
-    
-    var mainWindowController: DocumentWindowController? {
+    var mainWindowController: LogWindowController? {
         if documentWindowControllers.isEmpty{
             return nil
         }
@@ -61,36 +41,8 @@ class LogDocumentPool: NSObject, Codable {
         mainWindowController?.window
     }
     
-    var mainDocument: LogDocument? {
+    var mainDocument: LogFile? {
         mainWindowController?.logDocument
-    }
-    
-    override init(){
-        frameRect = LogDocumentPool.defaultRect
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        frameRect = try values.decodeIfPresent(NSRect.self, forKey: .frameRect) ?? LogDocumentPool.defaultRect
-        documentHistory = try values.decodeIfPresent(Array<LogDescriptor>.self, forKey: .documentHistory) ?? Array<LogDescriptor>()
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(frameRect, forKey: .frameRect)
-        try container.encode(documentHistory, forKey: .documentHistory)
-    }
-    
-    func addToHistory(_ descriptor: LogDescriptor){
-        if !documentHistory.contains(descriptor){
-            documentHistory.append(descriptor)
-            save()
-        }
-    }
-    
-    func save(){
-        let storeString = toJSON()
-        UserDefaults.standard.set(storeString, forKey: "appState")
     }
     
     func clearRecentDocuments(_ sender: Any?) {
@@ -98,7 +50,7 @@ class LogDocumentPool: NSObject, Codable {
         GlobalPreferences.shared.save()
     }
     
-    func removeController(controller: DocumentWindowController){
+    func removeController(controller: LogWindowController){
         controller.logDocument.releaseLogSource()
         documentWindowControllers.remove(obj: controller)
         if documentWindowControllers.isEmpty{
@@ -117,19 +69,16 @@ class LogDocumentPool: NSObject, Codable {
     
 }
 
-extension LogDocumentPool: DocumentWindowDelegate{
+extension LogPool: LogWindowDelegate{
     
-    func openDocument(sender: DocumentWindowController?) {
-        let dialog = OpenDocumentDialog()
-        NSApp.runModal(for: dialog.window!)
-        if let url = dialog.url{
-            var document : LogDocument
-            switch dialog.type{
-            case .remote: document = LogRemoteDocument()
-            case .file: document = LogFileDocument()
-            }
-            document.url = url
-            let controller = DocumentWindowController(document: document)
+    func openDocument(sender: LogWindowController?) {
+        let panel = NSOpenPanel()
+        panel.allowsMultipleSelection = false
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        if NSApp.runModal(for: panel) == .OK, let url = panel.urls.first{
+            let document = LocalLogFile(url: url)
+            let controller = LogWindowController(document: document)
             controller.delegate = self
             guard let window = controller.window else {return}
             NotificationCenter.default.addObserver(forName:NSWindow.willCloseNotification, object: window, queue: nil){ [unowned self] notification in
@@ -137,7 +86,6 @@ extension LogDocumentPool: DocumentWindowDelegate{
                 self.removeController(forWindow: window)
             }
             documentWindowControllers.append(controller)
-            addToHistory(LogDescriptor(type: dialog.type, path: url.path))
             if GlobalPreferences.shared.useTabs, let sender = sender{
                 sender.window!.addTabbedWindow(controller.window!, ordered: .above)
             }
@@ -147,17 +95,16 @@ extension LogDocumentPool: DocumentWindowDelegate{
         }
     }
     
-    func newWindowForTab(from: DocumentWindowController) {
-        var url : URL? = nil
-        let dialog = OpenDocumentDialog()
-        if NSApp.runModal(for: dialog.window!) != .OK{
-            return
+    func newWindowForTab(from: LogWindowController) {
+        let panel = NSOpenPanel()
+        panel.allowsMultipleSelection = false
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        if NSApp.runModal(for: panel) == .OK, let url = panel.urls.first{
+            let document = LocalLogFile(url: url)
+            let controller = LogWindowController(document: document)
+            from.window!.addTabbedWindow(controller.window!, ordered: .above)
         }
-        url = dialog.url
-        let document = LogDocument()
-        document.url = url
-        let controller = DocumentWindowController(document: document)
-        from.window!.addTabbedWindow(controller.window!, ordered: .above)
     }
     
 }

@@ -10,7 +10,20 @@
 import Foundation
 import Cocoa
 
-class LogRemoteDocument: LogDocument{
+class RemoteLogFile: LogFile{
+    
+    var sshServer: String
+    var sshPort: Int
+    var sshUser: String
+    var path: String
+    
+    init(server: String, port: Int = 22, user: String, path: String){
+        self.sshServer = server
+        self.sshPort = port
+        self.sshUser = user
+        self.path = path
+        super.init()
+    }
     
     override func releaseLogSource(){
         

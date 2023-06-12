@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		4E20A79D257E47B40068AC8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A79C257E47B40068AC8D /* AppDelegate.swift */; };
 		4E20A79F257E47B50068AC8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A79E257E47B50068AC8D /* Assets.xcassets */; };
-		4E20A7AC257E48140068AC8D /* DocumentWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7AB257E48140068AC8D /* DocumentWindowController.swift */; };
-		4E20A7B2257E484F0068AC8D /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7B1257E484F0068AC8D /* DocumentViewController.swift */; };
+		4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7AB257E48140068AC8D /* LogWindowController.swift */; };
+		4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A7B1257E484F0068AC8D /* LogViewController.swift */; };
 		4E33FA98257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33FA97257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift */; };
 		4E33FA9B257FD0CE007AB6C0 /* GlobalPreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33FA9A257FD0CE007AB6C0 /* GlobalPreferencesWindowController.swift */; };
 		4E50575A25811C7E00A4CC90 /* GlobalPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50575925811C7E00A4CC90 /* GlobalPreferences.swift */; };
@@ -38,19 +38,19 @@
 		4E672AD62734773300CBB3CE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E672AD32734773300CBB3CE /* String.swift */; };
 		4E672AD72734773300CBB3CE /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E672AD42734773300CBB3CE /* StringProtocol.swift */; };
 		4E672AD82734773300CBB3CE /* StringLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E672AD52734773300CBB3CE /* StringLocalizer.swift */; };
-		4E6730AC2A34649900990CA1 /* LogFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730AB2A34649900990CA1 /* LogFileDocument.swift */; };
-		4E6730AE2A3465EF00990CA1 /* LogRemoteDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730AD2A3465EF00990CA1 /* LogRemoteDocument.swift */; };
-		4E6730B02A34AC7B00990CA1 /* LogDocumentPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730AF2A34AC7B00990CA1 /* LogDocumentPool.swift */; };
-		4E6730B22A34B19E00990CA1 /* LogDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730B12A34B19E00990CA1 /* LogDescriptor.swift */; };
-		4E6730B42A34EA8000990CA1 /* DocumentWindowController+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730B32A34EA8000990CA1 /* DocumentWindowController+Toolbar.swift */; };
-		4E72F91D264D3A1500EF6AF0 /* OpenDocumentDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E72F91C264D3A1500EF6AF0 /* OpenDocumentDialog.swift */; };
+		4E6730AC2A34649900990CA1 /* LocalLogFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730AB2A34649900990CA1 /* LocalLogFile.swift */; };
+		4E6730AE2A3465EF00990CA1 /* RemoteLogFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730AD2A3465EF00990CA1 /* RemoteLogFile.swift */; };
+		4E6730B02A34AC7B00990CA1 /* LogPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730AF2A34AC7B00990CA1 /* LogPool.swift */; };
+		4E6730B42A34EA8000990CA1 /* LogWindowController+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6730B32A34EA8000990CA1 /* LogWindowController+Toolbar.swift */; };
+		4E72F91D264D3A1500EF6AF0 /* OpenRemoteLogDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E72F91C264D3A1500EF6AF0 /* OpenRemoteLogDialog.swift */; };
 		4E903C17258CD52000E542AD /* DocumentPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E903C16258CD52000E542AD /* DocumentPreferences.swift */; };
 		4EA1E50F2A2F444100FF0B32 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E50E2A2F444100FF0B32 /* Store.swift */; };
 		4EA1E5122A2F453400FF0B32 /* StoreWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5112A2F453400FF0B32 /* StoreWindowController.swift */; };
 		4EA1E5142A2F454900FF0B32 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5132A2F454900FF0B32 /* StoreViewController.swift */; };
 		4EA1E5162A2F594E00FF0B32 /* RadioGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5152A2F594E00FF0B32 /* RadioGroup.swift */; };
 		4EA1E5182A2F939A00FF0B32 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E5172A2F939A00FF0B32 /* Log.swift */; };
-		4EAC4CEB258A3D6800554A69 /* LogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CEA258A3D6800554A69 /* LogDocument.swift */; };
+		4EAC4CEB258A3D6800554A69 /* LogFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC4CEA258A3D6800554A69 /* LogFile.swift */; };
+		4EB7CD252A3728F1005614C5 /* Citadel in Frameworks */ = {isa = PBXBuildFile; productRef = 4EB7CD242A3728F1005614C5 /* Citadel */; };
 		4EC9215D2A333E2F004C2A32 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9215C2A333E2F004C2A32 /* main.swift */; };
 		4ED97A61263A9F7C00F79137 /* DocumentPreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED97A60263A9F7C00F79137 /* DocumentPreferencesWindowController.swift */; };
 		4ED97A63263A9F9900F79137 /* DocumentPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED97A62263A9F9900F79137 /* DocumentPreferencesViewController.swift */; };
@@ -62,8 +62,8 @@
 		4E20A79E257E47B50068AC8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E20A7A3257E47B50068AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E20A7A4257E47B50068AC8D /* LogViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LogViewer.entitlements; sourceTree = "<group>"; };
-		4E20A7AB257E48140068AC8D /* DocumentWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentWindowController.swift; sourceTree = "<group>"; };
-		4E20A7B1257E484F0068AC8D /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
+		4E20A7AB257E48140068AC8D /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
+		4E20A7B1257E484F0068AC8D /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		4E33FA97257FCE8C007AB6C0 /* GlobalPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPreferencesViewController.swift; sourceTree = "<group>"; };
 		4E33FA9A257FD0CE007AB6C0 /* GlobalPreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPreferencesWindowController.swift; sourceTree = "<group>"; };
 		4E50575925811C7E00A4CC90 /* GlobalPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPreferences.swift; sourceTree = "<group>"; };
@@ -91,19 +91,18 @@
 		4E672AD32734773300CBB3CE /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4E672AD42734773300CBB3CE /* StringProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
 		4E672AD52734773300CBB3CE /* StringLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringLocalizer.swift; sourceTree = "<group>"; };
-		4E6730AB2A34649900990CA1 /* LogFileDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFileDocument.swift; sourceTree = "<group>"; };
-		4E6730AD2A3465EF00990CA1 /* LogRemoteDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRemoteDocument.swift; sourceTree = "<group>"; };
-		4E6730AF2A34AC7B00990CA1 /* LogDocumentPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocumentPool.swift; sourceTree = "<group>"; };
-		4E6730B12A34B19E00990CA1 /* LogDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDescriptor.swift; sourceTree = "<group>"; };
-		4E6730B32A34EA8000990CA1 /* DocumentWindowController+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentWindowController+Toolbar.swift"; sourceTree = "<group>"; };
-		4E72F91C264D3A1500EF6AF0 /* OpenDocumentDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDocumentDialog.swift; sourceTree = "<group>"; };
+		4E6730AB2A34649900990CA1 /* LocalLogFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLogFile.swift; sourceTree = "<group>"; };
+		4E6730AD2A3465EF00990CA1 /* RemoteLogFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLogFile.swift; sourceTree = "<group>"; };
+		4E6730AF2A34AC7B00990CA1 /* LogPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogPool.swift; sourceTree = "<group>"; };
+		4E6730B32A34EA8000990CA1 /* LogWindowController+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogWindowController+Toolbar.swift"; sourceTree = "<group>"; };
+		4E72F91C264D3A1500EF6AF0 /* OpenRemoteLogDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenRemoteLogDialog.swift; sourceTree = "<group>"; };
 		4E903C16258CD52000E542AD /* DocumentPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferences.swift; sourceTree = "<group>"; };
 		4EA1E50E2A2F444100FF0B32 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		4EA1E5112A2F453400FF0B32 /* StoreWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreWindowController.swift; sourceTree = "<group>"; };
 		4EA1E5132A2F454900FF0B32 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		4EA1E5152A2F594E00FF0B32 /* RadioGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioGroup.swift; sourceTree = "<group>"; };
 		4EA1E5172A2F939A00FF0B32 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		4EAC4CEA258A3D6800554A69 /* LogDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDocument.swift; sourceTree = "<group>"; };
+		4EAC4CEA258A3D6800554A69 /* LogFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFile.swift; sourceTree = "<group>"; };
 		4EC9215C2A333E2F004C2A32 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4ED97A60263A9F7C00F79137 /* DocumentPreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferencesWindowController.swift; sourceTree = "<group>"; };
 		4ED97A62263A9F9900F79137 /* DocumentPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreferencesViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EB7CD252A3728F1005614C5 /* Citadel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,15 +189,14 @@
 		4E5C9AA4257F79A300E0D8BB /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				4E20A7B1257E484F0068AC8D /* DocumentViewController.swift */,
-				4E20A7AB257E48140068AC8D /* DocumentWindowController.swift */,
-				4E6730B32A34EA8000990CA1 /* DocumentWindowController+Toolbar.swift */,
-				4E6730B12A34B19E00990CA1 /* LogDescriptor.swift */,
-				4EAC4CEA258A3D6800554A69 /* LogDocument.swift */,
-				4E6730AF2A34AC7B00990CA1 /* LogDocumentPool.swift */,
-				4E6730AB2A34649900990CA1 /* LogFileDocument.swift */,
-				4E6730AD2A3465EF00990CA1 /* LogRemoteDocument.swift */,
-				4E72F91C264D3A1500EF6AF0 /* OpenDocumentDialog.swift */,
+				4E6730AB2A34649900990CA1 /* LocalLogFile.swift */,
+				4EAC4CEA258A3D6800554A69 /* LogFile.swift */,
+				4E6730AF2A34AC7B00990CA1 /* LogPool.swift */,
+				4E20A7B1257E484F0068AC8D /* LogViewController.swift */,
+				4E20A7AB257E48140068AC8D /* LogWindowController.swift */,
+				4E6730B32A34EA8000990CA1 /* LogWindowController+Toolbar.swift */,
+				4E72F91C264D3A1500EF6AF0 /* OpenRemoteLogDialog.swift */,
+				4E6730AD2A3465EF00990CA1 /* RemoteLogFile.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -273,6 +272,7 @@
 			);
 			name = "Log-Viewer";
 			packageProductDependencies = (
+				4EB7CD242A3728F1005614C5 /* Citadel */,
 			);
 			productName = LogViewer;
 			productReference = 4E20A799257E47B40068AC8D /* Log-Viewer.app */;
@@ -303,6 +303,7 @@
 			);
 			mainGroup = 4E20A790257E47B40068AC8D;
 			packageReferences = (
+				4EB7CD232A3728F1005614C5 /* XCRemoteSwiftPackageReference "Citadel" */,
 			);
 			productRefGroup = 4E20A79A257E47B40068AC8D /* Products */;
 			projectDirPath = "";
@@ -329,11 +330,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E6730AC2A34649900990CA1 /* LogFileDocument.swift in Sources */,
+				4E6730AC2A34649900990CA1 /* LocalLogFile.swift in Sources */,
 				4EA1E5182A2F939A00FF0B32 /* Log.swift in Sources */,
 				4E672AB22734771100CBB3CE /* Dictionary.swift in Sources */,
 				4E672ACF2734772A00CBB3CE /* CodableColor.swift in Sources */,
-				4E20A7AC257E48140068AC8D /* DocumentWindowController.swift in Sources */,
+				4E20A7AC257E48140068AC8D /* LogWindowController.swift in Sources */,
 				4E672ACE2734772A00CBB3CE /* NSView.swift in Sources */,
 				4E903C17258CD52000E542AD /* DocumentPreferences.swift in Sources */,
 				4E672AD12734772A00CBB3CE /* AttributedButton.swift in Sources */,
@@ -341,15 +342,14 @@
 				4E20A79D257E47B40068AC8D /* AppDelegate.swift in Sources */,
 				4E5395562582230C00CC56A8 /* HelpViewController.swift in Sources */,
 				4E672AD02734772A00CBB3CE /* NSGridView.swift in Sources */,
-				4EAC4CEB258A3D6800554A69 /* LogDocument.swift in Sources */,
+				4EAC4CEB258A3D6800554A69 /* LogFile.swift in Sources */,
 				4E672AC52734772A00CBB3CE /* PopupWindow.swift in Sources */,
 				4EA1E5142A2F454900FF0B32 /* StoreViewController.swift in Sources */,
 				4E672AAF2734771100CBB3CE /* Date.swift in Sources */,
-				4E6730B22A34B19E00990CA1 /* LogDescriptor.swift in Sources */,
 				4E672AC42734772A00CBB3CE /* Alert.swift in Sources */,
-				4E72F91D264D3A1500EF6AF0 /* OpenDocumentDialog.swift in Sources */,
+				4E72F91D264D3A1500EF6AF0 /* OpenRemoteLogDialog.swift in Sources */,
 				4EC9215D2A333E2F004C2A32 /* main.swift in Sources */,
-				4E6730AE2A3465EF00990CA1 /* LogRemoteDocument.swift in Sources */,
+				4E6730AE2A3465EF00990CA1 /* RemoteLogFile.swift in Sources */,
 				4ED97A61263A9F7C00F79137 /* DocumentPreferencesWindowController.swift in Sources */,
 				4E672AC92734772A00CBB3CE /* NSInsets.swift in Sources */,
 				4E672AB02734771100CBB3CE /* Array.swift in Sources */,
@@ -363,11 +363,11 @@
 				4E672ACD2734772A00CBB3CE /* NSMenuItem.swift in Sources */,
 				4E672AD82734773300CBB3CE /* StringLocalizer.swift in Sources */,
 				4E672AD72734773300CBB3CE /* StringProtocol.swift in Sources */,
-				4E20A7B2257E484F0068AC8D /* DocumentViewController.swift in Sources */,
+				4E20A7B2257E484F0068AC8D /* LogViewController.swift in Sources */,
 				4ED97A63263A9F9900F79137 /* DocumentPreferencesViewController.swift in Sources */,
-				4E6730B42A34EA8000990CA1 /* DocumentWindowController+Toolbar.swift in Sources */,
+				4E6730B42A34EA8000990CA1 /* LogWindowController+Toolbar.swift in Sources */,
 				4E672AC72734772A00CBB3CE /* NSScrollView.swift in Sources */,
-				4E6730B02A34AC7B00990CA1 /* LogDocumentPool.swift in Sources */,
+				4E6730B02A34AC7B00990CA1 /* LogPool.swift in Sources */,
 				4E50575A25811C7E00A4CC90 /* GlobalPreferences.swift in Sources */,
 				4E672AD62734773300CBB3CE /* String.swift in Sources */,
 				4EA1E50F2A2F444100FF0B32 /* Store.swift in Sources */,
@@ -576,6 +576,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4EB7CD232A3728F1005614C5 /* XCRemoteSwiftPackageReference "Citadel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/orlandos-nl/Citadel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4EB7CD242A3728F1005614C5 /* Citadel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4EB7CD232A3728F1005614C5 /* XCRemoteSwiftPackageReference "Citadel" */;
+			productName = Citadel;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4E20A791257E47B40068AC8D /* Project object */;
 }

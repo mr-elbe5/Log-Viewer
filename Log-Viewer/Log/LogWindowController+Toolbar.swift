@@ -9,7 +9,7 @@
 
 import Cocoa
 
-extension DocumentWindowController: NSToolbarDelegate {
+extension LogWindowController: NSToolbarDelegate {
     
     func addToolbar(){
         let toolbar = NSToolbar(identifier: mainWindowToolbarIdentifier)

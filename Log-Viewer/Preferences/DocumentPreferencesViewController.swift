@@ -12,7 +12,7 @@ import Cocoa
 
 class DocumentPreferencesViewController:ViewController {
     
-    var logDocument : LogDocument? = nil
+    var logDocument : LogFile? = nil
     
     var fullLineColoringField = NSButton(checkboxWithTitle: "On", target: nil, action: nil)
     var skipUnmarkedField = NSButton(checkboxWithTitle: "Skip line", target: nil, action: nil)

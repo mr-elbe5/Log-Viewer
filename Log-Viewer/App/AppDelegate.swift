@@ -12,7 +12,6 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        LogDocumentPool.loadDocumentPool()
         NSColorPanel.setPickerMode(.wheel)
         NSColorPanel.setPickerMask(.wheelModeMask)
         NSColorPanel.shared.showsAlpha = false
@@ -22,8 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Task{
             await Store.shared.load()
         }
-        if LogDocumentPool.shared.documentWindowControllers.isEmpty{
-            LogDocumentPool.shared.openDocument(sender: nil)
+        if LogPool.shared.documentWindowControllers.isEmpty{
+            LogPool.shared.openDocument(sender: nil)
         }
     }
     
@@ -62,6 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let fileMenu = NSMenuItem(title: "File", action: nil, keyEquivalent: "")
         fileMenu.submenu = NSMenu(title: "File")
         fileMenu.submenu?.addItem(withTitle: "Open Log File...", action: #selector(openLogFile), keyEquivalent: "")
+        fileMenu.submenu?.addItem(withTitle: "Open Remote Log File...", action: #selector(openRemoteLogFile), keyEquivalent: "")
         fileMenu.submenu?.addItem(NSMenuItem.separator())
         fileMenu.submenu?.addItem(withTitle: "Close", action: #selector(closeFile), keyEquivalent: "w")
         
@@ -108,7 +108,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func openLogFile() {
-        LogDocumentPool.shared.openDocument(sender: nil)
+        LogPool.shared.openDocument(sender: nil)
+    }
+    
+    @objc func openRemoteLogFile() {
+        LogPool.shared.openDocument(sender: nil)
     }
     
     @objc func closeFile() {
@@ -116,7 +120,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func openHelp() {
-        if let windowsController = LogDocumentPool.shared.mainWindowController{
+        if let windowsController = LogPool.shared.mainWindowController{
             windowsController.openHelp()
         }
     }

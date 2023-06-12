@@ -12,11 +12,11 @@ import Cocoa
 
 class DocumentPreferencesWindowController: NSWindowController, NSWindowDelegate {
     
-    var logDocument : LogDocument
+    var logDocument : LogFile
     
     var observer : NSKeyValueObservation? = nil
     
-    init(log: LogDocument){
+    init(log: LogFile){
         logDocument = log
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 310), styleMask: [.closable, .titled, .resizable], backing: .buffered, defer: false)
         window.title = "Document Preferences"

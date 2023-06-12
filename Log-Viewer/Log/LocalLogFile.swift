@@ -10,10 +10,17 @@
 import Foundation
 import Cocoa
 
-class LogFileDocument: LogDocument{
+class LocalLogFile: LogFile{
+    
+    var url: URL
     
     private var fileHandle: FileHandle? = nil
     private var eventSource: DispatchSourceFileSystemObject? = nil
+    
+    init(url: URL){
+        self.url = url
+        super.init()
+    }
     
     override func releaseLogSource(){
         releaseEventSource()
@@ -21,27 +28,25 @@ class LogFileDocument: LogDocument{
     }
     
     override func load(){
-        if let url = url{
-            if FileManager.default.fileExists(atPath: url.path){
-                do{
-                    preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)
-                    fileHandle = try FileHandle(forReadingFrom: url)
-                    Log.debug("start read")
-                    if GlobalPreferences.shared.showFullFile, let data = fileHandle?.readDataToEndOfFile(){
-                        let str = String(data: data, encoding: .utf8) ?? ""
-                        if GlobalPreferences.shared.maxLines != 0{
-                            chunks.append(LogDocumentChunk(str.substr(lines: GlobalPreferences.shared.maxLines)))
-                        }
-                        else{
-                            chunks.append(LogDocumentChunk(str))
-                        }
+        if FileManager.default.fileExists(atPath: url.path){
+            do{
+                preferences = GlobalPreferences.shared.getDocumentPreferences(url: url)
+                fileHandle = try FileHandle(forReadingFrom: url)
+                Log.debug("start read")
+                if GlobalPreferences.shared.showFullFile, let data = fileHandle?.readDataToEndOfFile(){
+                    let str = String(data: data, encoding: .utf8) ?? ""
+                    if GlobalPreferences.shared.maxLines != 0{
+                        chunks.append(LogChunk(str.substr(lines: GlobalPreferences.shared.maxLines)))
                     }
-                    Log.debug("end read")
-                    setEventSource()
+                    else{
+                        chunks.append(LogChunk(str))
+                    }
                 }
-                catch{
-                    Swift.print(error.localizedDescription)
-                }
+                Log.debug("end read")
+                setEventSource()
+            }
+            catch{
+                Swift.print(error.localizedDescription)
             }
         }
     }
@@ -81,7 +86,7 @@ class LogFileDocument: LogDocument{
             return
         }
         if let data = fileHandle?.readDataToEndOfFile(){
-            let chunk = LogDocumentChunk(String(data: data, encoding: .utf8) ?? "")
+            let chunk = LogChunk(String(data: data, encoding: .utf8) ?? "")
             chunks.append(chunk)
             viewController?.updateFromDocument()
         }

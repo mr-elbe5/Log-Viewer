@@ -10,20 +10,19 @@
 import Foundation
 import Cocoa
 
-class LogDocument: NSObject, PreferencesDelegate{
+class LogFile: NSObject, PreferencesDelegate{
     
-    var url : URL? = nil
     var preferences =  DocumentPreferences()
     
-    var windowController : DocumentWindowController? = nil
+    var windowController : LogWindowController? = nil
     
-    var viewController : DocumentViewController?{
+    var viewController : LogViewController?{
         get{
             windowController?.documentViewController
         }
     }
     
-    var chunks = [LogDocumentChunk]()
+    var chunks = [LogChunk]()
     
     deinit {
         releaseLogSource()
@@ -58,7 +57,7 @@ class LogDocument: NSObject, PreferencesDelegate{
 
 }
 
-class LogDocumentChunk{
+class LogChunk{
     
     var string : String
     var displayed : Bool = false

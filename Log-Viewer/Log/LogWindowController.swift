@@ -9,12 +9,12 @@
 
 import Cocoa
 
-protocol DocumentWindowDelegate{
-    func openDocument(sender: DocumentWindowController?)
-    func newWindowForTab(from: DocumentWindowController)
+protocol LogWindowDelegate{
+    func openDocument(sender: LogWindowController?)
+    func newWindowForTab(from: LogWindowController)
 }
 
-class DocumentWindowController: NSWindowController {
+class LogWindowController: NSWindowController {
     
     let mainWindowToolbarIdentifier = NSToolbar.Identifier("MainWindowToolbar")
     let toolbarItemOpen = NSToolbarItem.Identifier("ToolbarOpenItem")
@@ -27,19 +27,19 @@ class DocumentWindowController: NSWindowController {
     let toolbarItemStore = NSToolbarItem.Identifier("ToolbarStoreItem")
     let toolbarItemHelp = NSToolbarItem.Identifier("ToolbarHelpItem")
 
-    var delegate : DocumentWindowDelegate? = nil
+    var delegate : LogWindowDelegate? = nil
     
-    var logDocument : LogDocument
+    var logDocument : LogFile
     
-    var documentViewController : DocumentViewController {
+    var documentViewController : LogViewController {
         get{
-            contentViewController as! DocumentViewController
+            contentViewController as! LogViewController
         }
     }
     
-    init(document: LogDocument){
+    init(document: LogFile){
         logDocument = document
-        let window = NSWindow(contentRect: LogDocumentPool.shared.frameRect, styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
+        let window = NSWindow(contentRect: LogPool.defaultRect, styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
         window.title = "Log-Viewer"
         window.tabbingMode = GlobalPreferences.shared.useTabs ? .preferred : .automatic
         super.init(window: window)
@@ -56,7 +56,7 @@ class DocumentWindowController: NSWindowController {
     }
     
     func setupViewController(){
-        let viewController = DocumentViewController(logDocument: logDocument)
+        let viewController = LogViewController(logDocument: logDocument)
         contentViewController = viewController
         DispatchQueue.main.async{
             self.logDocument.load()
@@ -66,7 +66,7 @@ class DocumentWindowController: NSWindowController {
     
 }
 
-extension DocumentWindowController: NSWindowDelegate{
+extension LogWindowController: NSWindowDelegate{
     
     func windowWillClose(_ notification: Notification) {
         if GlobalPreferences.shared.rememberWindowFrame{
