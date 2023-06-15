@@ -156,7 +156,7 @@ extension StringProtocol{
                     let key = String(self[varStart..<varEnd])
                     if key.contains("{{") {
                         p1 = p2
-                        print("parse error before \(varEnd)")
+                        //print("parse error before \(varEnd)")
                         break
                     }
                     if key.hasPrefix("_") {
@@ -167,7 +167,7 @@ extension StringProtocol{
                     p1 = self.index(varEnd, offsetBy: 2)
                 } else {
                     p1 = p2
-                    print("parse error at \(varStart)")
+                    //print("parse error at \(varStart)")
                     break
                 }
             } else {

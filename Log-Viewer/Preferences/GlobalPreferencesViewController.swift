@@ -35,7 +35,7 @@ class GlobalPreferencesViewController:ViewController {
     
     override func loadView() {
         view = NSView()
-        view.frame = CGRect(x: 0, y: 0, width: 500, height: 430)
+        view.frame = CGRect(x: 0, y: 0, width: 500, height: 450)
         
         fontSizeField.addItems(selectedSize: GlobalPreferences.shared.fontSize)
         reset()

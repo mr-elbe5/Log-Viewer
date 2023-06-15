@@ -47,14 +47,14 @@ class Store {
                 self.productInfos.append(productInfo)
                 await productInfo.verify()
             }
-            print("product count is \(products.count)")
+            //print("product count is \(products.count)")
         }
         catch (let err){
             print(err)
             return
         }
         loaded = true
-        print("store loaded")
+        //print("store loaded")
     }
     
 }
@@ -88,13 +88,13 @@ class ProductInfo{
         do{
             guard let verificationResult = await product.currentEntitlement else {
                 purchased = false
-                print("\(product.displayName) not purchased")
+                //print("\(product.displayName) not purchased")
                 return
             }
             switch verificationResult {
             case .verified(let transaction):
                 purchased = transaction.productID == product.id
-                print("\(product.displayName) is purchased: \(purchased)")
+                //print("\(product.displayName) is purchased: \(purchased)")
                 delegate?.productPurchased(productInfo: self)
             case .unverified(_, _):
                 print("\(product.displayName) not verified")
@@ -104,7 +104,7 @@ class ProductInfo{
     
     func purchase(){
         let accountToken = UUID()
-        print(product.price)
+        //print(product.price)
         Task{
             let tokenOption = Product.PurchaseOption.appAccountToken(accountToken)
             let quantityOption = Product.PurchaseOption.quantity(1)
@@ -113,7 +113,7 @@ class ProductInfo{
                 switch result {
                 case let .success(.verified(transaction)):
                     if transaction.appAccountToken == accountToken{
-                        print("purchase successful")
+                        //print("purchase successful")
                         await transaction.finish()
                         purchased = true
                         delegate?.productPurchased(productInfo: self)
@@ -123,14 +123,14 @@ class ProductInfo{
                     }
                     break
                 case let .success(.unverified(_, error)):
-                    print("not verified")
+                    //print("not verified")
                     print(error)
                     break
                 case .pending:
-                    print("pending")
+                    //print("pending")
                     break
                 case .userCancelled:
-                    print("cancelled")
+                    //print("cancelled")
                     break
                 @unknown default:
                     break

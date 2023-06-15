@@ -77,7 +77,7 @@ class LogViewController: ViewController {
     func appendText(string: String) {
         Log.debug("start append text")
         let prefs = logDocument?.preferences ?? DocumentPreferences()
-        let font : NSFont = NSFont.systemFont(ofSize: CGFloat(GlobalPreferences.shared.fontSize))
+        let font : NSFont = NSFont.monospacedSystemFont(ofSize: CGFloat(GlobalPreferences.shared.fontSize), weight: .regular)
         if let document = logDocument{
             if document.preferences.hasColorCoding{
                 appendColorMarkedText(string, font : font, preferences: prefs)
