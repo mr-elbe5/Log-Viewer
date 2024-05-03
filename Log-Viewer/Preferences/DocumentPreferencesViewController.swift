@@ -17,6 +17,8 @@ class DocumentPreferencesViewController:ViewController {
     var fullLineColoringField = NSButton(checkboxWithTitle: "On", target: nil, action: nil)
     var skipUnmarkedField = NSButton(checkboxWithTitle: "Skip line", target: nil, action: nil)
     var patternFields = [NSTextField]()
+    var saveAsField = NSTextField()
+    var namedPreferencesField = NSPopUpButton()
     
     override init() {
         super.init()
@@ -54,6 +56,13 @@ class DocumentPreferencesViewController:ViewController {
         reset()
         grid.addSeparator()
         grid.addRow(with: [resetButton, okButton])
+        for i in 0..<GlobalPreferences.numSavedDocumentPreferences{
+            namedPreferencesField.addItem(withTitle: String(i+1))
+        }
+        grid.addLabeledRow(label: "Preferences slot", view: namedPreferencesField)
+        let saveButton = NSButton(title: "Save to slot", target: self, action: #selector(savePreferences))
+        let loadButton = NSButton(title: "Load from slot", target: self, action: #selector(loadPreferences))
+        grid.addRow(with: [saveButton, loadButton])
         grid.column(at: 1).xPlacement = .trailing
 
         view.addSubview(grid)
@@ -88,6 +97,29 @@ class DocumentPreferencesViewController:ViewController {
         for i in 0..<GlobalPreferences.numPatterns{
             patternFields[i].stringValue = ""
         }
+    }
+    
+    @objc func savePreferences(){
+        let idx = namedPreferencesField.indexOfSelectedItem
+        let prefs = DocumentPreferences()
+        prefs.fullLineColoring = fullLineColoringField.state == .on
+        prefs.skipUnmarked = skipUnmarkedField.state == .on
+        for i in 0..<GlobalPreferences.numPatterns{
+            prefs.patterns[i] = patternFields[i].stringValue
+        }
+        GlobalPreferences.shared.savedDocumentPreferences[idx] = prefs
+        GlobalPreferences.shared.save()
+    }
+    
+    @objc func loadPreferences(){
+        let idx = namedPreferencesField.indexOfSelectedItem
+        let prefs = GlobalPreferences.shared.savedDocumentPreferences[idx]
+        fullLineColoringField.state = prefs.fullLineColoring ? .on : .off
+        skipUnmarkedField.state = prefs.skipUnmarked ? .on : .off
+        for i in 0..<GlobalPreferences.numPatterns{
+            patternFields[i].stringValue = prefs.patterns[i]
+        }
+        
     }
     
     @objc func save(){

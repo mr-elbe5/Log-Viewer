@@ -21,6 +21,7 @@ class GlobalPreferences: Identifiable, Codable{
     
     static var fontSizes = [10, 12, 14, 16, 18, 20, 24]
     static var numPatterns : Int = 5
+    static var numSavedDocumentPreferences = 3
     
     static var defaultTextColorSet : [CodableColor] = [
         CodableColor(red: 0, green: 0, blue: 0),
@@ -64,6 +65,7 @@ class GlobalPreferences: Identifiable, Codable{
         case textColors
         case backgroundColors
         case documentPreferences
+        case savedDocumentPreferences
         case maxLines
     }
     
@@ -76,6 +78,7 @@ class GlobalPreferences: Identifiable, Codable{
     var textColors : [CodableColor] = isDarkMode ? darkmodeTextColorSet : defaultTextColorSet
     var backgroundColors : [CodableColor] = isDarkMode ? darkmodeBackgroundColorSet : defaultBackgroundColorSet
     var documentPreferences = [URL: DocumentPreferences]()
+    var savedDocumentPreferences = [DocumentPreferences]()
     var maxLines = 0
 
     static var isDarkMode : Bool{
@@ -85,6 +88,9 @@ class GlobalPreferences: Identifiable, Codable{
     }
 
     init(){
+        for _ in 0..<GlobalPreferences.numSavedDocumentPreferences{
+            savedDocumentPreferences.append(DocumentPreferences())
+        }
     }
     
     required init(from decoder: Decoder) throws {
@@ -98,6 +104,16 @@ class GlobalPreferences: Identifiable, Codable{
         textColors = try values.decodeIfPresent([CodableColor].self, forKey: .textColors) ?? (GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeTextColorSet : GlobalPreferences.defaultTextColorSet)
         backgroundColors = try values.decodeIfPresent([CodableColor].self, forKey: .backgroundColors) ?? (GlobalPreferences.isDarkMode ? GlobalPreferences.darkmodeBackgroundColorSet : GlobalPreferences.defaultBackgroundColorSet)
         documentPreferences = try values.decodeIfPresent([URL: DocumentPreferences].self, forKey: .documentPreferences) ?? [URL: DocumentPreferences]()
+        let docPrefs = try values.decodeIfPresent([DocumentPreferences].self, forKey: .savedDocumentPreferences)
+        if let docPrefs = docPrefs{
+            savedDocumentPreferences = docPrefs
+        }
+        else{
+            savedDocumentPreferences = [DocumentPreferences]()
+            for _ in 0..<GlobalPreferences.numSavedDocumentPreferences{
+                savedDocumentPreferences.append(DocumentPreferences())
+            }
+        }
         maxLines = try values.decodeIfPresent(Int.self, forKey: .maxLines) ?? 0
         save()
     }
@@ -113,6 +129,7 @@ class GlobalPreferences: Identifiable, Codable{
         try container.encode(textColors, forKey: .textColors)
         try container.encode(backgroundColors, forKey: .backgroundColors)
         try container.encode(documentPreferences, forKey: .documentPreferences)
+        try container.encode(savedDocumentPreferences, forKey: .savedDocumentPreferences)
         try container.encode(maxLines, forKey: .maxLines)
         
     }
