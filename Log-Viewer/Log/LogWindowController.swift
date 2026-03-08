@@ -95,8 +95,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(openFile)
-            toolbarItem.label = "Open File"
-            toolbarItem.paletteLabel = "Open File"
+            toolbarItem.label = "Open"
+            toolbarItem.paletteLabel = "Open"
             toolbarItem.toolTip = "Open new file"
             if #available(macOS 11.0, *){
                 toolbarItem.image = NSImage(systemSymbolName: "plus.circle", accessibilityDescription: "")
@@ -111,8 +111,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(clearView)
-            toolbarItem.label = "Clear View"
-            toolbarItem.paletteLabel = "Clear View"
+            toolbarItem.label = "Clear"
+            toolbarItem.paletteLabel = "Clear"
             toolbarItem.toolTip = "Clear view and proceed with incoming messages"
             if #available(macOS 11.0, *){
                 toolbarItem.image = NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: "")
@@ -127,8 +127,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(reloadView)
-            toolbarItem.label = "Reload File"
-            toolbarItem.paletteLabel = "Reload File"
+            toolbarItem.label = "Reload"
+            toolbarItem.paletteLabel = "Reload"
             toolbarItem.toolTip = "Reload File"
             if #available(macOS 11.0, *){
                 toolbarItem.image = NSImage(systemSymbolName: "arrow.clockwise.circle", accessibilityDescription: "")
@@ -143,8 +143,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(start)
-            toolbarItem.label = "Start Following"
-            toolbarItem.paletteLabel = "Start Following"
+            toolbarItem.label = "Start"
+            toolbarItem.paletteLabel = "Start"
             toolbarItem.toolTip = "Follow changes of the log file"
             if #available(macOS 11.0, *){
                 toolbarItem.image = NSImage(systemSymbolName: "play.circle", accessibilityDescription: "")
@@ -159,8 +159,8 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(pause)
-            toolbarItem.label = "Pause Following"
-            toolbarItem.paletteLabel = "Pause Following"
+            toolbarItem.label = "Pause"
+            toolbarItem.paletteLabel = "Pause"
             toolbarItem.toolTip = "Pause following the log file"
             if #available(macOS 11.0, *){
                 toolbarItem.image = NSImage(systemSymbolName: "pause.circle", accessibilityDescription: "")
