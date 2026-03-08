@@ -13,8 +13,8 @@ import Cocoa
 class HelpViewController: NSViewController {
     
     let texts = ["Log-Viewer helps you to follow log files and thereby mark text parts of interest.",
-                 "Open 'Global Preferences' to select general behaviour, font size, colors and search mode. Colors can be changed by selecting a color block.",
-                 "Open 'Document Preferences' to set the text patterns to be color marked. Full line coloring is a little faster and colors the complete line with the color of the first detected pattern.",
+                 "Open 'Global Settings' to select general behaviour, font size, colors and search mode. Colors can be changed by selecting a color block.",
+                 "Open 'Document Settings' to set the text patterns to be color marked. Full line coloring is a little faster and colors the complete line with the color of the first detected pattern.",
                  "Open a log file (.txt, .log or .out). The view will follow the file like the tail -f command.",
                  "You can pause and resume following new incoming lines with the toolbar icon.",
                  "If color marks overlap, the first (leftmost) 'wins'."]

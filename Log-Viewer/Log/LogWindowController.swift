@@ -175,9 +175,9 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(openGlobalPreferences)
-            toolbarItem.label = "Global Preferences"
-            toolbarItem.paletteLabel = "Global Preferences"
-            toolbarItem.toolTip = "Set global preferences and colors"
+            toolbarItem.label = "Global Settings"
+            toolbarItem.paletteLabel = "Global Settings"
+            toolbarItem.toolTip = "Set global settings and colors"
             if #available(macOS 11.0, *){
                 toolbarItem.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: "")
             }
@@ -191,9 +191,9 @@ class LogWindowController: NSWindowController, NSWindowDelegate, NSToolbarDelega
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
             toolbarItem.action = #selector(openDocumentPreferences)
-            toolbarItem.label = "Document Preferences"
-            toolbarItem.paletteLabel = "Document Preferences"
-            toolbarItem.toolTip = "Set document log preferences"
+            toolbarItem.label = "Document Settings"
+            toolbarItem.paletteLabel = "Document Settings"
+            toolbarItem.toolTip = "Set document log settings"
             if #available(macOS 11.0, *){
                 toolbarItem.image = NSImage(systemSymbolName: "doc.badge.gearshape", accessibilityDescription: "")
             }

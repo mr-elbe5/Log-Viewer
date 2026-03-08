@@ -14,7 +14,7 @@ class GlobalPreferencesWindowController: NSWindowController, NSWindowDelegate {
     
     init(){
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 450), styleMask: [.closable, .titled, .resizable], backing: .buffered, defer: false)
-        window.title = "Global Preferences"
+        window.title = "Global Settings"
         super.init(window: window)
         self.window?.delegate = self
         let controller = GlobalPreferencesViewController()

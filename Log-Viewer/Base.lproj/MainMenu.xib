@@ -27,7 +27,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                            <menuItem title="Global Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                            <menuItem title="Global Settings…" keyEquivalent="," id="BOF-NM-1cW">
                                 <connections>
                                     <action selector="openPreferences:" target="Voe-Tx-rLC" id="GeC-JA-aY6"/>
                                 </connections>

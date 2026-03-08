@@ -167,7 +167,7 @@ class GlobalPreferences: Identifiable, Codable{
             }
         }
         else{
-            print("no saved data available for preferences")
+            print("no saved data available for settings")
             GlobalPreferences.shared = GlobalPreferences()
         }
     }

@@ -59,7 +59,7 @@ class DocumentPreferencesViewController:ViewController {
         for i in 0..<GlobalPreferences.numSavedDocumentPreferences{
             namedPreferencesField.addItem(withTitle: String(i+1))
         }
-        grid.addLabeledRow(label: "Preferences slot", view: namedPreferencesField)
+        grid.addLabeledRow(label: "Settings slot", view: namedPreferencesField)
         let saveButton = NSButton(title: "Save to slot", target: self, action: #selector(savePreferences))
         let loadButton = NSButton(title: "Load from slot", target: self, action: #selector(loadPreferences))
         grid.addRow(with: [saveButton, loadButton])
